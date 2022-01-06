@@ -12,6 +12,10 @@ const FullRow = tw.div`
 col-span-12
 `;
 
+function RuledBox() {
+  return <BorderBox />;
+}
+
 export function Page() {
   return (
     <div className="grid grid-cols-12 grid-rows-6 grid-flow-row-dense ">
@@ -20,8 +24,4 @@ export function Page() {
       </FullRow>
     </div>
   );
-}
-
-function RuledBox() {
-  return <BorderBox></BorderBox>;
 }

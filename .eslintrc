@@ -5,22 +5,18 @@
     "node": true,
     "jest": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2019,
-    "sourceType": "module"
+    "project": "./tsconfig.json"
   },
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "plugins": ["react", "react-hooks", "jsx-a11y", "prettier", "jest"],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "jest"],
   "extends": [
     "plugin:react/recommended",
     "airbnb",
-    "prettier",
     "plugin:jest/recommended",
     "plugin:jest/style"
   ],
@@ -28,7 +24,6 @@
     "no-else-return": "off",
     "jest/prefer-strict-equal": "error",
     "jest/prefer-to-have-length": "warn",
-    "prettier/prettier": "error",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": "off",
@@ -67,8 +62,7 @@
       "plugins": ["@typescript-eslint/eslint-plugin"],
       "extends": [
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
+        "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
         "@typescript-eslint/explicit-function-return-type": "off",
@@ -91,7 +85,7 @@
         "quotes": "off",
         "@typescript-eslint/quotes": [
           2,
-          "single",
+          "double",
           {
             "avoidEscape": true
           }
