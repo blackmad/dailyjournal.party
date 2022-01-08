@@ -5,6 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 code {
@@ -15,6 +23,10 @@ code {
 @page {
   size: 100mm 100mm;
   margin: 0mm;
+}
+
+body {
+  font-family: "Computer Modern Serif", serif;
 }
 
 @tailwind base;

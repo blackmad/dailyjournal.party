@@ -18,7 +18,8 @@
     "plugin:react/recommended",
     "airbnb",
     "plugin:jest/recommended",
-    "plugin:jest/style"
+    "plugin:jest/style",
+    "prettier"
   ],
   "rules": {
     "no-else-return": "off",
@@ -62,7 +63,7 @@
       "plugins": ["@typescript-eslint/eslint-plugin", "prettier"],
       "extends": [
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
         "prettier/prettier": "error",
@@ -86,7 +87,7 @@
         "quotes": "off",
         "@typescript-eslint/quotes": [
           2,
-          "single",
+          "double",
           {
             "avoidEscape": true
           }
