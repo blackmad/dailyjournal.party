@@ -1,3 +1,15 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+  color-adjust: exact !important; /*Firefox*/
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -8,6 +20,9 @@ body {
 
   height: 100vh;
   width: 100vw;
+
+  padding: 0;
+  overflow: hidden;
 }
 
 #root {
@@ -21,7 +36,7 @@ code {
 }
 
 @page {
-  size: 100mm 100mm;
+  size: 6in 9in;
   margin: 0mm;
 }
 

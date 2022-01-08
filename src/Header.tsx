@@ -9,7 +9,6 @@ const HeaderContainer = styled.div`
   border-left: solid 3px ${(props) => props.theme.colors.borderColor};
   box-sizing: border-box;
   width: 100%;
-  margin-bottom: ;
 `;
 
 const HeaderComponents = styled.div`

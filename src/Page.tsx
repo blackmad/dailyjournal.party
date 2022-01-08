@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
+
 import { Header } from "./Header";
 
 const theme = {
@@ -10,6 +11,12 @@ const theme = {
     borderColor: "#AFDBD2",
   },
 };
+
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
 const BasicBorder = styled.div`
   border: solid 1px ${(props) => props.theme.colors.borderColor};
@@ -38,7 +45,8 @@ const PageGrid = styled.div`
   gap: 20px;
   width: 100%;
   height: 100%;
-  padding: 1.2em;
+  padding: 2.2em 1.2em;
+  flex-grow: 1;
 `;
 
 const WithDots = styled.div`
@@ -72,7 +80,7 @@ const WithLines = styled.div`
     ${(props) => props.theme.colors.backgroundColor} 52.38%,
     ${(props) => props.theme.colors.backgroundColor} 100%
   );
-  background-size: 42px 42px;
+  background-size: 2em 2em;
 
   width: 100%;
   height: 100%;
@@ -104,16 +112,18 @@ function RuledBox({ className, title }: { className: string; title: string }) {
 export function Page() {
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <PageGrid>
-        <RuledBox className="col-span-12" title="who is your daddy" />
+      <PageContainer>
+        <Header />
+        <PageGrid>
+          <RuledBox className="col-span-12" title="who is your daddy" />
 
-        <RuledBox className="col-span-4" title="who is your daddy" />
-        <RuledBox className="col-span-4" title="who is your daddy" />
-        <RuledBox className="col-span-4" title="who is your daddy" />
+          <RuledBox className="col-span-4" title="who is your daddy" />
+          <RuledBox className="col-span-4" title="who is your daddy" />
+          <RuledBox className="col-span-4" title="who is your daddy" />
 
-        <DottedBox className="col-span-12" title="who is your daddy" />
-      </PageGrid>
+          <DottedBox className="col-span-12" title="who is your daddy" />
+        </PageGrid>
+      </PageContainer>
     </ThemeProvider>
   );
 }
