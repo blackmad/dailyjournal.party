@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import useDimensions from "use-react-dimensions";
 import * as _ from "lodash";
@@ -30,14 +30,15 @@ const BasicBorder = styled.div`
 
 const BorderBox = styled(BasicBorder)`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 1em);
+  margin-top: 1em;
 `;
 
 const BoxTitle = styled(BasicBorder)`
   position: absolute;
   top: 0px;
   left: 50%;
-  transform: translate(-50%, -1em);
+  transform: translate(-50%, 0);
   padding: 0.2em;
   white-space: nowrap;
 `;
@@ -48,7 +49,7 @@ const PageGrid = styled.div`
   gap: 20px;
   width: 100%;
   height: 100%;
-  padding: 2.2em 1.2em;
+  padding: 1.2em 1.2em;
   flex-grow: 1;
 `;
 
@@ -82,15 +83,18 @@ function drawLines() {
   });
 }
 
-function drawDots() {
+function drawDots(dimensions: Dimensions) {
   const lineHeight = 20;
+  const { width, height } = dimensions;
 
   return drawWrapper((context) => {
-    const offScreenCanvas = context.canvas;
     context.fillStyle = theme.colors.dotColor;
     context.lineWidth = 0.2;
-    _.times(offScreenCanvas.height / lineHeight, (i) => {
-      _.times(offScreenCanvas.width / lineHeight, (j) => {
+    _.times(width / lineHeight, (i) => {
+      _.times(height / lineHeight, (j) => {
+        if (i === 0 || j === 0) {
+          return;
+        }
         context.beginPath();
         context.arc(i * lineHeight, j * lineHeight, 1, 0, 2 * Math.PI);
         context.fill();
@@ -99,24 +103,17 @@ function drawDots() {
   });
 }
 
+type Dimensions = { width: number; height: number };
+
 function DottedBox({ className, title }: { className: string; title: string }) {
   const { ref, dimensions } = useDimensions<HTMLDivElement>({});
-  const [savedDim, setSavedDim] = useState<
-    { width: number; height: number } | undefined
-  >(undefined);
-
-  const { width, height } = dimensions;
-
-  if (!savedDim && width) {
-    setSavedDim({ width, height });
-  }
 
   return (
     <div className={`${className} relative`} ref={ref}>
       <BoxTitle>{title}</BoxTitle>
       <BorderBox
         style={{
-          backgroundImage: drawDots(),
+          backgroundImage: drawDots(dimensions),
           backgroundSize: "2000px 2000px",
         }}
       />
