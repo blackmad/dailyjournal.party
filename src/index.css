@@ -8,6 +8,7 @@ html {
   box-sizing: border-box;
   -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
   color-adjust: exact !important; /*Firefox*/
+  image-rendering: crisp-edges;
 }
 
 body {

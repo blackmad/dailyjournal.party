@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
+import useDimensions from "use-react-dimensions";
+import * as _ from "lodash";
 
 import { Header } from "./Header";
 
@@ -15,7 +17,8 @@ const theme = {
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 600px;
+  height: 900px;
 `;
 
 const BasicBorder = styled.div`
@@ -52,40 +55,56 @@ const PageGrid = styled.div`
 const WithDots = styled.div`
   background: linear-gradient(
         90deg,
-        ${(props) => props.theme.colors.backgroundColor} 20px,
+        ${(props) => props.theme.colors.backgroundColor} 20pt,
         transparent 1%
       )
       center,
     linear-gradient(
-        ${(props) => props.theme.colors.backgroundColor} 20px,
+        ${(props) => props.theme.colors.backgroundColor} 20pt,
         transparent 1%
       )
       center,
     ${(props) => props.theme.colors.dotColor};
-  background-size: 22px 22px;
+  background-size: 22pt 22pt;
 
-  width: calc(100% - 20px);
-  height: calc(100% - 20px);
-  margin: 10px;
+  width: calc(100% - 20pt);
+  height: calc(100% - 20pt);
+  margin: 10pt;
+  opacity: 0.99;
 `;
 
 const WithLines = styled.div`
-  background-image: linear-gradient(
-    0deg,
-    ${(props) => props.theme.colors.dotColor} 2.38%,
-    ${(props) => props.theme.colors.backgroundColor} 2.38%,
-    ${(props) => props.theme.colors.backgroundColor} 50%,
-    ${(props) => props.theme.colors.dotColor} 50%,
-    ${(props) => props.theme.colors.dotColor} 52.38%,
-    ${(props) => props.theme.colors.backgroundColor} 52.38%,
-    ${(props) => props.theme.colors.backgroundColor} 100%
-  );
-  background-size: 2em 2em;
-
+  // background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPScjZmZmJyAvPgogIDxjaXJjbGUgY3g9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSIjMDAwIi8+Cjwvc3ZnPg==");
+  // background-repeat: repeat;
   width: 100%;
   height: 100%;
-  // margin: 10px;
+  // opacity: 0.99;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAHlBMVEUAAABkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGSH0mEbAAAACnRSTlMAzDPDPPPYnGMw2CgMzQAAAChJREFUKM9jgAPOAgZMwGIwKkhXQSUY0BCCMxkEYUAsEM4cjI4fwYIAf2QMNbUsZjcAAAAASUVORK5CYII=");
+  background-size: 15px;
 `;
+
+function drawLines() {
+  const lineHeight = 20;
+
+  const offScreenCanvas = document.createElement("canvas");
+  offScreenCanvas.width = 2000;
+  offScreenCanvas.height = 2000;
+  const context = offScreenCanvas.getContext("2d");
+
+  if (context) {
+    context.strokeStyle = theme.colors.dotColor;
+    context.lineWidth = 0.2;
+    _.times(offScreenCanvas.height / lineHeight, (i) => {
+      context.beginPath();
+      context.moveTo(0, i * lineHeight);
+      context.lineTo(offScreenCanvas.width, i * lineHeight);
+      context.stroke();
+    });
+  }
+  const x = offScreenCanvas.toDataURL();
+  console.log(x);
+  return x;
+}
 
 function DottedBox({ className, title }: { className: string; title: string }) {
   return (
@@ -98,9 +117,60 @@ function DottedBox({ className, title }: { className: string; title: string }) {
   );
 }
 
-function RuledBox({ className, title }: { className: string; title: string }) {
+function DottedBox2({
+  className,
+  title,
+}: {
+  className: string;
+  title: string;
+}) {
+  // const { ref, dimensions } = useDimensions<HTMLDivElement>({});
+  // const [savedDim, setSavedDim] = useState<
+  //   { width: number; height: number } | undefined
+  // >(undefined);
+
+  // const { width, height } = dimensions;
+
+  // if (!savedDim && width) {
+  //   setSavedDim({ width, height });
+  // }
+
+  // console.log({ width, height });
+
+  // const targetLineHeightPx = 20;
+  // const topMarginPx = 10;
+
+  // if (!savedDim) {
+  //   return null;
+  // }
+
+  // const maxLines = Math.floor(
+  //   (savedDim.height - topMarginPx) / targetLineHeightPx
+  // );
+  // const extraMargin = savedDim.height - topMarginPx - maxLines * topMarginPx;
+
   return (
     <div className={`${className} relative`}>
+      <BoxTitle>{title}</BoxTitle>
+      <BorderBox
+        style={{
+          backgroundImage: `url(${drawLines()})`,
+          backgroundSize: "2000px 2000px",
+        }}
+      />
+    </div>
+  );
+}
+
+function RuledBox({ className, title }: { className: string; title: string }) {
+  const { ref, dimensions } = useDimensions<HTMLDivElement>({});
+
+  const { width, height } = dimensions;
+
+  console.log(width, height);
+
+  return (
+    <div className={`${className} relative`} ref={ref}>
       <BoxTitle>{title}</BoxTitle>
       <BorderBox>
         <WithLines />
@@ -115,7 +185,7 @@ export function Page() {
       <PageContainer>
         <Header />
         <PageGrid>
-          <RuledBox className="col-span-12" title="who is your daddy" />
+          <DottedBox2 className="col-span-12" title="who is your daddy" />
 
           <RuledBox className="col-span-4" title="who is your daddy" />
           <RuledBox className="col-span-4" title="who is your daddy" />
