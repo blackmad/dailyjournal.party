@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import useDimensions from "use-react-dimensions";
 import * as _ from "lodash";
@@ -52,46 +52,25 @@ const PageGrid = styled.div`
   flex-grow: 1;
 `;
 
-const WithDots = styled.div`
-  background: linear-gradient(
-        90deg,
-        ${(props) => props.theme.colors.backgroundColor} 20pt,
-        transparent 1%
-      )
-      center,
-    linear-gradient(
-        ${(props) => props.theme.colors.backgroundColor} 20pt,
-        transparent 1%
-      )
-      center,
-    ${(props) => props.theme.colors.dotColor};
-  background-size: 22pt 22pt;
+type DrawCallback = (ctx: CanvasRenderingContext2D) => void;
 
-  width: calc(100% - 20pt);
-  height: calc(100% - 20pt);
-  margin: 10pt;
-  opacity: 0.99;
-`;
-
-const WithLines = styled.div`
-  // background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPScjZmZmJyAvPgogIDxjaXJjbGUgY3g9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSIjMDAwIi8+Cjwvc3ZnPg==");
-  // background-repeat: repeat;
-  width: 100%;
-  height: 100%;
-  // opacity: 0.99;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAHlBMVEUAAABkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGSH0mEbAAAACnRSTlMAzDPDPPPYnGMw2CgMzQAAAChJREFUKM9jgAPOAgZMwGIwKkhXQSUY0BCCMxkEYUAsEM4cjI4fwYIAf2QMNbUsZjcAAAAASUVORK5CYII=");
-  background-size: 15px;
-`;
-
-function drawLines() {
-  const lineHeight = 20;
-
+function drawWrapper(cb: DrawCallback) {
   const offScreenCanvas = document.createElement("canvas");
   offScreenCanvas.width = 2000;
   offScreenCanvas.height = 2000;
   const context = offScreenCanvas.getContext("2d");
 
   if (context) {
+    cb(context);
+  }
+  return `url(${offScreenCanvas.toDataURL()})`;
+}
+
+function drawLines() {
+  const lineHeight = 20;
+
+  return drawWrapper((context) => {
+    const offScreenCanvas = context.canvas;
     context.strokeStyle = theme.colors.dotColor;
     context.lineWidth = 0.2;
     _.times(offScreenCanvas.height / lineHeight, (i) => {
@@ -100,30 +79,52 @@ function drawLines() {
       context.lineTo(offScreenCanvas.width, i * lineHeight);
       context.stroke();
     });
-  }
-  const x = offScreenCanvas.toDataURL();
-  console.log(x);
-  return x;
+  });
+}
+
+function drawDots() {
+  const lineHeight = 20;
+
+  return drawWrapper((context) => {
+    const offScreenCanvas = context.canvas;
+    context.fillStyle = theme.colors.dotColor;
+    context.lineWidth = 0.2;
+    _.times(offScreenCanvas.height / lineHeight, (i) => {
+      _.times(offScreenCanvas.width / lineHeight, (j) => {
+        context.beginPath();
+        context.arc(i * lineHeight, j * lineHeight, 1, 0, 2 * Math.PI);
+        context.fill();
+      });
+    });
+  });
 }
 
 function DottedBox({ className, title }: { className: string; title: string }) {
+  const { ref, dimensions } = useDimensions<HTMLDivElement>({});
+  const [savedDim, setSavedDim] = useState<
+    { width: number; height: number } | undefined
+  >(undefined);
+
+  const { width, height } = dimensions;
+
+  if (!savedDim && width) {
+    setSavedDim({ width, height });
+  }
+
   return (
-    <div className={`${className} relative`}>
+    <div className={`${className} relative`} ref={ref}>
       <BoxTitle>{title}</BoxTitle>
-      <BorderBox>
-        <WithDots />
-      </BorderBox>
+      <BorderBox
+        style={{
+          backgroundImage: drawDots(),
+          backgroundSize: "2000px 2000px",
+        }}
+      />
     </div>
   );
 }
 
-function DottedBox2({
-  className,
-  title,
-}: {
-  className: string;
-  title: string;
-}) {
+function RuledBox({ className, title }: { className: string; title: string }) {
   // const { ref, dimensions } = useDimensions<HTMLDivElement>({});
   // const [savedDim, setSavedDim] = useState<
   //   { width: number; height: number } | undefined
@@ -154,27 +155,10 @@ function DottedBox2({
       <BoxTitle>{title}</BoxTitle>
       <BorderBox
         style={{
-          backgroundImage: `url(${drawLines()})`,
+          backgroundImage: drawLines(),
           backgroundSize: "2000px 2000px",
         }}
       />
-    </div>
-  );
-}
-
-function RuledBox({ className, title }: { className: string; title: string }) {
-  const { ref, dimensions } = useDimensions<HTMLDivElement>({});
-
-  const { width, height } = dimensions;
-
-  console.log(width, height);
-
-  return (
-    <div className={`${className} relative`} ref={ref}>
-      <BoxTitle>{title}</BoxTitle>
-      <BorderBox>
-        <WithLines />
-      </BorderBox>
     </div>
   );
 }
@@ -185,13 +169,13 @@ export function Page() {
       <PageContainer>
         <Header />
         <PageGrid>
-          <DottedBox2 className="col-span-12" title="who is your daddy" />
-
-          <RuledBox className="col-span-4" title="who is your daddy" />
-          <RuledBox className="col-span-4" title="who is your daddy" />
-          <RuledBox className="col-span-4" title="who is your daddy" />
-
           <DottedBox className="col-span-12" title="who is your daddy" />
+
+          <RuledBox className="col-span-4" title="who is your daddy" />
+          <RuledBox className="col-span-4" title="who is your daddy" />
+          <RuledBox className="col-span-4" title="who is your daddy" />
+
+          <RuledBox className="col-span-12" title="who is your daddy" />
         </PageGrid>
       </PageContainer>
     </ThemeProvider>
