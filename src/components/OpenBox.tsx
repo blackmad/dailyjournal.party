@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { AbstractBox, BoxWithTitleProps } from "./AbstractBox";
+import { AbstractBox, BoxWithFill, BoxWithTitleProps } from "./AbstractBox";
+import { drawDots } from "./fillUtils";
 
 const OpenBox = styled.div`
   width: 100%;
-  height: calc(100% - 1em);
-  margin-top: 1em;
+  height: 100%;
 `;
 
 const BoxTitleBox = styled.div`
   top: 0px;
   left: 50%;
-  padding: 0.2em;
   white-space: nowrap;
+  text-decoration: underline;
 `;
 
 function BoxTitle({ title }: { title: string }) {
@@ -25,6 +25,16 @@ export function OpenBoxWithTitle(props: BoxWithTitleProps) {
       {...props}
       TitleBoxComponent={BoxTitle}
       ContentBoxComponent={OpenBox}
+    />
+  );
+}
+
+export function OpenDottedBox(props: BoxWithTitleProps) {
+  return (
+    <BoxWithFill
+      {...props}
+      bgFillCallback={drawDots}
+      BoxComponent={OpenBoxWithTitle}
     />
   );
 }

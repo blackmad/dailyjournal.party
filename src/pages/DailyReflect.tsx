@@ -1,5 +1,5 @@
 import React from "react";
-import { OpenBoxWithTitle } from "../components/OpenBox";
+import { OpenBoxWithTitle, OpenDottedBox } from "../components/OpenBox";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
 
 function DailyReflect(_props: PageContentProps) {
@@ -11,7 +11,7 @@ function DailyReflect(_props: PageContentProps) {
       <OpenBoxWithTitle className="col-span-4" title="who is your daddy" />
       <OpenBoxWithTitle className="col-span-4" title="who is your daddy" />
 
-      <OpenBoxWithTitle className="col-span-12" title="who is your daddy" />
+      <OpenDottedBox className="col-span-12" title="who is your daddy" />
     </PageGrid>
   );
 }

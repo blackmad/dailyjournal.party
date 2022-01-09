@@ -50,6 +50,10 @@ body {
   div.page {
     page-break-after: always;
   }
+
+  #root {
+    overflow: unset;
+  }
 }
 
 @tailwind base;

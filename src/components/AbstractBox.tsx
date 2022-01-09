@@ -46,16 +46,18 @@ export function AbstractBox(props: AbstractBoxWithTitleProps) {
   const { ref, dimensions } = useDimensions<HTMLDivElement>({});
 
   return (
-    <div className={`${className || ""} relative`} ref={ref}>
+    <div className={`${className || ""} relative`}>
       <TitleBoxComponent title={title} />
-      <ContentBoxComponent
-        style={{
-          ...(style || {}),
-          ...styleCallback?.(dimensions),
-        }}
-      >
-        {children}
-      </ContentBoxComponent>
+      <div ref={ref} style={{ width: "100%", height: "100%" }}>
+        <ContentBoxComponent
+          style={{
+            ...(style || {}),
+            ...styleCallback?.(dimensions),
+          }}
+        >
+          {children}
+        </ContentBoxComponent>
+      </div>
     </div>
   );
 }
