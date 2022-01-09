@@ -27,7 +27,6 @@ export const PageGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
   grid-auto-rows: 1fr;
-
   gap: 20px;
   width: 100%;
   height: 100%;

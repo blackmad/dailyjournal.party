@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import useDimensions from "use-react-dimensions";
-import { Dimensions } from "./fillUtils";
+import { AbstractBox, BoxWithTitleProps, BoxWithFill } from "./AbstractBox";
+import { drawDots, drawLines } from "./fillUtils";
 
 const BasicBorder = styled.div`
   border: solid 1px ${(props) => props.theme.colors.borderColor};
@@ -16,7 +16,7 @@ const BorderBox = styled(BasicBorder)`
   margin-top: 1em;
 `;
 
-const BoxTitle = styled(BasicBorder)`
+const BoxTitleBox = styled(BasicBorder)`
   position: absolute;
   top: 0px;
   left: 50%;
@@ -25,29 +25,17 @@ const BoxTitle = styled(BasicBorder)`
   white-space: nowrap;
 `;
 
-export type BorderBoxWithTitleProps = React.PropsWithChildren<{
-  title: string;
-  style?: React.CSSProperties;
-  styleCallback?: (d: Dimensions) => React.CSSProperties | undefined;
-  className?: string;
-}>;
+function BoxTitle({ title }: { title: string }) {
+  return <BoxTitleBox>{title}</BoxTitleBox>;
+}
 
-export function BorderBoxWithTitle(props: BorderBoxWithTitleProps) {
-  const { title, style, className, children, styleCallback } = props;
-  const { ref, dimensions } = useDimensions<HTMLDivElement>({});
-
+export function BorderBoxWithTitle(props: BoxWithTitleProps) {
   return (
-    <div className={`${className || ""} relative`} ref={ref}>
-      <BoxTitle>{title}</BoxTitle>
-      <BorderBox
-        style={{
-          ...(style || {}),
-          ...styleCallback?.(dimensions),
-        }}
-      >
-        {children}
-      </BorderBox>
-    </div>
+    <AbstractBox
+      {...props}
+      TitleBoxComponent={BoxTitle}
+      ContentBoxComponent={BorderBox}
+    />
   );
 }
 
@@ -56,3 +44,23 @@ BorderBoxWithTitle.defaultProps = {
   styleCallback: undefined,
   style: undefined,
 };
+
+export function BorderDottedBox(props: BoxWithTitleProps) {
+  return (
+    <BoxWithFill
+      {...props}
+      bgFillCallback={drawDots}
+      BoxComponent={BorderBoxWithTitle}
+    />
+  );
+}
+
+export function BorderRuledBox(props: BoxWithTitleProps) {
+  return (
+    <BoxWithFill
+      {...props}
+      bgFillCallback={drawLines}
+      BoxComponent={BorderBoxWithTitle}
+    />
+  );
+}

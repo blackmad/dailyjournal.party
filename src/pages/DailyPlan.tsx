@@ -1,17 +1,17 @@
 import React from "react";
-import { DottedBox } from "../components/DottedBox";
+import { BorderDottedBox, BorderRuledBox } from "../components/BorderBox";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
 
 function DailyPage(_props: PageContentProps) {
   return (
     <PageGrid>
-      <DottedBox className="col-span-12" title="who is your daddy" />
+      <BorderDottedBox className="col-span-12" title="who is your daddy" />
 
-      <DottedBox className="col-span-4" title="who is your daddy" />
-      <DottedBox className="col-span-4" title="who is your daddy" />
-      <DottedBox className="col-span-4" title="who is your daddy" />
+      <BorderDottedBox className="col-span-4" title="who is your daddy" />
+      <BorderDottedBox className="col-span-4" title="who is your daddy" />
+      <BorderDottedBox className="col-span-4" title="who is your daddy" />
 
-      <DottedBox className="col-span-12" title="who is your daddy" />
+      <BorderRuledBox className="col-span-12" title="who is your daddy" />
     </PageGrid>
   );
 }

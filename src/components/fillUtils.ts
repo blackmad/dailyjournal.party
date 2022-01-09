@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme, useTheme } from "styled-components";
 
 export type DrawCallback = (ctx: CanvasRenderingContext2D) => void;
 
@@ -95,6 +95,18 @@ export function drawDots({
       });
     });
   });
+}
+
+export type BackgroundImageFillFunction = typeof drawDots;
+
+export function wrapInBackgroundImageCallback(cb: BackgroundImageFillFunction) {
+  const theme = useTheme();
+
+  return (dimensions: Dimensions) => {
+    return {
+      backgroundImage: cb({ dimensions, theme }),
+    };
+  };
 }
 
 export type Dimensions = { width: number; height: number };
