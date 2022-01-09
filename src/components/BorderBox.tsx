@@ -25,17 +25,12 @@ const BoxTitle = styled(BasicBorder)`
   white-space: nowrap;
 `;
 
-type BorderBoxWithTitleProps = React.PropsWithChildren<{
+export type BorderBoxWithTitleProps = React.PropsWithChildren<{
   title: string;
   style?: React.CSSProperties;
   styleCallback?: (d: Dimensions) => React.CSSProperties | undefined;
   className?: string;
 }>;
-
-export type BorderBoxWithTitleBasicProps = Pick<
-  BorderBoxWithTitleProps,
-  "title" | "className"
->;
 
 export function BorderBoxWithTitle(props: BorderBoxWithTitleProps) {
   const { title, style, className, children, styleCallback } = props;

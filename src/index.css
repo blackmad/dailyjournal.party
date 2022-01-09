@@ -50,3 +50,7 @@ body {
     page-break-after: always;
   }
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,10 +1,10 @@
 import React from "react";
 import { useTheme } from "styled-components";
-import { BorderBoxWithTitle, BorderBoxWithTitleBasicProps } from "./BorderBox";
+import { BorderBoxWithTitle, BorderBoxWithTitleProps } from "./BorderBox";
 import { Dimensions, drawDots, drawLines } from "./fillUtils";
 
 export function BoxWithBackgroundImageFill(
-  props: BorderBoxWithTitleBasicProps & {
+  props: BorderBoxWithTitleProps & {
     fillCb: typeof drawLines;
   }
 ) {
@@ -18,10 +18,10 @@ export function BoxWithBackgroundImageFill(
   return <BorderBoxWithTitle {...props} styleCallback={styleCallback} />;
 }
 
-export function RuledBox(props: BorderBoxWithTitleBasicProps) {
+export function RuledBox(props: BorderBoxWithTitleProps) {
   return <BoxWithBackgroundImageFill fillCb={drawLines} {...props} />;
 }
 
-export function DottedBox(props: BorderBoxWithTitleBasicProps) {
+export function DottedBox(props: BorderBoxWithTitleProps) {
   return <BoxWithBackgroundImageFill fillCb={drawDots} {...props} />;
 }
