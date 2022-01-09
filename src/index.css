@@ -45,6 +45,8 @@ body {
   font-family: "Computer Modern Serif", serif;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@media print {
+  div.page {
+    page-break-after: always;
+  }
+}

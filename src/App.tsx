@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import { Page } from "./Page";
+import { Book } from "./Book";
 
 function App() {
-  return <Page />;
+  return <Book />;
 }
 
 export default App;

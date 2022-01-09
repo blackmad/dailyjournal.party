@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { Theme } from "./theme";
+import { DefaultTheme } from "styled-components";
 
 export type DrawCallback = (ctx: CanvasRenderingContext2D) => void;
 
@@ -19,7 +19,7 @@ export function drawLines({
   theme,
   dimensions: _dimensions,
 }: {
-  theme: Theme;
+  theme: DefaultTheme;
   dimensions: Dimensions;
 }) {
   const lineHeight = 20;
@@ -41,22 +41,56 @@ export function drawDots({
   theme,
   dimensions,
 }: {
-  theme: Theme;
+  theme: DefaultTheme;
   dimensions: Dimensions;
 }) {
   const lineHeight = 20;
   const { width, height } = dimensions;
+  //   const width = 90;
+  //   const height = 50;
+
+  // subtract lineHeight / 2 so we're not right on the edges of our box
+  const numColumns = Math.floor((width - lineHeight / 2) / lineHeight);
+  const numRows = Math.floor((height - lineHeight / 2) / lineHeight);
+
+  const extraYPadding = height - numRows * lineHeight;
+  const extraXPadding = width - numColumns * lineHeight;
+
+  //   console.log({
+  //     width,
+  //     height,
+  //     lineHeight,
+  //     numColumns,
+  //     numRows,
+  //     extraXPadding,
+  //     extraYPadding,
+  //   });
+
+  /*
+  height = 50
+  width = 90
+
+  lineHeight = 20
+
+  numRows = 2
+  extraY = hiehgt - (lineHeight*numRows) = 50 - 40 = 10
+  dots at Y = 5, 25, 45
+
+  */
 
   return drawWrapper((context) => {
     context.fillStyle = theme.colors.dotColor;
     context.lineWidth = 0.2;
-    _.times(width / lineHeight, (i) => {
-      _.times(height / lineHeight, (j) => {
-        if (i === 0 || j === 0) {
-          return;
-        }
+    _.times(numColumns + 1, (i) => {
+      _.times(numRows + 1, (j) => {
         context.beginPath();
-        context.arc(i * lineHeight, j * lineHeight, 1, 0, 2 * Math.PI);
+        context.arc(
+          extraXPadding + i * lineHeight,
+          extraYPadding / 2 + j * lineHeight,
+          1,
+          0,
+          2 * Math.PI
+        );
         context.fill();
       });
     });

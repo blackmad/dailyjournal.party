@@ -30,15 +30,14 @@ const HeaderComponentLeft = styled(HeaderComponent)`
   text-align: end;
 `;
 
-export function Header() {
-  const date = DateTime.fromJSDate(new Date());
+export function Header(props: { title: string; date: DateTime }) {
+  const { date, title } = props;
+
   const quarter = date.toFormat("q");
   const year = date.toFormat("yyyy");
   const mon = date.toFormat("MMM");
   const week = date.toFormat("W");
   const daydate = date.toFormat("ccc, d");
-
-  const title = "Daily Plan";
 
   return (
     <HeaderContainer>
