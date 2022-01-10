@@ -2,20 +2,27 @@ import { DateTime } from "luxon";
 import unreachable from "ts-unreachable";
 import * as _ from "lodash";
 
+export const QuestionWhenOptions = [
+  "daily",
+  "weekday",
+  "weekend",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat",
+  "sun",
+] as const;
+
 export type Question = {
   text: string;
-  when:
-    | "daily"
-    | "weekday"
-    | "weekend"
-    | "mon"
-    | "tue"
-    | "wed"
-    | "thu"
-    | "fri"
-    | "sat"
-    | "sun";
+  when: typeof QuestionWhenOptions[number];
 };
+
+export type QuestionMap<T extends string> = Record<T, QuestionMapValue>;
+export type QuestionMapValue = Question[] | Question | string | string[];
+export type StrictQuestionMap<T extends string> = Record<T, Question[]>;
 
 export function mq(text: string, when: Question["when"] = "daily"): Question {
   return { text, when };
@@ -50,19 +57,35 @@ function filterQuestion(question: Question, dt: DateTime): boolean {
   }
 }
 
+export function questionArray(question: QuestionMapValue): Question[] {
+  if (_.isArray(question)) {
+    return question.flatMap(questionArray);
+  }
+  if (_.isString(question)) {
+    return [{ text: question, when: "daily" }];
+  }
+  return [question];
+}
+
+export function makeQuestionMap<T extends string>(
+  questionMap: QuestionMap<T>
+): StrictQuestionMap<T> {
+  const newQuestionMap: Record<string, any> = {};
+  // eslint-disable-next-line no-restricted-syntax
+  for (const k of _.keys(questionMap)) {
+    newQuestionMap[k] = questionArray((questionMap as any)[k as any] as any);
+  }
+  return newQuestionMap as StrictQuestionMap<T>;
+}
+
 export function filterQuestions(
-  questions: Question[],
+  questions: QuestionMapValue,
   dt: DateTime
 ): Question[] {
-  return questions.filter((question) => filterQuestion(question, dt));
+  return questionArray(questions).filter((question) =>
+    filterQuestion(question, dt)
+  );
 }
-
-export function questionArray(question: QuestionMapValue): Question[] {
-  return _.isArray(question) ? question : [question];
-}
-
-export type QuestionMap<T extends string> = Record<T, QuestionMapValue>;
-type QuestionMapValue = Question[] | Question;
 
 export function chooseOneQuestion(
   question: QuestionMapValue,

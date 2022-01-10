@@ -3,6 +3,7 @@ import React from "react";
 import { OpenDottedBox } from "../components/OpenBox";
 // import { mq } from "../utils/question";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
+import { weeklyDateCheck } from "./pageUtils";
 
 export const questionConfig = {
   gratefulFor: ["What was I grateful for today?"],
@@ -26,7 +27,7 @@ export const questionConfig = {
   highlights: ["Highlights", "What was awesome about today?"],
 };
 
-function DailyReflect(_props: PageContentProps) {
+function WeeklyReflect(_props: PageContentProps) {
   return (
     <PageGrid>
       {_.map(questionConfig, (q, key) => {
@@ -37,9 +38,9 @@ function DailyReflect(_props: PageContentProps) {
 }
 
 const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
-  title: "Daily Reflect",
-  dateCheck: () => true,
-  component: DailyReflect,
+  title: "Weekly Reflect",
+  dateCheck: weeklyDateCheck,
+  component: WeeklyReflect,
   questionConfig,
 };
 

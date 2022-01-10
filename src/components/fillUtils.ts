@@ -56,15 +56,15 @@ export function drawDots({
   const extraYPadding = height - numRows * lineHeight;
   const extraXPadding = width - numColumns * lineHeight;
 
-  //   console.log({
-  //     width,
-  //     height,
-  //     lineHeight,
-  //     numColumns,
-  //     numRows,
-  //     extraXPadding,
-  //     extraYPadding,
-  //   });
+  // console.log({
+  //   width,
+  //   height,
+  //   lineHeight,
+  //   numColumns,
+  //   numRows,
+  //   extraXPadding,
+  //   extraYPadding,
+  // });
 
   /*
   height = 50
@@ -85,7 +85,7 @@ export function drawDots({
       _.times(numRows + 1, (j) => {
         context.beginPath();
         context.arc(
-          extraXPadding + i * lineHeight,
+          extraXPadding / 2 + i * lineHeight,
           extraYPadding / 2 + j * lineHeight,
           1,
           0,

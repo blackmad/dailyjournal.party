@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { AbstractBox, BoxWithTitleProps, BoxWithFill } from "./AbstractBox";
 import { drawDots, drawLines } from "./fillUtils";
 
-const BasicBorder = styled.div`
+export const BasicBorder = styled.div`
   border: solid 1px ${(props) => props.theme.colors.borderColor};
   border-radius: 10px;
   background: ${(props) => props.theme.colors.backgroundColor};

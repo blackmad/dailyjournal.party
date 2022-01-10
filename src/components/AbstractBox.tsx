@@ -1,5 +1,7 @@
 import React from "react";
 import useDimensions from "use-react-dimensions";
+import { DateContext } from "../Book";
+import { chooseOneQuestion, QuestionMapValue } from "../utils/question";
 import {
   BackgroundImageFillFunction,
   Dimensions,
@@ -7,7 +9,7 @@ import {
 } from "./fillUtils";
 
 export type BoxWithTitleProps = React.PropsWithChildren<{
-  title: string;
+  question: QuestionMapValue;
   style?: React.CSSProperties;
   styleCallback?: (d: Dimensions) => React.CSSProperties | undefined;
   className?: string;
@@ -16,7 +18,7 @@ export type BoxWithTitleProps = React.PropsWithChildren<{
 export type BoxWithTitleComponentType = React.FC<BoxWithTitleProps>;
 
 type AbstractBoxWithTitleProps = {
-  TitleBoxComponent: React.FC<Pick<BoxWithTitleProps, "title">>;
+  TitleBoxComponent: React.FC<{ title: string }>;
   ContentBoxComponent: React.FC<
     Pick<BoxWithTitleProps, "style" | "styleCallback">
   >;
@@ -35,7 +37,7 @@ export function BoxWithFill(
 
 export function AbstractBox(props: AbstractBoxWithTitleProps) {
   const {
-    title,
+    question,
     style,
     className,
     children,
@@ -44,6 +46,8 @@ export function AbstractBox(props: AbstractBoxWithTitleProps) {
     ContentBoxComponent,
   } = props;
   const { ref, dimensions } = useDimensions<HTMLDivElement>({});
+  const { dt } = React.useContext(DateContext);
+  const title = chooseOneQuestion(question, dt);
 
   return (
     <div className={`${className || ""} relative flex flex-col`}>

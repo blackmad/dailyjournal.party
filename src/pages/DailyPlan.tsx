@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import { DateContext } from "../Book";
 import { AbstractBox } from "../components/AbstractBox";
 import {
   BorderBox,
@@ -8,13 +8,8 @@ import {
   BoxTitle,
 } from "../components/BorderBox";
 import { OpenDottedBox } from "../components/OpenBox";
-import {
-  chooseOneQuestion,
-  filterQuestionDict,
-  mq,
-  Question,
-  questionArray,
-} from "../utils/question";
+import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
+import { filterQuestions, mq, QuestionMapValue } from "../utils/question";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
 
 export const questionConfig = {
@@ -33,19 +28,13 @@ export const questionConfig = {
   positiveSelfTalk: [mq("Today's positive self-talk")],
 };
 
-const BlankLine = styled.div`
-  height: 1em;
-  border-bottom: 1px solid black;
-  width: 70%;
-  flex-grow: 1;
-`;
-
 function GridLineMultiBox({
   questions: _questions,
 }: {
-  questions: Question[] | Question;
+  questions: QuestionMapValue;
 }) {
-  const questions = questionArray(_questions);
+  const { dt } = React.useContext(DateContext);
+  const questions = filterQuestions(_questions, dt);
 
   return (
     <>
@@ -53,15 +42,12 @@ function GridLineMultiBox({
         return (
           <AbstractBox
             className={`col-span-${12 / questions.length}`}
-            title={question.text}
+            question={question}
             TitleBoxComponent={BoxTitle}
             ContentBoxComponent={BorderBox}
+            key={question.text}
           >
-            <div className="flex flex-col items-center justify-between h-full pt-[5%] pb-[10%]">
-              <BlankLine />
-              <BlankLine />
-              <BlankLine />
-            </div>
+            <ThreeLineBoxContents />
           </AbstractBox>
         );
       })}
@@ -69,48 +55,41 @@ function GridLineMultiBox({
   );
 }
 
-function DailyPage(props: PageContentProps) {
-  const { dt } = props;
-  const filteredQuestionConfig = filterQuestionDict(questionConfig, dt);
-
+function DailyPage(_props: PageContentProps) {
   return (
     <PageGrid>
-      <GridLineMultiBox
-        questions={filteredQuestionConfig.dailyThreeUpQuestions}
+      <GridLineMultiBox questions={questionConfig.dailyThreeUpQuestions} />
+
+      <BorderDottedBox
+        className="col-span-12"
+        question={questionConfig.iAmLookingForwardTo}
       />
 
       <BorderDottedBox
         className="col-span-12"
-        title={chooseOneQuestion(
-          filteredQuestionConfig.iAmLookingForwardTo,
-          dt
-        )}
-      />
-
-      <BorderDottedBox
-        className="col-span-12"
-        title={chooseOneQuestion(filteredQuestionConfig.todayPlan, dt)}
+        question={questionConfig.todayPlan}
       />
 
       <BorderRuledBox
         className="col-span-6"
-        title={chooseOneQuestion(filteredQuestionConfig.gratefulFor, dt)}
+        question={questionConfig.gratefulFor}
       />
 
-      <OpenDottedBox className="col-span-6 row-span-2" title="Notes" />
+      <OpenDottedBox className="col-span-6 row-span-2" question="Notes" />
 
       <BorderRuledBox
         className="col-span-6"
-        title={chooseOneQuestion(filteredQuestionConfig.positiveSelfTalk, dt)}
+        question={questionConfig.positiveSelfTalk}
       />
     </PageGrid>
   );
 }
 
-const PageContentDefinition: PageContent = {
+const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
   title: "Daily Plan",
   dateCheck: () => true,
   component: DailyPage,
+  questionConfig,
 };
 
 export default PageContentDefinition;

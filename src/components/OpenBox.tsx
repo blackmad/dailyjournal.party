@@ -9,6 +9,12 @@ const OpenBox = styled.div`
   // background: ${(props) => props.theme.colors.textBackgroundColor};
 `;
 
+export const OpenBackgroundBox = styled.div`
+  width: 100%;
+  height: 100%;
+  background: ${(props) => props.theme.colors.textBackgroundColor};
+`;
+
 const BoxTitleBox = styled.div`
   top: 0px;
   left: 50%;

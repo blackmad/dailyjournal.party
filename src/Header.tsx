@@ -1,7 +1,7 @@
 import React from "react";
-import { DateTime } from "luxon";
 
 import styled from "styled-components";
+import { DateContext } from "./Book";
 
 const HeaderContainer = styled.div`
   border-bottom: solid 3px ${(props) => props.theme.colors.borderColor};
@@ -30,14 +30,15 @@ const HeaderComponentLeft = styled(HeaderComponent)`
   text-align: end;
 `;
 
-export function Header(props: { title: string; date: DateTime }) {
-  const { date, title } = props;
+export function Header(props: { title: string }) {
+  const { title } = props;
+  const { dt } = React.useContext(DateContext);
 
-  const quarter = date.toFormat("q");
-  const year = date.toFormat("yyyy");
-  const mon = date.toFormat("MMM");
-  const week = date.toFormat("W");
-  const daydate = date.toFormat("ccc, d");
+  const quarter = dt.toFormat("q");
+  const year = dt.toFormat("yyyy");
+  const mon = dt.toFormat("MMM");
+  const week = dt.toFormat("W");
+  const daydate = dt.toFormat("ccc, d");
 
   return (
     <HeaderContainer>
