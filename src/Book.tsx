@@ -9,7 +9,7 @@ const PageContents = [WeeklyPlan, DailyPlan, DailyReflect];
 
 export function Book() {
   const startDate = DateTime.fromJSDate(new Date());
-  const endDate = startDate.plus({ days: 30 });
+  const endDate = startDate.plus({ days: 1 });
 
   const interval = Interval.fromDateTimes(startDate, endDate).splitBy({
     days: 1,
