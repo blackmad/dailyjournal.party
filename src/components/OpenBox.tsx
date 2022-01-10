@@ -6,7 +6,7 @@ import { drawDots } from "./fillUtils";
 const OpenBox = styled.div`
   width: 100%;
   height: 100%;
-  background: ${(props) => props.theme.colors.textBackgroundColor};
+  // background: ${(props) => props.theme.colors.textBackgroundColor};
 `;
 
 const BoxTitleBox = styled.div`
@@ -15,8 +15,9 @@ const BoxTitleBox = styled.div`
   white-space: nowrap;
   text-decoration: underline;
   text-underline-offset: 4px;
-  padding: 0.2em 1em 0em;
-  background: ${(props) => props.theme.colors.textBackgroundColor};
+  padding: 0.2em 0.2em;
+  width: fit-content;
+  background: ${(props) => props.theme.colors.backgroundColor};
 `;
 
 function BoxTitle({ title }: { title: string }) {

@@ -14,7 +14,7 @@ const PageContainer = styled.div`
 `;
 
 export type PageContentProps = {
-  date: DateTime;
+  dt: DateTime;
 };
 
 export type PageContent = {

@@ -10,7 +10,7 @@ const BasicBorder = styled.div`
   overflow: hidden;
 `;
 
-const BorderBox = styled(BasicBorder)`
+export const BorderBox = styled(BasicBorder)`
   width: 100%;
   height: calc(100% - 1em);
   margin-top: 1em;
@@ -21,11 +21,11 @@ const BoxTitleBox = styled(BasicBorder)`
   top: 0px;
   left: 50%;
   transform: translate(-50%, 0);
-  padding: 0.2em;
+  padding: 0.2em 1em;
   white-space: nowrap;
 `;
 
-function BoxTitle({ title }: { title: string }) {
+export function BoxTitle({ title }: { title: string }) {
   return <BoxTitleBox>{title}</BoxTitleBox>;
 }
 

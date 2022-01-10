@@ -65,6 +65,7 @@
     "tailwind-styled-components": "^2.0.3",
     "tailwindcss": "^3.0.2",
     "terser-webpack-plugin": "^5.2.5",
+    "ts-unreachable": "^1.0.0",
     "typescript": "^4.4.2",
     "use-dimensions": "^1.0.3",
     "use-react-dimensions": "^2.0.1",

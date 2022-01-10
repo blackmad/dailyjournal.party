@@ -8418,6 +8418,11 @@ tryer@^1.0.1:
   resolved "https://registry.npmjs.org/tryer/-/tryer-1.0.1.tgz"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
+ts-unreachable@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ts-unreachable/-/ts-unreachable-1.0.0.tgz#40f0dad2af4f60c0d4c75c2d508fde3466aecaaa"
+  integrity sha512-RlSPEXNt3f0Ut8Jj+U/oa9s/Gxgv31AdPTjuY44+ZevG3DVEnwnU1jJW0Bn/txHhjNsDlhfdy3SiypT5cvPhQA==
+
 tsconfig-paths@^3.12.0, tsconfig-paths@^3.9.0:
   version "3.12.0"
   resolved "https://registry.npmjs.org/tsconfig-paths/-/tsconfig-paths-3.12.0.tgz"
