@@ -95,7 +95,8 @@
         "@typescript-eslint/no-unused-vars": [2, { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
         "react/no-danger": "off",
         "arrow-body-style": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "react/require-default-props": "off"
       }
     }
   ],

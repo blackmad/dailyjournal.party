@@ -46,9 +46,9 @@ export function AbstractBox(props: AbstractBoxWithTitleProps) {
   const { ref, dimensions } = useDimensions<HTMLDivElement>({});
 
   return (
-    <div className={`${className || ""} relative`}>
+    <div className={`${className || ""} relative flex flex-col`}>
       <TitleBoxComponent title={title} />
-      <div ref={ref} style={{ width: "100%", height: "100%" }}>
+      <div ref={ref} style={{ flexGrow: 1 }}>
         <ContentBoxComponent
           style={{
             ...(style || {}),

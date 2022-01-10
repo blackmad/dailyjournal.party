@@ -5,13 +5,13 @@ import { PageContent, PageContentProps, PageGrid } from "./Page";
 function DailyReflect(_props: PageContentProps) {
   return (
     <PageGrid>
-      <OpenBoxWithTitle className="col-span-12" title="who is your daddy" />
+      <OpenBoxWithTitle className="col-span-12" title="WHO is your daddy" />
 
       <OpenBoxWithTitle className="col-span-4" title="who is your daddy" />
-      <OpenBoxWithTitle className="col-span-4" title="who is your daddy" />
-      <OpenBoxWithTitle className="col-span-4" title="who is your daddy" />
+      <OpenBoxWithTitle className="col-span-4" title="who IS your daddy" />
+      <OpenBoxWithTitle className="col-span-4" title="who is YOUR daddy" />
 
-      <OpenDottedBox className="col-span-12" title="who is your daddy" />
+      <OpenDottedBox className="col-span-12" title="who is your DADDY" />
     </PageGrid>
   );
 }

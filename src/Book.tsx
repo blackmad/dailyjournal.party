@@ -1,10 +1,13 @@
 import React from "react";
 import { DateTime, Interval } from "luxon";
-import DailyPlan from "./pages/DailyPlan";
+// import DailyPlan from "./pages/DailyPlan";
 import { Page } from "./pages/Page";
 import DailyReflect from "./pages/DailyReflect";
 
-const PageContents = [DailyPlan, DailyReflect];
+const PageContents = [
+  // DailyPlan,
+  DailyReflect,
+];
 
 export function Book() {
   const startDate = DateTime.fromJSDate(new Date());
