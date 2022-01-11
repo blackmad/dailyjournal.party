@@ -1,7 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
-import { DateContext } from "./Book";
+import { DateContext } from "./providers/DateContext";
 
 const HeaderContainer = styled.div`
   border-bottom: solid 3px ${(props) => props.theme.colors.borderColor};

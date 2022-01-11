@@ -5,9 +5,9 @@ import WeeklyPlan from "./pages/WeeklyPlan";
 import { Page } from "./pages/Page";
 import WeeklyReflect from "./pages/WeeklyReflect";
 import DailyReflect from "./pages/DailyReflect";
-import { BookForm } from "./BookForm";
+// import { BookForm } from "./BookForm";
 
-const PageContents = [WeeklyReflect, WeeklyPlan, DailyPlan, DailyReflect];
+const PageContents = [WeeklyReflect, DailyPlan, WeeklyPlan, DailyReflect];
 // const PageContents = [WeeklyPlan];
 
 export const DateContext = React.createContext<{ dt: DateTime }>({
@@ -41,7 +41,7 @@ function BookDate({ date }: { date: DateTime }) {
 
 export function Book() {
   const startDate = DateTime.fromJSDate(new Date());
-  const endDate = startDate.plus({ days: 2 });
+  const endDate = startDate.plus({ days: 7 });
 
   const interval = Interval.fromDateTimes(startDate, endDate).splitBy({
     days: 1,
@@ -49,7 +49,7 @@ export function Book() {
 
   return (
     <>
-      <BookForm />
+      {/* <BookForm /> */}
       {interval.map((date) => {
         return <BookDate date={date.start} key={date.start.toISODate()} />;
       })}

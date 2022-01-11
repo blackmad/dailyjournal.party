@@ -1,6 +1,6 @@
 import React from "react";
 import useDimensions from "use-react-dimensions";
-import { DateContext } from "../Book";
+import { DateContext } from "../providers/DateContext";
 import { chooseOneQuestion, QuestionMapValue } from "../utils/question";
 import {
   BackgroundImageFillFunction,

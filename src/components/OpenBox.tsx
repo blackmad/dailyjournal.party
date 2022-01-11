@@ -46,6 +46,7 @@ export function OpenDottedBox(props: BoxWithTitleProps) {
   return (
     <BoxWithFill
       {...props}
+      style={{ marginTop: "0.5em" }}
       bgFillCallback={drawDots}
       BoxComponent={OpenBoxWithTitle}
     />
