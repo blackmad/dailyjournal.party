@@ -11,6 +11,9 @@ import { OpenDottedBox } from "../components/OpenBox";
 import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
 import { filterQuestions, mq, QuestionMapValue } from "../utils/question";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
+import { Header } from "../Header";
+
+const title = "Daily Plan";
 
 export const questionConfig = {
   dailyThreeUpQuestions: [
@@ -57,36 +60,39 @@ function GridLineMultiBox({
 
 function DailyPage(_props: PageContentProps) {
   return (
-    <PageGrid>
-      <GridLineMultiBox questions={questionConfig.dailyThreeUpQuestions} />
+    <>
+      <Header title={title} />
+      <PageGrid>
+        <GridLineMultiBox questions={questionConfig.dailyThreeUpQuestions} />
 
-      <BorderDottedBox
-        className="col-span-12"
-        question={questionConfig.iAmLookingForwardTo}
-      />
+        <BorderDottedBox
+          className="col-span-12"
+          question={questionConfig.iAmLookingForwardTo}
+        />
 
-      <BorderDottedBox
-        className="col-span-12"
-        question={questionConfig.todayPlan}
-      />
+        <BorderDottedBox
+          className="col-span-12"
+          question={questionConfig.todayPlan}
+        />
 
-      <BorderRuledBox
-        className="col-span-6"
-        question={questionConfig.gratefulFor}
-      />
+        <BorderRuledBox
+          className="col-span-6"
+          question={questionConfig.gratefulFor}
+        />
 
-      <OpenDottedBox className="col-span-6 row-span-2" question="Notes" />
+        <OpenDottedBox className="col-span-6 row-span-2" question="Notes" />
 
-      <BorderRuledBox
-        className="col-span-6"
-        question={questionConfig.positiveSelfTalk}
-      />
-    </PageGrid>
+        <BorderRuledBox
+          className="col-span-6"
+          question={questionConfig.positiveSelfTalk}
+        />
+      </PageGrid>
+    </>
   );
 }
 
 const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
-  title: "Daily Plan",
+  title,
   dateCheck: () => true,
   component: DailyPage,
   questionConfig,

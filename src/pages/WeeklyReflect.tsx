@@ -2,6 +2,7 @@ import _ from "lodash";
 import React from "react";
 import { OpenDottedBox } from "../components/OpenBox";
 // import { mq } from "../utils/question";
+import { Header } from "../Header";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
 import { weeklyDateCheck } from "./pageUtils";
 
@@ -27,18 +28,25 @@ export const questionConfig = {
   highlights: ["Highlights", "What was awesome about today?"],
 };
 
+const title = "Weekly Reflect";
+
 function WeeklyReflect(_props: PageContentProps) {
   return (
-    <PageGrid>
-      {_.map(questionConfig, (q, key) => {
-        return <OpenDottedBox className="col-span-12" question={q} key={key} />;
-      })}
-    </PageGrid>
+    <>
+      <Header title={title} omitDay />
+      <PageGrid>
+        {_.map(questionConfig, (q, key) => {
+          return (
+            <OpenDottedBox className="col-span-12" question={q} key={key} />
+          );
+        })}
+      </PageGrid>
+    </>
   );
 }
 
 const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
-  title: "Weekly Reflect",
+  title,
   dateCheck: weeklyDateCheck,
   component: WeeklyReflect,
   questionConfig,

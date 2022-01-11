@@ -3,7 +3,6 @@ import styled, { ThemeProvider } from "styled-components";
 import * as _ from "lodash";
 import { DateTime } from "luxon";
 
-import { Header } from "../Header";
 import { theme } from "../theme";
 import { QuestionMap } from "../utils/question";
 
@@ -36,18 +35,11 @@ export const PageGrid = styled.div`
   overflow: hidden;
 `;
 
-export function Page(
-  props: React.PropsWithChildren<{
-    title: string;
-  }>
-) {
-  const { title, children } = props;
+export function Page(props: React.PropsWithChildren<any>) {
+  const { children } = props;
   return (
     <ThemeProvider theme={theme}>
-      <PageContainer className="page">
-        <Header title={title} />
-        {children}
-      </PageContainer>
+      <PageContainer className="page">{children}</PageContainer>
     </ThemeProvider>
   );
 }

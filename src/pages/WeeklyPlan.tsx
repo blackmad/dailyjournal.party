@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { BasicBorder, BorderBoxWithTitle } from "../components/BorderBox";
 import { OpenBackgroundBox, OpenDottedBox } from "../components/OpenBox";
 import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
-// import { BorderDottedBox, BorderRuledBox } from "../components/BorderBox";
+import { Header } from "../Header";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
 import { weeklyDateCheck } from "./pageUtils";
 
@@ -21,6 +21,8 @@ const WeekName = styled(OpenBackgroundBox)`
 `;
 
 const questionConfig = {};
+
+const title = "Weekly Plan";
 
 const WeekBox = styled(BasicBorder)``;
 
@@ -47,41 +49,45 @@ function WeekGrid({ className }: { className: string }) {
 
 function WeekPlan(_props: PageContentProps) {
   return (
-    <PageGrid>
-      <WeekGrid className="col-span-8 row-span-4" />
-      <OpenDottedBox className="col-span-4 row-span-2" question="Todo" />
-      <BorderBoxWithTitle
-        className="col-span-4 row-span-2"
-        question="Goal for the week"
-      />
+    <>
+      <Header title={title} omitDay />
 
-      <BorderBoxWithTitle
-        className="col-span-12"
-        question="Top 3 personal goals this week"
-      >
-        <ThreeLineBoxContents />
-      </BorderBoxWithTitle>
+      <PageGrid>
+        <WeekGrid className="col-span-8 row-span-4" />
+        <OpenDottedBox className="col-span-4 row-span-2" question="Todo" />
+        <BorderBoxWithTitle
+          className="col-span-4 row-span-2"
+          question="Goal for the week"
+        />
 
-      <BorderBoxWithTitle
-        className="col-span-12"
-        question="Top 3 professional goals this week"
-      >
-        <ThreeLineBoxContents />
-      </BorderBoxWithTitle>
+        <BorderBoxWithTitle
+          className="col-span-12"
+          question="Top 3 personal goals this week"
+        >
+          <ThreeLineBoxContents />
+        </BorderBoxWithTitle>
 
-      {/* <BorderDottedBox className="col-span-12" title="week is your daddy" />
+        <BorderBoxWithTitle
+          className="col-span-12"
+          question="Top 3 professional goals this week"
+        >
+          <ThreeLineBoxContents />
+        </BorderBoxWithTitle>
+
+        {/* <BorderDottedBox className="col-span-12" title="week is your daddy" />
 
       <BorderDottedBox className="col-span-4" title="week is your daddy" />
       <BorderDottedBox className="col-span-4" title="week is your daddy" />
       <BorderDottedBox className="col-span-4" title="week is your daddy" />
 
        */}
-    </PageGrid>
+      </PageGrid>
+    </>
   );
 }
 
 const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
-  title: "Weekly Plan",
+  title,
   dateCheck: weeklyDateCheck,
   component: WeekPlan,
   questionConfig,

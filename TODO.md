@@ -1,1 +1,5 @@
-TODO.md
+- fix how dots are generated / rendered
+- fix weekly title
+- get form working
+- get form not ugly
+- option to lay out for book

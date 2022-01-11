@@ -30,8 +30,14 @@ const HeaderComponentLeft = styled(HeaderComponent)`
   text-align: end;
 `;
 
-export function Header(props: { title: string }) {
-  const { title } = props;
+export function Header(props: {
+  title: string;
+  omitDay?: boolean;
+  overrideDay?: string;
+  omitWeek?: boolean;
+  overrideWeek?: string;
+}) {
+  const { title, omitDay, overrideDay, omitWeek, overrideWeek } = props;
   const { dt } = React.useContext(DateContext);
 
   const quarter = dt.toFormat("q");
@@ -46,8 +52,12 @@ export function Header(props: { title: string }) {
         <HeaderComponent>{year}</HeaderComponent>
         <HeaderComponent>Q{quarter}</HeaderComponent>
         <HeaderComponent>{mon}</HeaderComponent>
-        <HeaderComponent>Week {week}</HeaderComponent>
-        <HeaderComponent>{daydate}</HeaderComponent>
+        {!omitWeek && (
+          <HeaderComponent>{overrideWeek || `Week ${week}`}</HeaderComponent>
+        )}
+        {!omitDay && (
+          <HeaderComponent>{overrideDay || daydate}</HeaderComponent>
+        )}
         <HeaderComponentLeft>{title}</HeaderComponentLeft>
       </HeaderComponents>
     </HeaderContainer>

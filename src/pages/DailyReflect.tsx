@@ -1,8 +1,11 @@
 import _ from "lodash";
 import React from "react";
 import { OpenDottedBox } from "../components/OpenBox";
+import { Header } from "../Header";
 // import { mq } from "../utils/question";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
+
+const title = "Daily Reflect";
 
 export const questionConfig = {
   gratefulFor: ["What was I grateful for today?"],
@@ -28,16 +31,22 @@ export const questionConfig = {
 
 function DailyReflect(_props: PageContentProps) {
   return (
-    <PageGrid style={{ gap: 0 }}>
-      {_.map(questionConfig, (q, key) => {
-        return <OpenDottedBox className="col-span-12" question={q} key={key} />;
-      })}
-    </PageGrid>
+    <>
+      <Header title={title} />
+
+      <PageGrid style={{ gap: 0 }}>
+        {_.map(questionConfig, (q, key) => {
+          return (
+            <OpenDottedBox className="col-span-12" question={q} key={key} />
+          );
+        })}
+      </PageGrid>
+    </>
   );
 }
 
 const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
-  title: "Daily Reflect",
+  title,
   dateCheck: () => true,
   component: DailyReflect,
   questionConfig,

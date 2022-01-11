@@ -5,14 +5,11 @@ import WeeklyPlan from "./pages/WeeklyPlan";
 import { Page } from "./pages/Page";
 import WeeklyReflect from "./pages/WeeklyReflect";
 import DailyReflect from "./pages/DailyReflect";
+import { DateContext } from "./providers/DateContext";
 // import { BookForm } from "./BookForm";
 
 const PageContents = [WeeklyReflect, DailyPlan, WeeklyPlan, DailyReflect];
 // const PageContents = [WeeklyPlan];
-
-export const DateContext = React.createContext<{ dt: DateTime }>({
-  dt: DateTime.fromJSDate(new Date()),
-});
 
 function BookDate({ date }: { date: DateTime }) {
   const dateContext = useMemo(() => {
