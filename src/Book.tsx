@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { DateTime, Interval } from "luxon";
 import DailyPlan from "./pages/DailyPlan";
 import WeeklyPlan from "./pages/WeeklyPlan";
-import { Page } from "./pages/Page";
+import { Page, PageContent } from "./pages/Page";
 import WeeklyReflect from "./pages/WeeklyReflect";
 import DailyReflect from "./pages/DailyReflect";
 import { DateContext } from "./providers/DateContext";
@@ -11,29 +11,45 @@ import { DateContext } from "./providers/DateContext";
 const PageContents = [WeeklyReflect, DailyPlan, WeeklyPlan, DailyReflect];
 // const PageContents = [WeeklyPlan];
 
-function BookDate({ date }: { date: DateTime }) {
+function BookPage<T extends string>({
+  date,
+  pageContent,
+}: {
+  date: DateTime;
+  pageContent: PageContent<T>;
+}) {
   const dateContext = useMemo(() => {
     return { dt: date };
   }, [date]);
+
+  const { title, component: PageContentComponent } = pageContent;
+
   return (
-    <DateContext.Provider value={dateContext}>
-      {PageContents.map((pageContent) => {
-        const {
-          title,
-          dateCheck,
-          component: PageContentComponent,
-        } = pageContent;
-        if (!dateCheck(date)) {
-          return null;
-        }
-        return (
-          <Page title={title} key={date.toISODate() + title}>
-            <PageContentComponent />
-          </Page>
-        );
-      })}
-    </DateContext.Provider>
+    <React.Fragment key={`${date}-${title}`}>
+      <DateContext.Provider value={dateContext}>
+        <Page title={title} key={date.toISODate() + title}>
+          <PageContentComponent />
+        </Page>
+      </DateContext.Provider>
+    </React.Fragment>
   );
+}
+
+function makeBookPages({ date }: { date: DateTime }) {
+  return PageContents.flatMap((pageContent) => {
+    const { dateCheck } = pageContent;
+    if (!dateCheck(date)) {
+      return [];
+    }
+
+    return [
+      <BookPage
+        pageContent={pageContent}
+        date={date}
+        key={`${pageContent.title}-${date}`}
+      />,
+    ];
+  });
 }
 
 export function Book() {
@@ -44,12 +60,12 @@ export function Book() {
     days: 1,
   });
 
+  const pages = interval.flatMap((date) => makeBookPages({ date: date.start }));
+
   return (
     <>
       {/* <BookForm /> */}
-      {interval.map((date) => {
-        return <BookDate date={date.start} key={date.start.toISODate()} />;
-      })}
+      {pages}
     </>
   );
 }
