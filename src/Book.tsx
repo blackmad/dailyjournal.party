@@ -1,15 +1,23 @@
 import React, { useMemo } from "react";
 import { DateTime, Interval } from "luxon";
+import { createGlobalStyle } from "styled-components";
 import DailyPlan from "./pages/DailyPlan";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import { Page, PageContent } from "./pages/Page";
 import WeeklyReflect from "./pages/WeeklyReflect";
 import DailyReflect from "./pages/DailyReflect";
 import { DateContext } from "./providers/DateContext";
+import { bookConfig } from "./bookConfig";
 // import { BookForm } from "./BookForm";
 
+const GlobalCSS = createGlobalStyle`
+@page {
+  size: ${bookConfig.pageWidth}${bookConfig.pageHeight} ${bookConfig.pageWidth}${bookConfig.pageUnits};
+  margin: 0mm;
+}
+`;
+
 const PageContents = [WeeklyReflect, DailyPlan, WeeklyPlan, DailyReflect];
-// const PageContents = [WeeklyPlan];
 
 function BookPage<T extends string>({
   date,
@@ -64,6 +72,8 @@ export function Book() {
 
   return (
     <>
+      <GlobalCSS />
+
       {/* <BookForm /> */}
       {pages}
     </>

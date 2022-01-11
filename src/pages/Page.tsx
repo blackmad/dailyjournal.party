@@ -5,12 +5,13 @@ import { DateTime } from "luxon";
 
 import { theme } from "../theme";
 import { QuestionMap } from "../utils/question";
+import { bookConfig } from "../bookConfig";
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 600px;
-  height: 900px;
+  width: ${bookConfig.pageWidth}00px;
+  height: ${bookConfig.pageHeight}00px;
 `;
 
 export type PageContentProps = Record<string, never>;
