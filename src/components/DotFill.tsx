@@ -6,12 +6,9 @@ import useDimensions from "use-react-dimensions";
 const DotSpacing = 20;
 const DotSize = 2;
 
-const Dot = styled.div`
-  color: ${(props) => props.theme.colors.dotColor};
-  background: ${(props) => props.theme.colors.borderColor};
-  border-radius: 100px;
-  width: ${DotSize}px;
-  height: ${DotSize}px;
+const Dot = styled.svg`
+  fill: ${(props) => props.theme.colors.dotColor};
+  stroke: ${(props) => props.theme.colors.borderColor};
   position: absolute;
 `;
 
@@ -36,12 +33,18 @@ export function DotFill() {
         return _.times(numYDots, (yi) => {
           return (
             <Dot
+              width={DotSize}
+              height={DotSize}
               key={`${xi},${yi}`}
               style={{
                 left: extraXSpace / 2 + xi * DotSpacing - DotSize / 2,
                 top: extraYSpace / 2 + yi * DotSpacing - DotSize / 2,
               }}
-            />
+            >
+              <g>
+                <circle cx={DotSize / 2} cy={DotSize / 2} r={DotSize / 2} />
+              </g>
+            </Dot>
           );
         });
       })}
