@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
 import React from "react";
 import styled from "styled-components";
@@ -29,7 +30,7 @@ export function DotFill() {
       h: {height} <br />
       {numXDots} {numYDots} <br />
       {extraXSpace}, {extraYSpace} <br /> */}
-      {_.times(numXDots, (xi) => {
+      {/* {_.times(numXDots, (xi) => {
         return _.times(numYDots, (yi) => {
           return (
             <Dot
@@ -47,7 +48,7 @@ export function DotFill() {
             </Dot>
           );
         });
-      })}
+      })} */}
     </div>
   );
 }

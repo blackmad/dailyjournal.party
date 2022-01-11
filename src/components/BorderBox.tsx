@@ -14,7 +14,7 @@ export const BasicBorder = styled.div`
 export const BorderBox = styled(BasicBorder)`
   width: 100%;
   height: calc(100% - 1em);
-  margin-top: 1.5em;
+  margin-top: 1em;
 `;
 
 const BoxTitleBox = styled(BasicBorder)`

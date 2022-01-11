@@ -37,23 +37,8 @@ code {
     monospace;
 }
 
-@page {
-  size: 6in 9in;
-  margin: 0mm;
-}
-
 body {
   font-family: "Computer Modern Serif", serif;
-}
-
-@media print {
-  div.page {
-    page-break-after: always;
-  }
-
-  #root {
-    overflow: unset;
-  }
 }
 
 @tailwind base;

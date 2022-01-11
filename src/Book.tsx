@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import _ from "lodash";
 import { DateTime, Interval } from "luxon";
 import { createGlobalStyle } from "styled-components";
 import DailyPlan from "./pages/DailyPlan";
@@ -11,10 +12,23 @@ import { bookConfig } from "./bookConfig";
 // import { BookForm } from "./BookForm";
 
 const GlobalCSS = createGlobalStyle`
-@page {
-  size: ${bookConfig.pageWidth}${bookConfig.pageHeight} ${bookConfig.pageWidth}${bookConfig.pageUnits};
-  margin: 0mm;
-}
+  @page {
+    size: ${bookConfig.pageWidth * 2}${bookConfig.pageUnits} ${
+  bookConfig.pageHeight
+}${bookConfig.pageUnits};
+    margin: 0mm;
+  }
+
+
+  @media print {
+    div.pageBreak {
+      page-break-after: always;
+    }
+
+    #root {
+      overflow: unset;
+    }
+  }
 `;
 
 const PageContents = [WeeklyReflect, DailyPlan, WeeklyPlan, DailyReflect];
@@ -75,7 +89,14 @@ export function Book() {
       <GlobalCSS />
 
       {/* <BookForm /> */}
-      {pages}
+      {_.chunk(pages, 2).map(([page1, page2]) => {
+        return (
+          <div className="pageBreak flex flex-row w-fit">
+            {page1}
+            {page2}
+          </div>
+        );
+      })}
     </>
   );
 }
