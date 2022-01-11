@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { AbstractBox, BoxWithFill, BoxWithTitleProps } from "./AbstractBox";
-import { drawDots } from "./fillUtils";
+import { AbstractBox, BoxWithTitleProps } from "./AbstractBox";
+import { DotFill } from "./DotFill";
 
 const OpenBox = styled.div`
   width: 100%;
@@ -44,11 +44,8 @@ export function OpenBoxWithTitle(props: BoxWithTitleProps) {
 
 export function OpenDottedBox(props: BoxWithTitleProps) {
   return (
-    <BoxWithFill
-      {...props}
-      style={{ marginTop: "0.5em" }}
-      bgFillCallback={drawDots}
-      BoxComponent={OpenBoxWithTitle}
-    />
+    <OpenBoxWithTitle {...props}>
+      <DotFill />
+    </OpenBoxWithTitle>
   );
 }

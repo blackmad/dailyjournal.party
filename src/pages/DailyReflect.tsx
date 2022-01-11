@@ -28,7 +28,7 @@ export const questionConfig = {
 
 function DailyReflect(_props: PageContentProps) {
   return (
-    <PageGrid>
+    <PageGrid style={{ gap: 0 }}>
       {_.map(questionConfig, (q, key) => {
         return <OpenDottedBox className="col-span-12" question={q} key={key} />;
       })}

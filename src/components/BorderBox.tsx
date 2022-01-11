@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { AbstractBox, BoxWithTitleProps, BoxWithFill } from "./AbstractBox";
-import { drawDots, drawLines } from "./fillUtils";
+import { DotFill } from "./DotFill";
+import { drawLines } from "./fillUtils";
 
 export const BasicBorder = styled.div`
   border: solid 1px ${(props) => props.theme.colors.borderColor};
@@ -13,7 +14,7 @@ export const BasicBorder = styled.div`
 export const BorderBox = styled(BasicBorder)`
   width: 100%;
   height: calc(100% - 1em);
-  margin-top: 1em;
+  margin-top: 1.5em;
 `;
 
 const BoxTitleBox = styled(BasicBorder)`
@@ -23,6 +24,7 @@ const BoxTitleBox = styled(BasicBorder)`
   transform: translate(-50%, 0);
   padding: 0.2em 1em;
   white-space: nowrap;
+  z-index: 1000;
 `;
 
 export function BoxTitle({ title }: { title: string }) {
@@ -47,11 +49,9 @@ BorderBoxWithTitle.defaultProps = {
 
 export function BorderDottedBox(props: BoxWithTitleProps) {
   return (
-    <BoxWithFill
-      {...props}
-      bgFillCallback={drawDots}
-      BoxComponent={BorderBoxWithTitle}
-    />
+    <BorderBoxWithTitle {...props}>
+      <DotFill />
+    </BorderBoxWithTitle>
   );
 }
 
