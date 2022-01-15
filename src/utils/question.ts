@@ -109,3 +109,8 @@ export function filterQuestionDict<T extends string>(
     }
   });
 }
+
+export function camelCaseToTitleCase(text: string): string {
+  const result = text.replace(/([A-Z]{1,})/g, " $1");
+  return result.charAt(0).toUpperCase() + result.slice(1);
+}

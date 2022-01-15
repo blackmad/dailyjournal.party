@@ -16,7 +16,7 @@ import { Header } from "../Header";
 const title = "Daily Plan";
 
 export const questionConfig = {
-  dailyThreeUpQuestions: [
+  dailyThreeUp: [
     mq("Work", "weekday"),
     mq("Home", "weekend"),
     mq("Personal", "daily"),
@@ -66,7 +66,7 @@ function DailyPage(_props: PageContentProps) {
     <>
       <Header title={title} />
       <PageGrid>
-        <GridLineMultiBox questions={questionConfig.dailyThreeUpQuestions} />
+        <GridLineMultiBox questions={questionConfig.dailyThreeUp} />
 
         <BorderDottedBox
           className="col-span-12"

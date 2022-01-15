@@ -49,7 +49,9 @@ export function Header(props: {
   return (
     <HeaderContainer>
       <HeaderComponents>
-        <HeaderComponent>{year}</HeaderComponent>
+        <HeaderComponent style={{ borderLeft: "unset" }}>
+          {year}
+        </HeaderComponent>
         {/* <HeaderComponent>Q{quarter}</HeaderComponent> */}
         <HeaderComponent>{mon}</HeaderComponent>
         {!omitWeek && (

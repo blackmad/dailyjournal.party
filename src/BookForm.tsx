@@ -11,6 +11,7 @@ import styles from "rhfa-emergency-styles";
 import "rhfa-emergency-styles/dist/styles.css";
 import DailyReflect from "./pages/DailyReflect";
 import {
+  camelCaseToTitleCase,
   makeQuestionMap,
   QuestionMap,
   QuestionWhenOptions,
@@ -57,15 +58,21 @@ addTranslations({
 
 function makeSchemaFromQuestionConfig<T extends string>(
   name: string,
-  questionConfig: QuestionMap<T>
+  questionConfig: QuestionMap<T>,
+  questionTranslations?: Partial<Record<T, string>>
 ) {
   const schema: Record<string, any> = {};
+  const translations: Partial<Record<T, string>> = {};
+
   _.forEach(questionConfig, (value, key) => {
     // const qa = questionArray(value);
     schema[key] = {
       type: [questionSchema],
       required: true,
     };
+
+    translations[key as T] =
+      questionTranslations?.[key as T] || camelCaseToTitleCase(key);
   });
   console.log({ schema });
   return createSchema(name, schema);

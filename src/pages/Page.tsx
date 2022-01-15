@@ -26,6 +26,7 @@ export type PageContent<Q extends string> = {
   dateCheck: (dt: DateTime) => boolean;
   component: React.FC<PageContentProps>;
   questionConfig: QuestionMap<Q>;
+  questionTranslations?: Partial<Record<Q, string>>;
 };
 
 export const PageGrid = styled.div`
