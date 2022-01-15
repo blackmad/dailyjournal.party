@@ -6,7 +6,6 @@ import styled from "styled-components";
 const BlankLineContainer = styled.div`
   border-bottom: 0.5px solid ${(props) => props.theme.colors.borderColor};
   width: 100%;
-  //   flex-grow: 1;
   align-items: end;
   display: flex;
 `;
@@ -34,13 +33,15 @@ export function NLineBoxContents({
 }) {
   return (
     <div className="flex flex-col items-center h-full align-middle justify-center">
-      <div className="flex flex-col items-center px-[1em] w-full pb-[1em] pt-[1em]">
+      <div className="flex flex-col items-center px-[1em] w-full h-full">
+        <div style={{ flexGrow: 1.2, minHeight: "1em" }} />
         {_.times(numLines).map((n) => {
           if (dotted) {
             return <DottedLine key={n.toString()} />;
           }
           return <BlankLine key={n.toString()} />;
         })}
+        <div style={{ flexGrow: 1, minHeight: "1em" }} />
       </div>
     </div>
   );
