@@ -59,29 +59,21 @@ function WeekPlan(_props: PageContentProps) {
           className="col-span-4 row-span-2"
           question="Goal for the week"
         />
-
-        <BorderBoxWithTitle
-          className="col-span-12"
-          question="Top 3 personal goals this week"
-        >
-          <ThreeLineBoxContents />
-        </BorderBoxWithTitle>
-
-        <BorderBoxWithTitle
-          className="col-span-12"
-          question="Top 3 professional goals this week"
-        >
-          <ThreeLineBoxContents />
-        </BorderBoxWithTitle>
-
-        {/* <BorderDottedBox className="col-span-12" title="week is your daddy" />
-
-      <BorderDottedBox className="col-span-4" title="week is your daddy" />
-      <BorderDottedBox className="col-span-4" title="week is your daddy" />
-      <BorderDottedBox className="col-span-4" title="week is your daddy" />
-
-       */}
       </PageGrid>
+
+      <BorderBoxWithTitle
+        className="flex-shrink-0 mt-5 h-fit"
+        question="Top 3 personal goals this week"
+      >
+        <ThreeLineBoxContents />
+      </BorderBoxWithTitle>
+
+      <BorderBoxWithTitle
+        className="h-fit flex-shrink-0 mt-5"
+        question="Top 3 professional goals this week"
+      >
+        <ThreeLineBoxContents />
+      </BorderBoxWithTitle>
     </>
   );
 }

@@ -6,12 +6,17 @@ import { DateTime } from "luxon";
 import { theme } from "../theme";
 import { QuestionMap } from "../utils/question";
 import { bookConfig } from "../bookConfig";
+import { convertUnits } from "../utils/convert";
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${bookConfig.pageWidth}00px;
-  height: ${bookConfig.pageHeight}00px;
+  width: 100%;
+  height: 100%;
+  padding: 12pt;
+  box-sizing: border-box;
+  width: ${convertUnits(bookConfig.pageWidth, bookConfig.pageUnits, "px")}px;
+  height: ${convertUnits(bookConfig.pageHeight, bookConfig.pageUnits, "px")}px;
 `;
 
 export type PageContentProps = Record<string, never>;
@@ -31,7 +36,7 @@ export const PageGrid = styled.div`
   gap: 20px;
   width: 100%;
   height: 100%;
-  padding: 1.2em 1.2em;
+  padding-top: 0.8em;
   flex-grow: 1;
   overflow: hidden;
 `;

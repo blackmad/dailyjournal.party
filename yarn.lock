@@ -2243,6 +2243,11 @@ alphanum-sort@^1.0.2:
   resolved "https://registry.npmjs.org/alphanum-sort/-/alphanum-sort-1.0.2.tgz"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
+another-dimension@^0.4.9:
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/another-dimension/-/another-dimension-0.4.9.tgz#5dc2d6182a9e811f18ec0d6b11c69d09b267d4aa"
+  integrity sha512-2tOdxheFgNY7efqs2gQOwPo8wbw6L8lUYKAEPjGVK2PVIF8OI5SecdyHVjaRemB1FZynVURjj9jzxHXla90BYw==
+
 ansi-colors@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npmjs.org/ansi-colors/-/ansi-colors-4.1.1.tgz"
@@ -2622,6 +2627,13 @@ binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
+
+bindery@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/bindery/-/bindery-2.3.6.tgz#79b9b9f0d93c8f735cb3520978e22b39b6114e97"
+  integrity sha512-4/IlvvwXjIKFeN22bi7xLRjlkpY7x7MRI/W3UywpKNIwyQOybvJut6VGXmpXJS1nntEvtfMWhiYRIusVuY3HTg==
+  dependencies:
+    regionize "^0.1.7"
 
 bl@^4.1.0:
   version "4.1.0"
@@ -7474,6 +7486,11 @@ regexpu-core@^4.7.1:
     regjsparser "^0.7.0"
     unicode-match-property-ecmascript "^2.0.0"
     unicode-match-property-value-ecmascript "^2.0.0"
+
+regionize@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/regionize/-/regionize-0.1.7.tgz#a4a7e27a46a4a65cb3e60e8952522fbc2cbe411f"
+  integrity sha512-5COvFpO8I2BbCKrOqqL2VgFGTFnN6uvj+/NkPwWCv8VbJDSa9oZlbzEhFUzZDjp1oDCY8E/j8BL2IEMIC2Zeeg==
 
 regjsgen@^0.5.2:
   version "0.5.2"

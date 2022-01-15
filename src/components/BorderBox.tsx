@@ -8,13 +8,14 @@ export const BasicBorder = styled.div`
   border: solid 1px ${(props) => props.theme.colors.borderColor};
   border-radius: 10px;
   background: ${(props) => props.theme.colors.backgroundColor};
-  overflow: hidden;
 `;
 
 export const BorderBox = styled(BasicBorder)`
   width: 100%;
   height: calc(100% - 1em);
   margin-top: 1em;
+  position: relative;
+  overflow: hidden;
 `;
 
 const BoxTitleBox = styled(BasicBorder)`

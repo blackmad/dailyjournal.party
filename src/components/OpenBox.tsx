@@ -6,6 +6,7 @@ import { DotFill } from "./DotFill";
 const OpenBox = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
   // background: ${(props) => props.theme.colors.textBackgroundColor};
 `;
 

@@ -50,7 +50,9 @@ export function AbstractBox(props: AbstractBoxWithTitleProps) {
   const title = chooseOneQuestion(question, dt);
 
   return (
-    <div className={`${className || ""} relative flex flex-col`}>
+    <div
+      className={`relative flex flex-col overflow-hidden ${className || ""} `}
+    >
       <TitleBoxComponent title={title} />
       <div ref={ref} style={{ flexGrow: 1 }}>
         <ContentBoxComponent
