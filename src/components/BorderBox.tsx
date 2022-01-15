@@ -10,7 +10,7 @@ export const BasicBorder = styled.div`
   background: ${(props) => props.theme.colors.backgroundColor};
 `;
 
-export const BorderBox = styled(BasicBorder)`
+const BorderBoxInner = styled(BasicBorder)`
   width: 100%;
   height: calc(100% - 1em);
   margin-top: 1em;
@@ -18,18 +18,36 @@ export const BorderBox = styled(BasicBorder)`
   overflow: hidden;
 `;
 
+export function BorderBox(props: React.PropsWithChildren<any>) {
+  const { children } = props;
+  return (
+    <div className="w-full h-full flex flex-row">
+      <div style={{ height: "1em" }}>&nbsp;</div>
+      <BorderBoxInner>{children}</BorderBoxInner>
+    </div>
+  );
+}
+
 const BoxTitleBox = styled(BasicBorder)`
-  position: absolute;
-  top: 0px;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
   padding: 0.2em 1em;
   white-space: nowrap;
   z-index: 1000;
 `;
 
 export function BoxTitle({ title }: { title: string }) {
-  return <BoxTitleBox>{title}</BoxTitleBox>;
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        position: "absolute",
+        top: 0,
+        paddingLeft: "1em",
+      }}
+    >
+      <BoxTitleBox>{title}</BoxTitleBox>
+    </div>
+  );
 }
 
 export function BorderBoxWithTitle(props: BoxWithTitleProps) {

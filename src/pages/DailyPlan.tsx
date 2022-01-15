@@ -30,7 +30,7 @@ export const questionConfig = {
     mq("Today I am going to relax by ...", "weekend"),
     mq("I am going to disconnect from work by ...", "weekend"),
   ],
-  gratefulFor: [mq("What am I grateful for today?")],
+  gratefulFor: [mq("I am grateful for ...")],
   positiveSelfTalk: [mq("Today's positive self-talk")],
 };
 

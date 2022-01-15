@@ -13,7 +13,7 @@ const PageContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  // padding: 12pt;
+  padding: 12pt;
   box-sizing: border-box;
   width: ${bookConfig.pageWidth}${bookConfig.pageUnits};
   height: ${bookConfig.pageHeight}${bookConfig.pageUnits};
