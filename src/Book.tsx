@@ -116,8 +116,11 @@ export function Book() {
       <GlobalStyle />
       <BookForm />
       <div className="content">
-        {pageSpreads.map((pageSpread) => (
-          <div className="page-spread flex">{pageSpread}</div>
+        {pageSpreads.map((pageSpread, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div className="page-spread flex" key={`spread-${i}`}>
+            {pageSpread}
+          </div>
         ))}
       </div>
     </>
