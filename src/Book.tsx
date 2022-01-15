@@ -103,6 +103,10 @@ export function Book() {
       page-break-after: always;
       // page-break-inside: avoid;
     }
+
+    .print-hidden {
+      display: none;
+    }
   }
 
   @page {
@@ -114,7 +118,9 @@ export function Book() {
   return (
     <>
       <GlobalStyle />
-      <BookForm />
+      <div className="print-hidden">
+        <BookForm />
+      </div>
       <div className="content">
         {pageSpreads.map((pageSpread, i) => (
           // eslint-disable-next-line react/no-array-index-key

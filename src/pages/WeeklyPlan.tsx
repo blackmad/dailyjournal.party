@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { BasicBorder, BorderBoxWithTitle } from "../components/BorderBox";
 import { OpenBackgroundBox, OpenDottedBox } from "../components/OpenBox";
 import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
-import { Header } from "../Header";
+import { Header } from "../components/Header";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
 import { weeklyDateCheck } from "./pageUtils";
 

@@ -11,7 +11,7 @@ import { OpenDottedBox } from "../components/OpenBox";
 import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
 import { filterQuestions, mq, QuestionMapValue } from "../utils/question";
 import { PageContent, PageContentProps, PageGrid } from "./Page";
-import { Header } from "../Header";
+import { Header } from "../components/Header";
 
 const title = "Daily Plan";
 
