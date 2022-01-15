@@ -10,6 +10,7 @@ import WeeklyReflect from "./pages/WeeklyReflect";
 import DailyReflect from "./pages/DailyReflect";
 import { DateContext } from "./providers/DateContext";
 import { bookConfig } from "./bookConfig";
+import { BookForm } from "./BookForm";
 
 const PageContents = [WeeklyReflect, DailyPlan, WeeklyPlan, DailyReflect];
 
@@ -113,6 +114,7 @@ export function Book() {
   return (
     <>
       <GlobalStyle />
+      <BookForm />
       <div className="content">
         {pageSpreads.map((pageSpread) => (
           <div className="page-spread flex">{pageSpread}</div>
