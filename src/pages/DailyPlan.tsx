@@ -25,7 +25,10 @@ export const questionConfig = {
   iAmLookingForwardTo: [mq("I am looking forward to ...")],
   todayPlan: [
     mq("What I love about my job is ...", "weekday"),
-    mq("I am looking forward to ...", "weekend"),
+    mq("How can I be a good leader today?", "weekday"),
+    mq("What can I do to work more efficiently today?", "weekday"),
+    mq("Today I am going to relax by ...", "weekend"),
+    mq("I am going to disconnect from work by ...", "weekend"),
   ],
   gratefulFor: [mq("What am I grateful for today?")],
   positiveSelfTalk: [mq("Today's positive self-talk")],

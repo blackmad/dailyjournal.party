@@ -6,17 +6,17 @@ import { DateTime } from "luxon";
 import { theme } from "../theme";
 import { QuestionMap } from "../utils/question";
 import { bookConfig } from "../bookConfig";
-import { convertUnits } from "../utils/convert";
+// import { convertUnits } from "../utils/convert";
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 12pt;
+  // padding: 12pt;
   box-sizing: border-box;
-  width: ${convertUnits(bookConfig.pageWidth, bookConfig.pageUnits, "px")}px;
-  height: ${convertUnits(bookConfig.pageHeight, bookConfig.pageUnits, "px")}px;
+  width: ${bookConfig.pageWidth}${bookConfig.pageUnits};
+  height: ${bookConfig.pageHeight}${bookConfig.pageUnits};
 `;
 
 export type PageContentProps = Record<string, never>;
@@ -37,6 +37,7 @@ export const PageGrid = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 0.8em;
+  // margin: 12pt;
   flex-grow: 1;
   overflow: hidden;
 `;
@@ -48,4 +49,8 @@ export function Page(props: React.PropsWithChildren<any>) {
       <PageContainer className="page">{children}</PageContainer>
     </ThemeProvider>
   );
+}
+
+export function EmptyPage() {
+  return <Page>This page semi-intentionally left blank</Page>;
 }

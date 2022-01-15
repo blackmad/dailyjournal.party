@@ -1,5 +1,5 @@
 export const bookConfig = {
   pageUnits: "in",
-  pageWidth: 6,
-  pageHeight: 9,
+  pageWidth: 5.5,
+  pageHeight: 8.5,
 } as const;

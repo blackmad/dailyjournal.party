@@ -22,7 +22,7 @@ const BoxTitleBox = styled(BasicBorder)`
   position: absolute;
   top: 0px;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate3d(-50%, 0, 0);
   padding: 0.2em 1em;
   white-space: nowrap;
   z-index: 1000;
