@@ -34,7 +34,7 @@ function WeeklyReflect(_props: PageContentProps) {
   return (
     <>
       <Header title={title} omitDay />
-      <PageGrid>
+      <PageGrid style={{ gap: 0 }}>
         {_.map(questionConfig, (q, key) => {
           return (
             <OpenDottedBox className="col-span-12" question={q} key={key} />
