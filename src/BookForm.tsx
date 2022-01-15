@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import _ from "lodash";
 import React from "react";
 import { createSchema, Autoform, addTranslations } from "react-hook-form-auto";
