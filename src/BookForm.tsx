@@ -2,20 +2,16 @@
 import _ from "lodash";
 import React from "react";
 import { createSchema, Autoform, addTranslations } from "react-hook-form-auto";
-// import { createSchema, Autoform } from "rhfa-blueprint";
 import styles from "rhfa-emergency-styles";
 
-// With sass...
 import "./styles/rhfa.sass";
-// ...or without
-// import "rhfa-emergency-styles/dist/styles.css";
-import DailyReflect from "./pages/DailyReflect";
 import {
   camelCaseToTitleCase,
   makeQuestionMap,
   QuestionMap,
   QuestionWhenOptions,
 } from "./utils/question";
+import { PageContent } from "./pages/Page";
 
 const questionSchema = createSchema("question", {
   text: {
@@ -88,11 +84,35 @@ function makeSchemaFromQuestionConfig<T extends string>(
   return createSchema(name, schema);
 }
 
-export function BookForm() {
+export function PageForm<T extends string>({
+  pageContent,
+  onChange,
+}: {
+  pageContent: PageContent<T>;
+  onChange: (data: PageContent<T>) => void;
+}) {
   const schema = makeSchemaFromQuestionConfig(
-    DailyReflect.title,
-    DailyReflect.questionConfig
+    pageContent.title,
+    pageContent.questionConfig
   );
+  return (
+    <Autoform
+      onChange={onChange}
+      styles={styles}
+      schema={schema}
+      submitButton
+      // onErrors={console.log}
+      initialValues={makeQuestionMap(pageContent.questionConfig)}
+      config={{ arrayMode: "table" }}
+    />
+  );
+}
+
+export function BookForm({
+  pageContents,
+}: {
+  pageContents: PageContent<any>[];
+}) {
   return (
     <div className="flex justify-center">
       <div
@@ -101,17 +121,9 @@ export function BookForm() {
           padding: 20,
         }}
       >
-        <Autoform
-          onChange={console.log}
-          onBlur={console.log}
-          onSubmit={console.log}
-          styles={styles}
-          schema={schema}
-          submitButton
-          onErrors={console.log}
-          initialValues={makeQuestionMap(DailyReflect.questionConfig)}
-          config={{ arrayMode: "table" }}
-        />
+        {pageContents.map((pageContent) => {
+          <PageForm pageContent={pageContent} key={pageContent.title} />;
+        })}
       </div>
     </div>
   );
