@@ -5,7 +5,7 @@ import { BasicBorder, BorderBoxWithTitle } from "../components/BorderBox";
 import { OpenBackgroundBox, OpenDottedBox } from "../components/OpenBox";
 import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
 import { Header } from "../components/Header";
-import { PageContent, PageContentProps, PageGrid } from "./Page";
+import { PageContent, PageGrid } from "./Page";
 import { weeklyDateCheck } from "./pageUtils";
 
 const WeekContainer = styled.div`
@@ -20,7 +20,7 @@ const WeekName = styled(OpenBackgroundBox)`
   align-items
 `;
 
-const questionConfig = {};
+const defaultQuestionConfig = {} as const;
 
 const title = "Weekly Plan";
 
@@ -47,7 +47,11 @@ function WeekGrid({ className }: { className: string }) {
   );
 }
 
-function WeekPlan(_props: PageContentProps) {
+function WeekPlan({
+  questionConfig: _questionConfig,
+}: {
+  questionConfig: typeof defaultQuestionConfig;
+}) {
   return (
     <>
       <Header title={title} omitDay />
@@ -78,11 +82,11 @@ function WeekPlan(_props: PageContentProps) {
   );
 }
 
-const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
+const PageContentDefinition: PageContent<keyof typeof defaultQuestionConfig> = {
   title,
   dateCheck: weeklyDateCheck,
   component: WeekPlan,
-  questionConfig,
-};
+  defaultQuestionConfig,
+} as const;
 
 export default PageContentDefinition;

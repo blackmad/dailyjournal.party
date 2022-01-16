@@ -96,7 +96,8 @@
         "react/no-danger": "off",
         "arrow-body-style": "off",
         "no-unused-vars": "off",
-        "react/require-default-props": "off"
+        "react/require-default-props": "off",
+        "no-underscore-dangle": "off"
       }
     }
   ],

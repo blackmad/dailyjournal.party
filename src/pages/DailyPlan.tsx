@@ -9,13 +9,26 @@ import {
 } from "../components/BorderBox";
 import { OpenDottedBox } from "../components/OpenBox";
 import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
-import { filterQuestions, mq, QuestionMapValue } from "../utils/question";
-import { PageContent, PageContentProps, PageGrid } from "./Page";
+import {
+  filterQuestions,
+  mq,
+  QuestionMap,
+  QuestionMapValue,
+} from "../utils/question";
+import { PageContent, PageGrid } from "./Page";
 import { Header } from "../components/Header";
 
 const title = "Daily Plan";
 
-export const questionConfig = {
+const QuestionKeys = [
+  "dailyThreeUp",
+  "iAmLookingForwardTo",
+  "todayPlan",
+  "gratefulFor",
+  "positiveSelfTalk",
+] as const;
+type Questions = typeof QuestionKeys[number];
+export const defaultQuestionConfig: QuestionMap<Questions> = {
   dailyThreeUp: [
     mq("Work", "weekday"),
     mq("Home", "weekend"),
@@ -61,7 +74,11 @@ function GridLineMultiBox({
   );
 }
 
-function DailyPage(_props: PageContentProps) {
+function DailyPage({
+  questionConfig,
+}: {
+  questionConfig: QuestionMap<Questions>;
+}) {
   return (
     <>
       <Header title={title} />
@@ -94,11 +111,11 @@ function DailyPage(_props: PageContentProps) {
   );
 }
 
-const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
+const PageContentDefinition: PageContent<Questions> = {
   title,
   dateCheck: () => true,
   component: DailyPage,
-  questionConfig,
-};
+  defaultQuestionConfig,
+} as const;
 
 export default PageContentDefinition;

@@ -24,6 +24,8 @@ export type QuestionMap<T extends string> = Record<T, QuestionMapValue>;
 export type QuestionMapValue = Question[] | Question | string | string[];
 export type StrictQuestionMap<T extends string> = Record<T, Question[]>;
 
+export type FullAppQuestionMap = Record<string, QuestionMap<string>>;
+
 export function mq(text: string, when: Question["when"] = "daily"): Question {
   return { text, when };
 }

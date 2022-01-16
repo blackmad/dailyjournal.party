@@ -1,17 +1,20 @@
 /* eslint-disable no-console */
 import _ from "lodash";
-import React from "react";
+import React, { useEffect } from "react";
 import { createSchema, Autoform, addTranslations } from "react-hook-form-auto";
 import styles from "rhfa-emergency-styles";
+import { createState } from "@hookstate/core";
 
 import "./styles/rhfa.sass";
 import {
   camelCaseToTitleCase,
+  FullAppQuestionMap,
   makeQuestionMap,
   QuestionMap,
   QuestionWhenOptions,
 } from "./utils/question";
 import { PageContent } from "./pages/Page";
+import { questionMapState } from "./bookConfig";
 
 const questionSchema = createSchema("question", {
   text: {
@@ -89,11 +92,11 @@ export function PageForm<T extends string>({
   onChange,
 }: {
   pageContent: PageContent<T>;
-  onChange: (data: PageContent<T>) => void;
+  onChange: (data: PageContent<T>["defaultQuestionConfig"]) => void;
 }) {
   const schema = makeSchemaFromQuestionConfig(
     pageContent.title,
-    pageContent.questionConfig
+    pageContent.defaultQuestionConfig
   );
   return (
     <Autoform
@@ -102,17 +105,29 @@ export function PageForm<T extends string>({
       schema={schema}
       submitButton
       // onErrors={console.log}
-      initialValues={makeQuestionMap(pageContent.questionConfig)}
+      initialValues={makeQuestionMap(pageContent.defaultQuestionConfig)}
       config={{ arrayMode: "table" }}
     />
   );
 }
+
+export const fullAppQuestionMapState = createState({} as FullAppQuestionMap);
 
 export function BookForm({
   pageContents,
 }: {
   pageContents: PageContent<any>[];
 }) {
+  useEffect(() => {
+    const defaultQuestionMapState = {} as FullAppQuestionMap;
+
+    pageContents.forEach((pageContent) => {
+      defaultQuestionMapState[pageContent.title] =
+        pageContent.defaultQuestionConfig;
+    });
+    fullAppQuestionMapState.set(defaultQuestionMapState);
+  }, [pageContents]);
+
   return (
     <div className="flex justify-center">
       <div
@@ -122,7 +137,17 @@ export function BookForm({
         }}
       >
         {pageContents.map((pageContent) => {
-          <PageForm pageContent={pageContent} key={pageContent.title} />;
+          return (
+            <PageForm
+              pageContent={pageContent}
+              key={pageContent.title}
+              onChange={(newMap) => {
+                const newState = {} as Partial<FullAppQuestionMap>;
+                newState[pageContent.title] = newMap;
+                questionMapState.merge(newState);
+              }}
+            />
+          );
         })}
       </div>
     </div>

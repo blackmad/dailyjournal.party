@@ -1,12 +1,24 @@
 import _ from "lodash";
 import React from "react";
+
 import { OpenDottedBox } from "../components/OpenBox";
 // import { mq } from "../utils/question";
 import { Header } from "../components/Header";
-import { PageContent, PageContentProps, PageGrid } from "./Page";
+import { PageContent, PageGrid } from "./Page";
 import { weeklyDateCheck } from "./pageUtils";
+import { QuestionMap } from "../utils/question";
 
-export const questionConfig = {
+const QuestionKeys = [
+  "gratefulFor",
+  "growth",
+  "presence",
+  "bad",
+  "relationships",
+  "selfKindness",
+  "highlights",
+] as const;
+type Questions = typeof QuestionKeys[number];
+export const defaultQuestionConfig: QuestionMap<Questions> = {
   gratefulFor: ["What was I grateful for today?"],
   growth: ["What areas of growth did I express well today?"],
   presence: ["How present did I feel today?"],
@@ -30,7 +42,11 @@ export const questionConfig = {
 
 const title = "Weekly Reflect";
 
-function WeeklyReflect(_props: PageContentProps) {
+function WeeklyReflect({
+  questionConfig,
+}: {
+  questionConfig: QuestionMap<Questions>;
+}) {
   return (
     <>
       <Header title={title} omitDay />
@@ -45,11 +61,11 @@ function WeeklyReflect(_props: PageContentProps) {
   );
 }
 
-const PageContentDefinition: PageContent<keyof typeof questionConfig> = {
+const PageContentDefinition: PageContent<Questions> = {
   title,
   dateCheck: weeklyDateCheck,
   component: WeeklyReflect,
-  questionConfig,
-};
+  defaultQuestionConfig,
+} as const;
 
 export default PageContentDefinition;

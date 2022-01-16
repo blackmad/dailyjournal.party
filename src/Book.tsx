@@ -2,17 +2,12 @@ import React, { useMemo } from "react";
 import _ from "lodash";
 import { DateTime, Interval } from "luxon";
 import { createGlobalStyle } from "styled-components";
+import { useState } from "@hookstate/core";
 
-import DailyPlan from "./pages/DailyPlan";
-import WeeklyPlan from "./pages/WeeklyPlan";
 import { EmptyPage, Page, PageContent } from "./pages/Page";
-import WeeklyReflect from "./pages/WeeklyReflect";
-import DailyReflect from "./pages/DailyReflect";
 import { DateContext } from "./providers/DateContext";
-import { bookConfig } from "./bookConfig";
-import { BookForm } from "./BookForm";
-
-const PageContents = [WeeklyReflect, DailyPlan, WeeklyPlan, DailyReflect];
+import { AppPageConfig, bookConfig } from "./bookConfig";
+import { BookForm, fullAppQuestionMapState } from "./BookForm";
 
 function BookPage<T extends string>({
   date,
@@ -26,12 +21,15 @@ function BookPage<T extends string>({
   }, [date]);
 
   const { title, component: PageContentComponent } = pageContent;
+  const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
   return (
     <React.Fragment key={`${date}-${title}`}>
       <DateContext.Provider value={dateContext}>
         <Page title={title} key={date.toISODate() + title}>
-          <PageContentComponent />
+          <PageContentComponent
+            questionConfig={fullAppQuestionConfig.get()[title]}
+          />
         </Page>
       </DateContext.Provider>
     </React.Fragment>
@@ -39,7 +37,7 @@ function BookPage<T extends string>({
 }
 
 function makeBookPages({ date }: { date: DateTime }) {
-  return PageContents.flatMap((pageContent) => {
+  return Object.values(AppPageConfig).flatMap((pageContent) => {
     const { dateCheck } = pageContent;
     if (!dateCheck(date)) {
       return [];
@@ -47,7 +45,7 @@ function makeBookPages({ date }: { date: DateTime }) {
 
     return [
       <BookPage
-        pageContent={pageContent}
+        pageContent={pageContent as any}
         date={date}
         key={`${pageContent.title}-${date}`}
       />,
@@ -119,7 +117,7 @@ export function Book() {
     <>
       <GlobalStyle />
       <div className="print-hidden">
-        <BookForm />
+        <BookForm pageContents={Object.values(AppPageConfig)} />
       </div>
       <div className="content">
         {pageSpreads.map((pageSpread, i) => (

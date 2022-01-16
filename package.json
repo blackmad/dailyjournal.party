@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
+    "@hookstate/core": "^3.0.13",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -72,6 +73,7 @@
     "tailwindcss": "^3.0.2",
     "terser-webpack-plugin": "^5.2.5",
     "ts-unreachable": "^1.0.0",
+    "type-fest": "^2.9.0",
     "typescript": "^4.4.2",
     "use-dimensions": "^1.0.3",
     "use-react-dimensions": "^2.0.1",
