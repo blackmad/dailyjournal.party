@@ -2,18 +2,24 @@ import React, { useMemo } from "react";
 import _ from "lodash";
 import { DateTime, Interval } from "luxon";
 import { createGlobalStyle } from "styled-components";
-import { useState } from "@hookstate/core";
+import { Downgraded, useState } from "@hookstate/core";
 
 import { EmptyPage, Page, PageContent } from "./pages/Page";
 import { DateContext } from "./providers/DateContext";
-import { AppPageConfig, bookConfig } from "./bookConfig";
-import { BookForm, fullAppQuestionMapState } from "./BookForm";
+import {
+  AppPage,
+  AppPageConfig,
+  bookConfig,
+  fullAppQuestionMapState,
+} from "./bookConfig";
 
 function BookPage<T extends string>({
   date,
+  pageKey,
   pageContent,
 }: {
   date: DateTime;
+  pageKey: AppPage;
   pageContent: PageContent<T>;
 }) {
   const dateContext = useMemo(() => {
@@ -22,14 +28,15 @@ function BookPage<T extends string>({
 
   const { title, component: PageContentComponent } = pageContent;
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
+  const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
+    pageKey
+  ];
 
   return (
     <React.Fragment key={`${date}-${title}`}>
       <DateContext.Provider value={dateContext}>
         <Page title={title} key={date.toISODate() + title}>
-          <PageContentComponent
-            questionConfig={fullAppQuestionConfig.get()[title]}
-          />
+          <PageContentComponent questionConfig={questionConfig as any} />
         </Page>
       </DateContext.Provider>
     </React.Fragment>
@@ -37,7 +44,7 @@ function BookPage<T extends string>({
 }
 
 function makeBookPages({ date }: { date: DateTime }) {
-  return Object.values(AppPageConfig).flatMap((pageContent) => {
+  return _.entries(AppPageConfig).flatMap(([pageContentKey, pageContent]) => {
     const { dateCheck } = pageContent;
     if (!dateCheck(date)) {
       return [];
@@ -46,6 +53,7 @@ function makeBookPages({ date }: { date: DateTime }) {
     return [
       <BookPage
         pageContent={pageContent as any}
+        pageKey={pageContentKey as any}
         date={date}
         key={`${pageContent.title}-${date}`}
       />,
@@ -117,7 +125,8 @@ export function Book() {
     <>
       <GlobalStyle />
       <div className="print-hidden">
-        <BookForm pageContents={Object.values(AppPageConfig)} />
+        {/* <BookForm pageContents={Object.values(AppPageConfig)} /> */}
+        Print this double sided with <i>short edge</i> binding.
       </div>
       <div className="content">
         {pageSpreads.map((pageSpread, i) => (

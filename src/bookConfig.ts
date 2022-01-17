@@ -19,6 +19,8 @@ export const AppPageConfig = {
   DailyReflect,
 } as const;
 
+export type AppPage = keyof typeof AppPageConfig;
+
 export type AppQuestionState = {
   [P in keyof typeof AppPageConfig]?: typeof AppPageConfig[P]["defaultQuestionConfig"];
 };
@@ -28,4 +30,6 @@ const defaultQuestionMap = _.mapValues(
   "defaultQuestionConfig"
 ) as AppQuestionState;
 
-export const questionMapState = createState(defaultQuestionMap);
+console.log(defaultQuestionMap);
+
+export const fullAppQuestionMapState = createState(defaultQuestionMap);

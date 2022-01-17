@@ -9,35 +9,25 @@ import { weeklyDateCheck } from "./pageUtils";
 import { QuestionMap } from "../utils/question";
 
 const QuestionKeys = [
-  "gratefulFor",
-  "growth",
-  "presence",
-  "bad",
-  "relationships",
-  "selfKindness",
+  "completedThisWeek",
+  "goingWell",
+  "improve",
+  "timeUse",
+  "challenging",
   "highlights",
 ] as const;
 type Questions = typeof QuestionKeys[number];
 export const defaultQuestionConfig: QuestionMap<Questions> = {
-  gratefulFor: ["What was I grateful for today?"],
-  growth: ["What areas of growth did I express well today?"],
-  presence: ["How present did I feel today?"],
-  bad: [
-    "What sucked about today?",
-    "How did I mug myself today?",
-    "How was I unkind to future me today?",
-    "What was challenging today?",
-    "Here is a place to vent ...",
+  completedThisWeek: ["What projects have I made progress on this week?"],
+  goingWell: ["What went well this week and why?"],
+  improve: [
+    "What’s one thing I can do next week that wil create the biggest results in my life?",
   ],
-  relationships: [
-    "What relationships do I want to be investing more in?",
-    "What relationships in my life are filling me up?",
+  timeUse: ["How am I using my time? How can I prioritize better?"],
+  challenging: [
+    "What’s most chalenging and how can I turn it into an oppportunity?",
   ],
-  selfKindness: [
-    "How was I kind to myself today?",
-    "What self-talk served me well today?",
-  ],
-  highlights: ["Highlights", "What was awesome about today?"],
+  highlights: ["What were my favorite moments from this week?"],
 };
 
 const title = "Weekly Reflect";
