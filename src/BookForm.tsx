@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 import _ from "lodash";
-import React, { useEffect } from "react";
+import React from "react";
 import { createSchema, Autoform, addTranslations } from "react-hook-form-auto";
 import styles from "rhfa-emergency-styles";
-import { createState } from "@hookstate/core";
 
 import "./styles/rhfa.sass";
 import {
@@ -14,7 +13,6 @@ import {
   QuestionWhenOptions,
 } from "./utils/question";
 import { PageContent } from "./pages/Page";
-import { questionMapState } from "./bookConfig";
 
 const questionSchema = createSchema("question", {
   text: {
@@ -111,23 +109,11 @@ export function PageForm<T extends string>({
   );
 }
 
-export const fullAppQuestionMapState = createState({} as FullAppQuestionMap);
-
 export function BookForm({
   pageContents,
 }: {
   pageContents: PageContent<any>[];
 }) {
-  useEffect(() => {
-    const defaultQuestionMapState = {} as FullAppQuestionMap;
-
-    pageContents.forEach((pageContent) => {
-      defaultQuestionMapState[pageContent.title] =
-        pageContent.defaultQuestionConfig;
-    });
-    fullAppQuestionMapState.set(defaultQuestionMapState);
-  }, [pageContents]);
-
   return (
     <div className="flex justify-center">
       <div
@@ -144,7 +130,7 @@ export function BookForm({
               onChange={(newMap) => {
                 const newState = {} as Partial<FullAppQuestionMap>;
                 newState[pageContent.title] = newMap;
-                questionMapState.merge(newState);
+                // questionMapState.merge(newState);
               }}
             />
           );
