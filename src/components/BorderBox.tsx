@@ -10,6 +10,13 @@ export const BasicBorder = styled.div`
   background: ${(props) => props.theme.colors.backgroundColor};
 `;
 
+export const BasicButton = styled.button`
+  border: solid 1px ${(props) => props.theme.colors.borderColor};
+  border-radius: 10px;
+  background: ${(props) => props.theme.colors.borderColor};
+  color: ${(props) => props.theme.colors.backgroundColor};
+`;
+
 const BorderBoxInner = styled(BasicBorder)`
   width: 100%;
   height: calc(100% - 1em);
