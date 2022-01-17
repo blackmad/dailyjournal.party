@@ -40,7 +40,7 @@ export default function OpenGraph() {
                 only at dailyjournal.party <br />a thing by blackmad
               </div>
             </div>
-            <div className="h-full flex flex-col align-middle justify-center justify-items-center ">
+            <div className="flex flex-col align-middle justify-center justify-items-center ">
               <div
                 className="border border-slate-300"
                 style={{
