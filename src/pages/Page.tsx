@@ -1,9 +1,8 @@
 import React from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import * as _ from "lodash";
 import { DateTime } from "luxon";
 
-import { theme } from "../theme";
 import { QuestionMap } from "../utils/question";
 import { bookConfig } from "../bookConfig";
 
@@ -42,11 +41,7 @@ export const PageGrid = styled.div`
 
 export function Page(props: React.PropsWithChildren<any>) {
   const { children } = props;
-  return (
-    <ThemeProvider theme={theme}>
-      <PageContainer className="page">{children}</PageContainer>
-    </ThemeProvider>
-  );
+  return <PageContainer className="page">{children}</PageContainer>;
 }
 
 export function EmptyPage() {

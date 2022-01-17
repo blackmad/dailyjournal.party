@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/index.css";
-import { Book } from "./Book";
+import App from "./App";
 
-ReactDOM.render(<Book />, document.getElementById("content"));
+ReactDOM.render(<App />, document.getElementById("content"));

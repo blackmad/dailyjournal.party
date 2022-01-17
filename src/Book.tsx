@@ -13,7 +13,7 @@ import {
   fullAppQuestionMapState,
 } from "./bookConfig";
 
-function BookPage<T extends string>({
+export function BookPage<T extends string>({
   date,
   pageKey,
   pageContent,
