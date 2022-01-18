@@ -77,6 +77,7 @@ function chunkPagesForPrinting<T>(pages: T[]) {
 
 export function Book() {
   const printConfigState = useState(printConfig);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const inPrintModeState = useState(inPrintMode);
 
   useEffect(() => {
@@ -126,11 +127,11 @@ export function Book() {
     }
 
     .print-hidden {
-      display: none;
+      display: none !important;
     }
 
     .preview-hidden {
-      display: block;
+      display: block !important;
     }
   }
 
