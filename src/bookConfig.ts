@@ -6,11 +6,16 @@ import DailyReflect from "./pages/DailyReflect";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import WeeklyReflect from "./pages/WeeklyReflect";
 
-export const bookConfig = {
-  pageUnits: "in",
-  pageWidth: 5.5,
-  pageHeight: 8.5,
+const defaultPrintConfig = {
+  pageUnits: "in" as "in" | "mm",
+  pageWidth: 11 as number,
+  pageHeight: 8.5 as number,
+  doubleSidedPrinting: true as boolean,
 } as const;
+
+export type PrintConfig = typeof defaultPrintConfig;
+
+export const printConfig = createState(defaultPrintConfig);
 
 export const AppPageConfig = {
   WeeklyReflect,

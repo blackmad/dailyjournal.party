@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-// import { bookConfig } from "./bookConfig";
+// import { printconfig } from "./bookConfig";
 // import { Book } from "./Book";
 import { BasicBorder, BasicButton } from "./components/BorderBox";
 import PagePreview from "./ui/PagePreview";

@@ -3,9 +3,6 @@ import _ from "lodash";
 import React from "react";
 import styled from "styled-components";
 
-const DotSpacing = 20;
-const DotSize = 2;
-
 const Dot = styled.div`
   color: ${(props) => props.theme.colors.dotColor};
 `;

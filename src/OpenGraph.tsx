@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import React, { useMemo } from "react";
 import { BookPage } from "./Book";
-// import { bookConfig } from "./bookConfig";
+// import { printconfig } from "./bookConfig";
 // import { Book } from "./Book";
 import { BasicBorder } from "./components/BorderBox";
 import DailyPlan from "./pages/DailyPlan";

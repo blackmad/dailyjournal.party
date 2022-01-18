@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import * as _ from "lodash";
 import { DateTime } from "luxon";
+import { useState } from "@hookstate/core";
 
 import { QuestionMap } from "../utils/question";
-import { bookConfig } from "../bookConfig";
+import { printConfig } from "../bookConfig";
 
 const PageContainer = styled.div`
   display: flex;
@@ -13,8 +14,6 @@ const PageContainer = styled.div`
   height: 100%;
   padding: 12pt;
   box-sizing: border-box;
-  width: ${bookConfig.pageWidth}${bookConfig.pageUnits};
-  height: ${bookConfig.pageHeight}${bookConfig.pageUnits};
 `;
 
 export interface PageContent<Q extends string> {
@@ -41,7 +40,24 @@ export const PageGrid = styled.div`
 
 export function Page(props: React.PropsWithChildren<any>) {
   const { children } = props;
-  return <PageContainer className="page">{children}</PageContainer>;
+
+  const printconfigState = useState(printConfig);
+  const printconfigValue = printconfigState.get();
+
+  return (
+    <PageContainer
+      className="page"
+      style={{
+        width: `${
+          printconfigValue.pageWidth /
+          (printconfigValue.doubleSidedPrinting ? 2 : 1)
+        }${printconfigValue.pageUnits}`,
+        height: `${printconfigValue.pageHeight}${printconfigValue.pageUnits}`,
+      }}
+    >
+      {children}
+    </PageContainer>
+  );
 }
 
 export function EmptyPage() {

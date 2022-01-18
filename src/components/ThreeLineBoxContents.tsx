@@ -24,13 +24,12 @@ function DottedLine(props: React.PropsWithChildren<Record<string, unknown>>) {
   return <DottedLineContainer>{children}&nbsp;</DottedLineContainer>;
 }
 
-export function NLineBoxContents({
-  dotted,
-  numLines,
-}: {
+export type NLineBoxContentsProps = {
   dotted?: boolean;
   numLines: number;
-}) {
+};
+
+export function NLineBoxContents({ dotted, numLines }: NLineBoxContentsProps) {
   return (
     <div className="flex flex-col items-center h-full align-middle justify-center">
       <div className="flex flex-col items-center px-[1em] w-full h-full">

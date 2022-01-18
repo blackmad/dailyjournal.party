@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import _ from "lodash";
 import { DateTime, Interval } from "luxon";
 import { createGlobalStyle } from "styled-components";
@@ -9,10 +9,11 @@ import { DateContext } from "./providers/DateContext";
 import {
   AppPage,
   AppPageConfig,
-  bookConfig,
+  printConfig,
   fullAppQuestionMapState,
 } from "./bookConfig";
 import BookMaker from "./BookMaker";
+import { inPrintMode } from "./state/printMode";
 
 export function BookPage<T extends string>({
   date,
@@ -75,6 +76,27 @@ function chunkPagesForPrinting<T>(pages: T[]) {
 }
 
 export function Book() {
+  const printConfigState = useState(printConfig);
+  const inPrintModeState = useState(inPrintMode);
+
+  useEffect(() => {
+    const beforeprintCb = () => {
+      console.log("in print mode!");
+      inPrintMode.set(true);
+    };
+    window.addEventListener("beforeprint", beforeprintCb);
+
+    const afterprintCb = () => {
+      inPrintMode.set(false);
+    };
+    window.addEventListener("afterprint", afterprintCb);
+
+    return () => {
+      window.removeEventListener("beforeprint", beforeprintCb);
+      window.removeEventListener("afterprint", afterprintCb);
+    };
+  }, []);
+
   const startDate = DateTime.fromJSDate(new Date());
   const endDate = startDate.plus({ days: 7 });
 
@@ -90,15 +112,11 @@ export function Book() {
     });
   }
 
-  const inTwoUpMode = true;
-
-  const pageWidth = inTwoUpMode
-    ? bookConfig.pageWidth * 2
-    : bookConfig.pageWidth;
-
   const chunkedPages = chunkPagesForPrinting(pages);
 
-  const pageSpreads = inTwoUpMode ? chunkedPages : pages;
+  const pageSpreads = printConfigState.get().doubleSidedPrinting
+    ? chunkedPages
+    : pages;
 
   const GlobalStyle = createGlobalStyle`
   @media print {
@@ -123,9 +141,13 @@ export function Book() {
 
   @page {
     margin: 0;
-    size: ${pageWidth}in ${bookConfig.pageHeight}in;
+    size: ${printConfigState.get().pageWidth}${
+    printConfigState.get().pageUnits
+  } ${printConfigState.get().pageHeight}${printConfigState.get().pageUnits};
   }
 `;
+
+  console.log(inPrintModeState.get());
 
   return (
     <>
@@ -135,14 +157,17 @@ export function Book() {
         {/* <BookForm pageContents={Object.values(AppPageConfig)} /> */}
         Print this double sided with <i>short edge</i> binding.
       </div>
-      <div className="content preview-hidden">
-        {pageSpreads.map((pageSpread, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div className="page-spread flex" key={`spread-${i}`}>
-            {pageSpread}
-          </div>
-        ))}
-      </div>
+
+      {inPrintModeState.get() && (
+        <div className="content preview-hidden">
+          {pageSpreads.map((pageSpread, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <div className="page-spread flex" key={`spread-${i}`}>
+              {pageSpread}
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }

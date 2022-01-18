@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { AbstractBox, BoxWithTitleProps, BoxWithFill } from "./AbstractBox";
+import { AbstractBox, BoxWithTitleProps } from "./AbstractBox";
 import { DotFill } from "./DotFill";
-import { drawLines } from "./fillUtils";
+import { NLineBoxContentsProps } from "./ThreeLineBoxContents";
 
 export const BasicBorder = styled.div`
   border: solid 1px ${(props) => props.theme.colors.borderColor};
@@ -81,12 +81,12 @@ export function BorderDottedBox(props: BoxWithTitleProps) {
   );
 }
 
-export function BorderRuledBox(props: BoxWithTitleProps) {
+export function BorderRuledBox(
+  props: BoxWithTitleProps & NLineBoxContentsProps
+) {
   return (
-    <BoxWithFill
-      {...props}
-      bgFillCallback={drawLines}
-      BoxComponent={BorderBoxWithTitle}
-    />
+    <BorderBoxWithTitle {...props}>
+      {/* <NLineBoxContents {...props} /> */}
+    </BorderBoxWithTitle>
   );
 }

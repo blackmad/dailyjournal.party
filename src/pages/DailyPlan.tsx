@@ -98,12 +98,14 @@ function DailyPage({
         <BorderRuledBox
           className="col-span-6"
           question={questionConfig.gratefulFor}
+          numLines={6}
         />
 
         <OpenDottedBox className="col-span-6 row-span-2" question="Notes" />
 
         <BorderRuledBox
           className="col-span-6"
+          numLines={6}
           question={questionConfig.positiveSelfTalk}
         />
       </PageGrid>
