@@ -81,7 +81,6 @@ export function Book() {
 
   useEffect(() => {
     const beforeprintCb = () => {
-      console.log("in print mode!");
       inPrintMode.set(true);
     };
     window.addEventListener("beforeprint", beforeprintCb);
@@ -146,8 +145,6 @@ export function Book() {
   } ${printConfigState.get().pageHeight}${printConfigState.get().pageUnits};
   }
 `;
-
-  console.log(inPrintModeState.get());
 
   return (
     <>
