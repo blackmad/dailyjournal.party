@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from "react";
 import { BasicBorder } from "./components/BorderBox";
@@ -8,12 +9,16 @@ function ControlPanelSection({
   children,
 }: React.PropsWithChildren<{ title: string }>) {
   return (
-    <div
-      tabIndex={0}
-      className="collapse w-96 border border-base-300 collapse-arrow"
-    >
+    <div className="collapse w-96 border rounded-box border-base-300 collapse-arrow">
+      <input type="checkbox" />
       <div className="collapse-title text-xl font-medium">{title}</div>
-      <div className="collapse-content">{children}</div>
+      <div className="collapse-content">
+        <p>
+          Collapse content reveals with focus. If you add a checkbox, you can
+          control it using checkbox instead of focus. Or you can
+          force-open/force-close using
+        </p>
+      </div>
     </div>
   );
 }

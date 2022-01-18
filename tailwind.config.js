@@ -3,7 +3,16 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     base: false,
-    styled: false,
+
+    themes: [
+      {
+        mytheme: {
+          primary: "#ea5234",
+          "primary-focus": "#d43616",
+          "primary-content": "#ffffff",
+        },
+      },
+    ],
   },
   theme: {
     extend: {
