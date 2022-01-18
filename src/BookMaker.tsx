@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from "react";
@@ -7,19 +8,39 @@ import PagePreview from "./ui/PagePreview";
 function ControlPanelSection({
   title,
   children,
-}: React.PropsWithChildren<{ title: string }>) {
+  open,
+}: React.PropsWithChildren<{ title: string; open?: boolean }>) {
   return (
     <div className="collapse w-96 border rounded-box border-base-300 collapse-arrow">
-      <input type="checkbox" />
+      <input type="checkbox" checked={Boolean(open)} />
       <div className="collapse-title text-xl font-medium">{title}</div>
       <div className="collapse-content">
-        <p>
-          Collapse content reveals with focus. If you add a checkbox, you can
-          control it using checkbox instead of focus. Or you can
-          force-open/force-close using
-        </p>
+        <p>{children}</p>
       </div>
     </div>
+  );
+}
+
+function PrintSettings() {
+  return (
+    <ControlPanelSection title="Print Settings" key="printing" open>
+      <div className="form-control">
+        <label className="cursor-pointer label">
+          <span className="label-text">Prepare for double-sided printing</span>
+          <input type="checkbox" checked={false} className="checkbox" />
+        </label>
+      </div>
+
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Page Size</span>
+        </label>
+        <select className="select select-bordered w-full">
+          <option>Letter</option>
+          <option>A4</option>
+        </select>
+      </div>
+    </ControlPanelSection>
   );
 }
 
@@ -30,10 +51,10 @@ export default function BookMaker() {
         <div className="w-full">
           <div className="flex flex-row p-6">
             <div className="pr-6">
-              <ControlPanelSection title="Layout Settings" key="layout" />
-              <ControlPanelSection title="Date Settings" key="date" />
-              <ControlPanelSection title="Question Settings" key="questions" />
-              <ControlPanelSection title="Print Settings" key="printing" />
+              {/* <ControlPanelSection title="Layout Settings" key="layout" /> */}
+              {/* <ControlPanelSection title="Date Settings" key="date" /> */}
+              {/* <ControlPanelSection title="Question Settings" key="questions" /> */}
+              <PrintSettings />
             </div>
             <div>
               <PagePreview />

@@ -91,15 +91,12 @@ export function Book() {
   }
 
   const inTwoUpMode = true;
-  const inPrinting = true;
 
   const pageWidth = inTwoUpMode
     ? bookConfig.pageWidth * 2
     : bookConfig.pageWidth;
 
-  const chunkedPages = inPrinting
-    ? chunkPagesForPrinting(pages)
-    : _.chunk(pages, 2);
+  const chunkedPages = chunkPagesForPrinting(pages);
 
   const pageSpreads = inTwoUpMode ? chunkedPages : pages;
 
