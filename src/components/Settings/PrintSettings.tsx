@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
-
+import stringify from "json-stable-stringify";
 import { useState } from "@hookstate/core";
 import { PrintConfig, printConfig } from "../../bookConfig";
 import { ControlPanelSection } from "./ControlPanelSection";
@@ -12,7 +12,7 @@ function PageSizeSetting({
   value: PrintConfig;
   name: string;
 }) {
-  return <option value={JSON.stringify(value)}>{name}</option>;
+  return <option value={stringify(value)}>{name}</option>;
 }
 
 export function PrintSettings() {
@@ -42,7 +42,7 @@ export function PrintSettings() {
         </label>
         <select
           className="select select-bordered w-full"
-          value={JSON.stringify(printconfigState.get())}
+          value={stringify(printconfigState.get())}
           onChange={(e) => {
             printConfig.merge(JSON.parse(e.target.value));
           }}
