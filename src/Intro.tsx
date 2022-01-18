@@ -3,8 +3,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 // import { printconfig } from "./bookConfig";
 // import { Book } from "./Book";
-import { BasicBorder, BasicButton } from "./components/BorderBox";
-import PagePreview from "./ui/PagePreview";
+import { BasicBorder, BasicButton } from "./book-components/BorderBox";
+import PagePreview from "./components/PagePreview";
 
 export default function Intro() {
   const navigate = useNavigate();

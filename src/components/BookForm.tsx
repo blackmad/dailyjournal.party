@@ -11,8 +11,8 @@ import {
   makeQuestionMap,
   QuestionMap,
   QuestionWhenOptions,
-} from "./utils/question";
-import { PageContent } from "./pages/Page";
+} from "../utils/question";
+import { PageContent } from "../pages/Page";
 
 const questionSchema = createSchema("question", {
   text: {

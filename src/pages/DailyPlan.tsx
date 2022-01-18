@@ -1,14 +1,14 @@
 import React from "react";
 import { DateContext } from "../providers/DateContext";
-import { AbstractBox } from "../components/AbstractBox";
+import { AbstractBox } from "../book-components/AbstractBox";
 import {
   BorderBox,
   BorderDottedBox,
   BorderRuledBox,
   BoxTitle,
-} from "../components/BorderBox";
-import { OpenDottedBox } from "../components/OpenBox";
-import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
+} from "../book-components/BorderBox";
+import { OpenDottedBox } from "../book-components/OpenBox";
+import ThreeLineBoxContents from "../book-components/ThreeLineBoxContents";
 import {
   filterQuestions,
   mq,
@@ -16,7 +16,7 @@ import {
   QuestionMapValue,
 } from "../utils/question";
 import { PageContent, PageGrid } from "./Page";
-import { Header } from "../components/Header";
+import { Header } from "../book-components/Header";
 
 const title = "Daily Plan";
 

@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
-import { OpenDottedBox } from "../components/OpenBox";
-import { Header } from "../components/Header";
+import { OpenDottedBox } from "../book-components/OpenBox";
+import { Header } from "../book-components/Header";
 // import { mq } from "../utils/question";
 import { PageContent, PageGrid } from "./Page";
 import { QuestionMap } from "../utils/question";

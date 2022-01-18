@@ -1,10 +1,10 @@
 import { Info } from "luxon";
 import React from "react";
 import styled from "styled-components";
-import { BasicBorder, BorderBoxWithTitle } from "../components/BorderBox";
-import { OpenBackgroundBox, OpenDottedBox } from "../components/OpenBox";
-import ThreeLineBoxContents from "../components/ThreeLineBoxContents";
-import { Header } from "../components/Header";
+import { BasicBorder, BorderBoxWithTitle } from "../book-components/BorderBox";
+import { OpenBackgroundBox, OpenDottedBox } from "../book-components/OpenBox";
+import ThreeLineBoxContents from "../book-components/ThreeLineBoxContents";
+import { Header } from "../book-components/Header";
 import { PageContent, PageGrid } from "./Page";
 import { weeklyDateCheck } from "./pageUtils";
 

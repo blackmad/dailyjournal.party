@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { BookPage } from "./Book";
 // import { printconfig } from "./bookConfig";
 // import { Book } from "./Book";
-import { BasicBorder } from "./components/BorderBox";
+import { BasicBorder } from "./book-components/BorderBox";
 import DailyPlan from "./pages/DailyPlan";
 import { DateContext } from "./providers/DateContext";
 

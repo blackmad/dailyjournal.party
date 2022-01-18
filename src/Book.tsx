@@ -12,7 +12,7 @@ import {
   printConfig,
   fullAppQuestionMapState,
 } from "./bookConfig";
-import BookMaker from "./BookMaker";
+import BookMaker from "./components/BookMaker";
 import { inPrintMode } from "./state/printMode";
 
 export function BookPage<T extends string>({
