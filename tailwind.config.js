@@ -1,7 +1,19 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    extend: {},
+  plugins: [require("daisyui")],
+  daisyui: {
+    base: false,
+    styled: false,
   },
-  plugins: [],
+  theme: {
+    extend: {
+      colors: {
+        backgroundColor: "#FFFDF9",
+        textBackgroundColor: "#CCCDC9",
+        textColor: "#06B49A",
+        dotColor: "#06B49A",
+        borderColor: "#AFDBD2",
+      },
+    },
+  },
 };

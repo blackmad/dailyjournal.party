@@ -12,6 +12,7 @@ import {
   bookConfig,
   fullAppQuestionMapState,
 } from "./bookConfig";
+import BookMaker from "./BookMaker";
 
 export function BookPage<T extends string>({
   date,
@@ -113,6 +114,14 @@ export function Book() {
     .print-hidden {
       display: none;
     }
+
+    .preview-hidden {
+      display: block;
+    }
+  }
+
+  .preview-hidden {
+    display: none;
   }
 
   @page {
@@ -125,10 +134,11 @@ export function Book() {
     <>
       <GlobalStyle />
       <div className="print-hidden">
+        <BookMaker />
         {/* <BookForm pageContents={Object.values(AppPageConfig)} /> */}
         Print this double sided with <i>short edge</i> binding.
       </div>
-      <div className="content">
+      <div className="content preview-hidden">
         {pageSpreads.map((pageSpread, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <div className="page-spread flex" key={`spread-${i}`}>
