@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 
 import { useState } from "@hookstate/core";
 import DatePicker from "react-datepicker";
@@ -29,16 +29,21 @@ function DateControl({
     </button>
   ));
 
+  const wrappedOnChange = useCallback(
+    (date) => {
+      const dt = date ? DateTime.fromJSDate(date) : undefined;
+      onChange(dt?.toISODate());
+    },
+    [onChange]
+  );
+
   return (
     <div className="form-control">
       <label className="label">
         <span className="label-text w-full"> {title}</span>
         <DatePicker
           selected={dateValue}
-          onChange={(date) => {
-            const dt = date ? DateTime.fromJSDate(date) : undefined;
-            onChange(dt?.toISODate());
-          }}
+          onChange={wrappedOnChange}
           customInput={<ExampleCustomInput />}
         />
       </label>
@@ -49,21 +54,27 @@ function DateControl({
 export function DateSettings() {
   const dateConfigState = useState(dateConfig);
 
+  const startCb = useCallback(
+    (newDateString) => dateConfig.merge({ startDate: newDateString }),
+    []
+  );
+
+  const endCb = useCallback(
+    (newDateString) => dateConfig.merge({ endDate: newDateString }),
+    []
+  );
+
   return (
     <ControlPanelSection title="Date Settings" key="printing">
       <DateControl
         title="State Date"
         dateString={dateConfigState.get().startDate}
-        onChange={(newDateString) =>
-          dateConfigState.merge({ startDate: newDateString })
-        }
+        onChange={startCb}
       />
       <DateControl
         title="End Date"
         dateString={dateConfigState.get().endDate}
-        onChange={(newDateString) =>
-          dateConfigState.merge({ endDate: newDateString })
-        }
+        onChange={endCb}
       />
     </ControlPanelSection>
   );
