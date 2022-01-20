@@ -11,6 +11,7 @@ import {
   AppPageConfig,
   printConfig,
   fullAppQuestionMapState,
+  PrintConfig,
 } from "./bookConfig";
 import BookMaker from "./components/BookMaker";
 import { inPrintMode } from "./state/printMode";
@@ -75,6 +76,34 @@ function chunkPagesForPrinting<T>(pages: T[]) {
   });
 }
 
+const GlobalStyle = createGlobalStyle<PrintConfig>`
+  @media print {
+    .page-spread {
+      zoom: 99%;
+      page-break-after: always;
+      // page-break-inside: avoid;
+    }
+
+    .print-hidden {
+      display: none !important;
+    }
+
+    .preview-hidden {
+      display: block !important;
+    }
+  }
+
+  .preview-hidden {
+    display: none;
+  }
+
+  @page {
+    margin: 0;
+    size: ${(props) =>
+      `${props.pageWidth}${props.pageUnits} ${props.pageHeight}${props.pageUnits}`};
+  }
+`;
+
 export function Book() {
   const printConfigState = useState(printConfig);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -118,38 +147,9 @@ export function Book() {
     ? chunkedPages
     : pages;
 
-  const GlobalStyle = createGlobalStyle`
-  @media print {
-    .page-spread {
-      zoom: 99%;
-      page-break-after: always;
-      // page-break-inside: avoid;
-    }
-
-    .print-hidden {
-      display: none !important;
-    }
-
-    .preview-hidden {
-      display: block !important;
-    }
-  }
-
-  .preview-hidden {
-    display: none;
-  }
-
-  @page {
-    margin: 0;
-    size: ${printConfigState.get().pageWidth}${
-    printConfigState.get().pageUnits
-  } ${printConfigState.get().pageHeight}${printConfigState.get().pageUnits};
-  }
-`;
-
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle {...printConfigState.get()} />
       <div className="print-hidden">
         <BookMaker />
         {/* <BookForm pageContents={Object.values(AppPageConfig)} /> */}
