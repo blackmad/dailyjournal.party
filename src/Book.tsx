@@ -151,9 +151,8 @@ export function Book() {
     <>
       <GlobalStyle {...printConfigState.get()} />
       <div className="print-hidden">
-        <BookMaker />
+        <BookMaker pages={pages} />
         {/* <BookForm pageContents={Object.values(AppPageConfig)} /> */}
-        Print this double sided with <i>short edge</i> binding.
       </div>
 
       {inPrintModeState.get() && (
