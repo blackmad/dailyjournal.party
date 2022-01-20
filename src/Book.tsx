@@ -15,6 +15,7 @@ import {
 } from "./bookConfig";
 import BookMaker from "./components/BookMaker";
 import { inPrintMode } from "./state/printMode";
+import { dateConfig } from "./state/dateConfig";
 
 export function BookPage<T extends string>({
   date,
@@ -106,6 +107,8 @@ const GlobalStyle = createGlobalStyle<PrintConfig>`
 
 export function Book() {
   const printConfigState = useState(printConfig);
+  const dateConfigState = useState(dateConfig);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const inPrintModeState = useState(inPrintMode);
 
@@ -126,8 +129,14 @@ export function Book() {
     };
   }, []);
 
-  const startDate = DateTime.fromJSDate(new Date());
-  const endDate = startDate.plus({ days: 7 });
+  const { startDate: startDateString, endDate: endDateString } =
+    dateConfigState.get();
+  const startDate = startDateString
+    ? DateTime.fromISO(startDateString)
+    : DateTime.fromJSDate(new Date());
+  const endDate = endDateString
+    ? DateTime.fromISO(endDateString)
+    : startDate.plus({ days: 7 });
 
   const interval = Interval.fromDateTimes(startDate, endDate).splitBy({
     days: 1,
