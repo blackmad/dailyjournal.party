@@ -159,9 +159,8 @@ export function Book() {
   return (
     <>
       <GlobalStyle {...printConfigState.get()} />
-      <div className="print-hidden">
+      <div className="print-hidden h-screen flex justify-center align-middle align-items-middle">
         <BookMaker pages={pages} />
-        {/* <BookForm pageContents={Object.values(AppPageConfig)} /> */}
       </div>
 
       {inPrintModeState.get() && (

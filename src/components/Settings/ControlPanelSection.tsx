@@ -9,9 +9,12 @@ export function ControlPanelSection({
   const isOpen = useState(Boolean(open));
   return (
     <div
-      className={`collapse w-96 border rounded-box border-base-300 collapse-arrow ${
+      className={`collapse w-full border rounded-box border-base-300 collapse-arrow ${
         isOpen.get() ? "overflow-visible" : ""
       }`}
+      style={{
+        minWidth: "24rem",
+      }}
     >
       <input
         type="checkbox"

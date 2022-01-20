@@ -4,15 +4,15 @@ import React from "react";
 import { createSchema, Autoform, addTranslations } from "react-hook-form-auto";
 import styles from "rhfa-emergency-styles";
 
-import "./styles/rhfa.sass";
+import "../../styles/rhfa.sass";
 import {
   camelCaseToTitleCase,
   FullAppQuestionMap,
   makeQuestionMap,
   QuestionMap,
   QuestionWhenOptions,
-} from "../utils/question";
-import { PageContent } from "../pages/Page";
+} from "../../utils/question";
+import { PageContent } from "../../pages/Page";
 
 const questionSchema = createSchema("question", {
   text: {
@@ -118,7 +118,6 @@ export function BookForm({
     <div className="flex justify-center">
       <div
         style={{
-          maxWidth: 800,
           padding: 20,
         }}
       >

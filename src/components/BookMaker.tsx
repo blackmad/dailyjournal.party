@@ -7,6 +7,7 @@ import { PrintSettings } from "./Settings/PrintSettings";
 import { DateSettings } from "./Settings/DateSettings";
 import { printConfig } from "../bookConfig";
 import { convertUnits } from "../utils/convert";
+import { QuestionSettings } from "./Settings/QuestionSettings";
 
 export default function BookMaker({ pages }: { pages: JSX.Element[] }) {
   const pageIndex = useState(0);
@@ -22,14 +23,14 @@ export default function BookMaker({ pages }: { pages: JSX.Element[] }) {
   const zoomFactor = maxHeight / heightInPx;
 
   return (
-    <div className="hero min-h-screen">
+    <div className="w-11/12 ">
       <BasicBorder className="text-center hero-content">
         <div className="w-full">
           <div className="flex flex-row p-6">
             <div className="pr-6">
               {/* <ControlPanelSection title="Layout Settings" key="layout" /> */}
               {/* <ControlPanelSection title="Date Settings" key="date" /> */}
-              {/* <ControlPanelSection title="Question Settings" key="questions" /> */}
+              <QuestionSettings />
               <DateSettings />
               <PrintSettings />
             </div>
