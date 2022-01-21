@@ -55,58 +55,17 @@ function chunkPagesForPrinting<T>(pages: T[]) {
   });
 }
 
-const GlobalStyle = createGlobalStyle<PrintConfig>`
-  @media print {
-    .page-spread {
-      zoom: 99%;
-      page-break-after: always;
-      // page-break-inside: avoid;
-    }
-
-    .print-hidden {
-      display: none !important;
-    }
-
-    .preview-hidden {
-      display: block !important;
-    }
-  }
-
-  .preview-hidden {
-    display: none;
-  }
-
-  @page {
-    margin: 0;
-    size: ${(props) =>
-      `${props.pageWidth}${props.pageUnits} ${props.pageHeight}${props.pageUnits}`};
-  }
-`;
-
-export function Book() {
+function PageSpreads() {
+  const inPrintModeState = useState(inPrintMode);
   const printConfigState = useState(printConfig);
   const dateConfigState = useState(dateConfig);
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const inPrintModeState = useState(inPrintMode);
+  console.log({ inPrintModeState });
 
-  useEffect(() => {
-    const beforeprintCb = () => {
-      inPrintMode.set(true);
-    };
-    window.addEventListener("beforeprint", beforeprintCb);
-
-    const afterprintCb = () => {
-      inPrintMode.set(false);
-    };
-    window.addEventListener("afterprint", afterprintCb);
-
-    return () => {
-      window.removeEventListener("beforeprint", beforeprintCb);
-      window.removeEventListener("afterprint", afterprintCb);
-    };
-  }, []);
+  if (!inPrintModeState.get()) {
+    return null;
+  }
 
   const { startDate: startDateString, endDate: endDateString } =
     dateConfigState.get();
@@ -139,22 +98,73 @@ export function Book() {
     : pages;
 
   return (
+    <div className="content preview-hidden">
+      {pageSpreads.map((pageSpread, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <div className="page-spread flex" key={`spread-${i}`}>
+          {pageSpread}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const GlobalStyle = createGlobalStyle<PrintConfig>`
+  @media print {
+    .page-spread {
+      zoom: 99%;
+      page-break-after: always;
+      // page-break-inside: avoid;
+    }
+
+    .print-hidden {
+      display: none !important;
+    }
+
+    .preview-hidden {
+      display: block !important;
+    }
+  }
+
+  .preview-hidden {
+    display: none;
+  }
+
+  @page {
+    margin: 0;
+    size: ${(props) =>
+      `${props.pageWidth}${props.pageUnits} ${props.pageHeight}${props.pageUnits}`};
+  }
+`;
+
+export function Book() {
+  const printConfigState = useState(printConfig);
+
+  useEffect(() => {
+    const beforeprintCb = () => {
+      inPrintMode.set(true);
+    };
+    window.addEventListener("beforeprint", beforeprintCb);
+
+    const afterprintCb = () => {
+      inPrintMode.set(false);
+    };
+    window.addEventListener("afterprint", afterprintCb);
+
+    return () => {
+      window.removeEventListener("beforeprint", beforeprintCb);
+      window.removeEventListener("afterprint", afterprintCb);
+    };
+  }, []);
+
+  return (
     <>
       <GlobalStyle {...printConfigState.get()} />
       <div className="print-hidden h-screen flex justify-center align-middle align-items-middle">
         <BookMaker />
       </div>
 
-      {inPrintModeState.get() && (
-        <div className="content preview-hidden">
-          {pageSpreads.map((pageSpread, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div className="page-spread flex" key={`spread-${i}`}>
-              {pageSpread}
-            </div>
-          ))}
-        </div>
-      )}
+      <PageSpreads />
     </>
   );
 }
