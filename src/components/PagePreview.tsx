@@ -25,6 +25,7 @@ export default function PagePreview({
           className="border border-slate-300"
           style={{
             zoom,
+            WebkitTextSizeAdjust: "none",
             height: "fit-content",
           }}
         >
