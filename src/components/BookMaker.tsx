@@ -17,6 +17,7 @@ import { QuestionSettings } from "./Settings/QuestionSettings";
 import { dateConfig } from "../state/dateConfig";
 import { BookPage } from "../Book";
 import { openQuestionsSettingPanel } from "../state/openQuestionsSettingPanel";
+import { Footer } from "./Footer";
 
 export default function BookMaker() {
   const pageIndex = useState(0);
@@ -121,6 +122,7 @@ export default function BookMaker() {
           </div>
         </div>
       </BasicBorder>
+      <Footer />
     </div>
   );
 }

@@ -4,24 +4,22 @@ import { useNavigate } from "react-router-dom";
 // import { printconfig } from "./bookConfig";
 // import { Book } from "./Book";
 import { BasicBorder, BasicButton } from "./book-components/BorderBox";
+import { Footer } from "./components/Footer";
 import PagePreview from "./components/PagePreview";
 
 export default function Intro() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex w-screen h-screen justify-center align-middle">
+    <div className="py-10 flex w-screen h-screen justify-center align-middle">
       <div
         className="container-lg"
         style={{
-          width: 1200,
-          height: 630,
-          padding: 20,
           boxSizing: "border-box",
         }}
       >
         <BasicBorder>
-          <div className="flex flex-row h-full w-full p-4 ">
+          <div className="flex flex-row h-full w-full p-4 min-w-[800px] max-w-5xl">
             <div className="flex-grow flex flex-col p-10">
               <div className="text-6xl pb-6 leading-snug">
                 dailyjournal.party
@@ -44,6 +42,7 @@ export default function Intro() {
             <PagePreview />
           </div>
         </BasicBorder>
+        <Footer />
       </div>
     </div>
   );
