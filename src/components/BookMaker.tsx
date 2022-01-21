@@ -69,7 +69,7 @@ function SpreadPreview({ pages }: { pages: GeneratedPages }) {
   ];
 
   const nextQuestionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
-    currentPage.pageKey
+    nextPage.pageKey
   ];
 
   return (

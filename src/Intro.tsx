@@ -20,17 +20,16 @@ function LeftPanel() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-grow flex flex-col px-10 sm:p-10">
-      <div className="text-4xl md:text-5xl lg:text-6xl pb-6 leading-snug pt-6 sm:pt-0">
+    <div className="flex-grow flex flex-col px-4 sm:px-10 sm:p-10">
+      <div className="text-3xl md:text-5xl lg:text-6xl pb-6 sm:pb-10 leading-snug pt-2 sm:pt-0">
         <span>dailyjournal.</span>
-        <br />
         <span>party</span>
       </div>
-      <div className="text-lg md:text-2xl lg:text-4xl leading-normal	">
+      <div className="text-lg md:text-2xl lg:text-4xl leading-10	pb-6 sm:pb-10">
         This is a tool for making customizable <i>printable</i> daily gratitude
         journals.
       </div>
-      <div className="pt-10 sm:pt-20 text-lg md:text-2xl lg:text-4xl leading-normal flex-grow justify-end flex align-bottom justify-items-end">
+      <div className=" text-md md:text-2xl lg:text-4xl leading-normal flex-grow justify-end flex align-bottom justify-items-end">
         <div>
           <BasicButton onClick={() => navigate("/make")} className="p-4 sm:p-6">
             Make one!
@@ -67,7 +66,7 @@ function RightPanel() {
     windowWidth < 1024 ? Math.min((windowWidth * 0.5) / widthInPx, 0.65) : 0.65;
 
   return (
-    <div className="flex justify-center flex-grow pb-8 sm:p-4">
+    <div className="flex justify-center flex-grow sm:pb-8 sm:p-4">
       <PagePreview
         zoom={twoPage ? (windowWidth * 0.8) / widthInPx : yZoom}
         pageContent={DailyPlan}

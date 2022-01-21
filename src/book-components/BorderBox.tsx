@@ -11,10 +11,12 @@ export const BasicBorder = styled.div`
 `;
 
 export const BasicButton = styled.button`
-  border: solid 1px ${(props) => props.theme.colors.borderColor};
+  border: solid 2px ${(props) => props.theme.colors.borderColor};
   border-radius: 10px;
-  background: ${(props) => props.theme.colors.borderColor};
-  color: ${(props) => props.theme.colors.backgroundColor};
+  color: ${(props) => props.theme.colors.borderColor};
+  // background: ${(props) => props.theme.colors.backgroundColor};
+  font-weight: bold;
+  filter: brightness(0.8);
 `;
 
 const BorderBoxInner = styled(BasicBorder)`
