@@ -85,11 +85,11 @@ function SpreadPreview({ pages }: { pages: GeneratedPages }) {
           <BookPage
             date={nextPage.date}
             pageContent={nextPage.pageContent}
-            questionConfig={questionConfig || ({} as any)}
+            questionConfig={nextQuestionConfig || ({} as any)}
           />
         )}
       </div>
-      <div className="flex justify-center py-2 sm:py-0">
+      <div className="flex justify-center py-2">
         <div className="btn-group">
           <button
             type="button"
@@ -123,8 +123,6 @@ function SpreadPreview({ pages }: { pages: GeneratedPages }) {
 
 export default function BookMaker() {
   const pageIndex = useState(0);
-  const printConfigState = useState(printConfig);
-  const printConfigValue = printConfigState.get();
 
   const openQuestionsSettingPanelState = useState(openQuestionsSettingPanel);
   const lastOpenQuestionsSettingPanelState = useState<undefined | AppPage>(
@@ -152,7 +150,7 @@ export default function BookMaker() {
 
   return (
     <div className="w-full h-full sm:w-fit sm:min-w-[800px] sm:h-fit sm:pt-10">
-      <BasicBorder className="text-center">
+      <BasicBorder className="text-center flex flex-col sm:flex-row">
         <div className="w-full">
           <div className="flex flex-row p-6">
             <div className="sm:pr-6 flex-grow w-[700px] max-w-[900px]">
