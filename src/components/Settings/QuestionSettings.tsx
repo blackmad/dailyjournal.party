@@ -10,15 +10,19 @@ export function QuestionSettings() {
   return (
     <>
       {AppPages.map((pageContent) => {
+        if (Object.keys(pageContent.defaultQuestionConfig).length === 0) {
+          return null;
+        }
         return (
           <ControlPanelSection
             title={`Questions: ${pageContent.title}`}
             key={`Questions: ${pageContent.title}`}
             onChange={(state: boolean) => {
               if (state) {
+                console.log("setting state to ", pageContent.key);
                 openQuestionsSettingPanel.set(pageContent.key);
               } else {
-                openQuestionsSettingPanel.set(undefined);
+                // openQuestionsSettingPanel.set(undefined);
               }
             }}
           >

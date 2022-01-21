@@ -50,13 +50,17 @@ export default function BookMaker() {
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
   const currentPage = pages[pageIndex.get()];
-  const questionConfig = fullAppQuestionConfig.get()[currentPage.pageKey];
+  const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
+    currentPage.pageKey
+  ];
 
   const openPanel = openQuestionsSettingPanelState.get();
   if (openPanel !== lastOpenQuestionsSettingPanelState.get()) {
-    if (currentPage.pageKey !== openPanel) {
+    if (openPanel && currentPage.pageKey !== openPanel) {
       const newPageIndex = pages.findIndex((p) => p.pageKey === openPanel);
-      pageIndex.set(newPageIndex);
+      if (newPageIndex !== -1) {
+        pageIndex.set(newPageIndex);
+      }
     }
 
     lastOpenQuestionsSettingPanelState.set(
@@ -70,8 +74,6 @@ export default function BookMaker() {
         <div className="w-full">
           <div className="flex flex-row p-6">
             <div className="pr-6">
-              {/* <ControlPanelSection title="Layout Settings" key="layout" /> */}
-              {/* <ControlPanelSection title="Date Settings" key="date" /> */}
               <QuestionSettings />
               <DateSettings />
               <PrintSettings />
