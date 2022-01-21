@@ -1,5 +1,5 @@
 import React from "react";
-import { DateContext } from "../providers/DateContext";
+
 import { AbstractBox } from "../book-components/AbstractBox";
 import {
   BorderBox,
@@ -17,6 +17,7 @@ import {
 } from "../utils/question";
 import { PageContent, PageGrid } from "./Page";
 import { Header } from "../book-components/Header";
+import { DateContext } from "../providers/DateContext";
 
 const title = "Daily Plan";
 
@@ -118,6 +119,7 @@ const PageContentDefinition: PageContent<Questions> = {
   dateCheck: () => true,
   component: DailyPage,
   defaultQuestionConfig,
+  key: "DailyPlan",
 } as const;
 
 export default PageContentDefinition;

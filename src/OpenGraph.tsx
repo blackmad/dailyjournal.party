@@ -50,7 +50,7 @@ export default function OpenGraph() {
               >
                 <BookPage
                   pageContent={pageContent as any}
-                  pageKey="DailyPlan"
+                  questionConfig={pageContent.defaultQuestionConfig}
                   date={date}
                   key={`${pageContent.title}-${date}`}
                 />

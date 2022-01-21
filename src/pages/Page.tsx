@@ -22,6 +22,7 @@ export interface PageContent<Q extends string> {
   component: React.FC<{ questionConfig: QuestionMap<Q> }>;
   defaultQuestionConfig: QuestionMap<Q>;
   questionTranslations?: Partial<Record<Q, string>>;
+  key: string;
 }
 
 export const PageGrid = styled.div`

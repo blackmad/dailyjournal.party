@@ -65,6 +65,7 @@ const PageContentDefinition: PageContent<Questions> = {
   dateCheck: () => true,
   component: DailyReflect,
   defaultQuestionConfig,
+  key: "DailyReflect",
 } as const;
 
 export default PageContentDefinition;

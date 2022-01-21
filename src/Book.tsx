@@ -1,43 +1,39 @@
 import React, { useEffect, useMemo } from "react";
 import _ from "lodash";
-import { DateTime, Interval } from "luxon";
+import { DateTime } from "luxon";
 import { createGlobalStyle } from "styled-components";
 import { Downgraded, useState } from "@hookstate/core";
+import { DateContext } from "./providers/DateContext";
 
 import { EmptyPage, Page, PageContent } from "./pages/Page";
-import { DateContext } from "./providers/DateContext";
 import {
-  AppPage,
-  AppPageConfig,
   printConfig,
   fullAppQuestionMapState,
   PrintConfig,
+  generatePages,
 } from "./bookConfig";
 import BookMaker from "./components/BookMaker";
 import { inPrintMode } from "./state/printMode";
 import { dateConfig } from "./state/dateConfig";
+import { QuestionMap } from "./utils/question";
 
 export function BookPage<T extends string>({
   date,
-  pageKey,
   pageContent,
+  questionConfig,
 }: {
   date: DateTime;
-  pageKey: AppPage;
   pageContent: PageContent<T>;
+  questionConfig: QuestionMap<T>;
 }) {
   const dateContext = useMemo(() => {
     return { dt: date };
   }, [date]);
-
   const { title, component: PageContentComponent } = pageContent;
-  const fullAppQuestionConfig = useState(fullAppQuestionMapState);
-  const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
-    pageKey
-  ];
 
   return (
     <React.Fragment key={`${date}-${title}`}>
+      {" "}
       <DateContext.Provider value={dateContext}>
         <Page title={title} key={date.toISODate() + title}>
           <PageContentComponent questionConfig={questionConfig as any} />
@@ -45,24 +41,6 @@ export function BookPage<T extends string>({
       </DateContext.Provider>
     </React.Fragment>
   );
-}
-
-function makeBookPages({ date }: { date: DateTime }) {
-  return _.entries(AppPageConfig).flatMap(([pageContentKey, pageContent]) => {
-    const { dateCheck } = pageContent;
-    if (!dateCheck(date)) {
-      return [];
-    }
-
-    return [
-      <BookPage
-        pageContent={pageContent as any}
-        pageKey={pageContentKey as any}
-        date={date}
-        key={`${pageContent.title}-${date}`}
-      />,
-    ];
-  });
 }
 
 function chunkPagesForPrinting<T>(pages: T[]) {
@@ -108,6 +86,7 @@ const GlobalStyle = createGlobalStyle<PrintConfig>`
 export function Book() {
   const printConfigState = useState(printConfig);
   const dateConfigState = useState(dateConfig);
+  const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const inPrintModeState = useState(inPrintMode);
@@ -131,18 +110,21 @@ export function Book() {
 
   const { startDate: startDateString, endDate: endDateString } =
     dateConfigState.get();
-  const startDate = startDateString
-    ? DateTime.fromISO(startDateString)
-    : DateTime.fromJSDate(new Date());
-  const endDate = endDateString
-    ? DateTime.fromISO(endDateString)
-    : startDate.plus({ days: 7 });
 
-  const interval = Interval.fromDateTimes(startDate, endDate).splitBy({
-    days: 1,
+  const pageObjects = generatePages(startDateString, endDateString);
+  const pages = pageObjects.map((pageObject) => {
+    const { pageKey } = pageObject;
+    const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
+      pageKey
+    ];
+
+    return (
+      <BookPage
+        {...pageObject}
+        questionConfig={questionConfig || ({} as any)}
+      />
+    );
   });
-
-  const pages = interval.flatMap((date) => makeBookPages({ date: date.start }));
 
   if (pages.length % 4 !== 0) {
     _.times(4 - (pages.length % 4)).forEach((i) => {
@@ -160,7 +142,7 @@ export function Book() {
     <>
       <GlobalStyle {...printConfigState.get()} />
       <div className="print-hidden h-screen flex justify-center align-middle align-items-middle">
-        <BookMaker pages={pages} />
+        <BookMaker />
       </div>
 
       {inPrintModeState.get() && (

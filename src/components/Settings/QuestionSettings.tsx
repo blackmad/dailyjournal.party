@@ -2,13 +2,13 @@
 import React from "react";
 
 import { ControlPanelSection } from "./ControlPanelSection";
-import { AppPageConfig } from "../../bookConfig";
 import { BookForm } from "./BookForm";
+import { AppPages } from "../../bookConfig";
 
 export function QuestionSettings() {
   return (
     <ControlPanelSection title="Questions" key="questions">
-      <BookForm pageContents={Object.values(AppPageConfig)} />
+      <BookForm pageContents={AppPages} />
     </ControlPanelSection>
   );
 }

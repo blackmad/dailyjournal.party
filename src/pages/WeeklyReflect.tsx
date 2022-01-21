@@ -56,6 +56,7 @@ const PageContentDefinition: PageContent<Questions> = {
   dateCheck: weeklyDateCheck,
   component: WeeklyReflect,
   defaultQuestionConfig,
+  key: "WeeklyReflect",
 } as const;
 
 export default PageContentDefinition;

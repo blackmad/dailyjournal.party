@@ -47,7 +47,7 @@ function WeekGrid({ className }: { className: string }) {
   );
 }
 
-function WeekPlan({
+function WeeklyPlan({
   questionConfig: _questionConfig,
 }: {
   questionConfig: typeof defaultQuestionConfig;
@@ -85,8 +85,9 @@ function WeekPlan({
 const PageContentDefinition: PageContent<keyof typeof defaultQuestionConfig> = {
   title,
   dateCheck: weeklyDateCheck,
-  component: WeekPlan,
+  component: WeeklyPlan,
   defaultQuestionConfig,
+  key: "WeeklyPlan",
 } as const;
 
 export default PageContentDefinition;

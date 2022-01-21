@@ -1,26 +1,49 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useMemo } from "react";
 import _ from "lodash";
-import { useState } from "@hookstate/core";
+import { Downgraded, useState } from "@hookstate/core";
 
 import { BasicBorder } from "../book-components/BorderBox";
 import { PrintSettings } from "./Settings/PrintSettings";
 import { DateSettings } from "./Settings/DateSettings";
-import { printConfig } from "../bookConfig";
+import {
+  fullAppQuestionMapState,
+  generatePages,
+  printConfig,
+} from "../bookConfig";
 import { convertUnits } from "../utils/convert";
 import { QuestionSettings } from "./Settings/QuestionSettings";
+import { dateConfig } from "../state/dateConfig";
+import { BookPage } from "../Book";
 
-export default function BookMaker({ pages }: { pages: JSX.Element[] }) {
+export default function BookMaker() {
   const pageIndex = useState(0);
   const printconfigState = useState(printConfig);
   const printconfigValue = printconfigState.get();
 
-  const heightInPx = convertUnits(
-    printconfigValue.pageHeight,
-    printconfigValue.pageUnits,
-    "px"
-  );
-  const maxHeight = 600;
-  const zoomFactor = maxHeight / heightInPx;
+  const zoomStyle = useMemo(() => {
+    const heightInPx = convertUnits(
+      printconfigValue.pageHeight,
+      printconfigValue.pageUnits,
+      "px"
+    );
+    const maxHeight = 600;
+    const zoomFactor = maxHeight / heightInPx;
+
+    return { zoom: zoomFactor };
+  }, [printconfigValue]);
+
+  const dateConfigState = useState(dateConfig);
+
+  const { startDate: startDateString, endDate: endDateString } =
+    dateConfigState.get();
+
+  const pages = generatePages(startDateString, endDateString);
+
+  const fullAppQuestionConfig = useState(fullAppQuestionMapState);
+
+  const currentPage = pages[pageIndex.get()];
+  const questionConfig = fullAppQuestionConfig.get()[currentPage.pageKey];
 
   return (
     <div className="w-11/12 ">
@@ -35,12 +58,12 @@ export default function BookMaker({ pages }: { pages: JSX.Element[] }) {
               <PrintSettings />
             </div>
             <div className="flex flex-col">
-              <div
-                style={{
-                  zoom: zoomFactor,
-                }}
-              >
-                {pages[pageIndex.get()]}
+              <div style={zoomStyle}>
+                <BookPage
+                  date={currentPage.date}
+                  pageContent={currentPage.pageContent}
+                  questionConfig={questionConfig || ({} as any)}
+                />
               </div>
               <div className="flex justify-center">
                 <div className="btn-group">

@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 import _ from "lodash";
-import React from "react";
+import React, { useCallback } from "react";
 import { createSchema, Autoform, addTranslations } from "react-hook-form-auto";
 import styles from "rhfa-emergency-styles";
+// import { useState } from "@hookstate/core";
 
 import "../../styles/rhfa.sass";
+
 import {
   camelCaseToTitleCase,
   FullAppQuestionMap,
@@ -13,6 +15,7 @@ import {
   QuestionWhenOptions,
 } from "../../utils/question";
 import { PageContent } from "../../pages/Page";
+import { fullAppQuestionMapState } from "../../bookConfig";
 
 const questionSchema = createSchema("question", {
   text: {
@@ -81,24 +84,32 @@ function makeSchemaFromQuestionConfig<T extends string>(
 
   addTranslations(translationsToAdd);
 
-  console.log({ schema });
   return createSchema(name, schema);
 }
 
 export function PageForm<T extends string>({
   pageContent,
-  onChange,
 }: {
   pageContent: PageContent<T>;
-  onChange: (data: PageContent<T>["defaultQuestionConfig"]) => void;
 }) {
+  // const fullAppQuestionConfig = useState(fullAppQuestionMapState);
+
+  const onChangeCallback = useCallback(
+    (newMap) => {
+      const newState = {} as Partial<FullAppQuestionMap>;
+      newState[pageContent.key] = newMap;
+      fullAppQuestionMapState.merge(newState);
+    },
+    [pageContent]
+  );
+
   const schema = makeSchemaFromQuestionConfig(
     pageContent.title,
     pageContent.defaultQuestionConfig
   );
   return (
     <Autoform
-      onChange={onChange}
+      onChange={onChangeCallback}
       styles={styles}
       schema={schema}
       submitButton
@@ -122,17 +133,7 @@ export function BookForm({
         }}
       >
         {pageContents.map((pageContent) => {
-          return (
-            <PageForm
-              pageContent={pageContent}
-              key={pageContent.title}
-              onChange={(newMap) => {
-                const newState = {} as Partial<FullAppQuestionMap>;
-                newState[pageContent.title] = newMap;
-                // questionMapState.merge(newState);
-              }}
-            />
-          );
+          return <PageForm pageContent={pageContent} key={pageContent.title} />;
         })}
       </div>
     </div>
