@@ -4,13 +4,19 @@ import { DateTime } from "luxon";
 import DailyPlan from "../pages/DailyPlan";
 import { DateContext } from "../providers/DateContext";
 import { BookPage } from "../Book";
+import { PageContent } from "../pages/Page";
 
-export default function PagePreview() {
+export default function PagePreview({
+  zoom = 0.65,
+  pageContent = DailyPlan,
+}: {
+  zoom?: number;
+  pageContent?: PageContent<any>;
+}) {
   const date = DateTime.fromJSDate(new Date());
   const dateContext = useMemo(() => {
     return { dt: date };
   }, [date]);
-  const pageContent = DailyPlan;
 
   return (
     <DateContext.Provider value={dateContext}>
@@ -18,7 +24,7 @@ export default function PagePreview() {
         <div
           className="border border-slate-300"
           style={{
-            zoom: 0.65,
+            zoom,
             height: "fit-content",
           }}
         >

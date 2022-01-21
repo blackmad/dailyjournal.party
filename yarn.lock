@@ -8743,6 +8743,11 @@ use-dimensions@^1.0.3:
   resolved "https://registry.yarnpkg.com/use-dimensions/-/use-dimensions-1.0.3.tgz#0b026ea3515626e9d738399069a4dacedd397192"
   integrity sha512-uR4zIbaAkaqUo+aagxG0dL+BSM/3ybSVqNQs1aA6nAo8ta0wX9KiZlp609gI/QBY9cXQNoflP/Sw5sIYo6iXRA==
 
+use-mobile-detect-hook@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/use-mobile-detect-hook/-/use-mobile-detect-hook-1.0.4.tgz#99dbded06d9e326c36fad19fb39b5ad3df37e499"
+  integrity sha512-2LchNLtoWmllIGE3obppw2R2Q1a17yZBtWgnYiVkSksU4IaK5L8AE7qGPn0s00J8AydlmRDnDhuSNfULf1EGuQ==
+
 use-react-dimensions@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/use-react-dimensions/-/use-react-dimensions-2.0.1.tgz#7bcbf5dff473cad6660da552a17f13efd1746581"

@@ -6,7 +6,7 @@ export function Separator() {
 
 export function Footer() {
   return (
-    <div className="pt-4 flex justify-evenly w-full">
+    <div className="py-4 flex justify-evenly w-full">
       <div>
         a thing by <a href="http://blackmad.com">blackmad</a>
       </div>
