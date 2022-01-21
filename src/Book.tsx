@@ -60,14 +60,12 @@ function PageSpreads() {
   const dateConfigState = useState(dateConfig);
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
+  console.log("ipm", inPrintModeState.get());
   if (!inPrintModeState.get()) {
     return null;
   }
 
-  const { startDate: startDateString, endDate: endDateString } =
-    dateConfigState.get();
-
-  const pageObjects = generatePages(startDateString, endDateString);
+  const pageObjects = generatePages(dateConfigState.get());
   const pages = pageObjects.map((pageObject) => {
     const { pageKey } = pageObject;
     const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
@@ -157,7 +155,7 @@ export function Book() {
   return (
     <>
       <GlobalStyle {...printConfigState.get()} />
-      <div className="print-hidden h-screen flex justify-center align-middle align-items-middle">
+      <div className="print-hidden h-screen flex justify-center align-middle">
         <BookMaker />
       </div>
 

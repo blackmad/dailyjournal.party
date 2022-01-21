@@ -1,12 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from "lodash";
 import { createState } from "@hookstate/core";
-import { DateTime, Interval } from "luxon";
+import { Interval } from "luxon";
+import { Persistence } from "@hookstate/persistence";
 
 import DailyPlan from "./pages/DailyPlan";
 import DailyReflect from "./pages/DailyReflect";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import WeeklyReflect from "./pages/WeeklyReflect";
+import { getTimeRange, DateConfig } from "./state/dateConfig";
+import { MyStateWatchPlugin } from "./state/persistUtil";
 
 const defaultPrintConfig = {
   pageUnits: "in" as "in" | "mm",
@@ -40,17 +42,11 @@ const defaultQuestionMap = _.mapValues(
 ) as AppQuestionState;
 
 export const fullAppQuestionMapState = createState(defaultQuestionMap);
+fullAppQuestionMapState.attach(MyStateWatchPlugin);
+fullAppQuestionMapState.attach(Persistence("fullAppQuestionMapState"));
 
-export function generatePages(
-  startDateString: string | undefined,
-  endDateString: string | undefined
-) {
-  const startDate = startDateString
-    ? DateTime.fromISO(startDateString)
-    : DateTime.fromJSDate(new Date());
-  const endDate = endDateString
-    ? DateTime.fromISO(endDateString)
-    : startDate.plus({ days: 7 });
+export function generatePages(dc: DateConfig) {
+  const { startDate, endDate } = getTimeRange(dc);
 
   const interval = Interval.fromDateTimes(startDate, endDate).splitBy({
     days: 1,

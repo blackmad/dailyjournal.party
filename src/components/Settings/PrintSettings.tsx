@@ -3,7 +3,6 @@ import React from "react";
 import stringify from "json-stable-stringify";
 import { useState } from "@hookstate/core";
 import { PrintConfig, printConfig } from "../../bookConfig";
-import { ControlPanelSection } from "./ControlPanelSection";
 
 function PageSizeSetting({
   value,
@@ -19,7 +18,7 @@ export function PrintSettings() {
   const printconfigState = useState(printConfig);
 
   return (
-    <ControlPanelSection title="Print Settings" key="printing" open>
+    <div>
       {/* <div className="form-control">
           <label className="cursor-pointer label">
             <span className="label-text">Prepare for double-sided printing</span>
@@ -107,6 +106,6 @@ export function PrintSettings() {
           Print
         </button>
       </div>
-    </ControlPanelSection>
+    </div>
   );
 }

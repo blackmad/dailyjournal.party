@@ -5,34 +5,36 @@ import { useState } from "@hookstate/core";
 import DatePicker from "react-datepicker";
 import { DateTime } from "luxon";
 
-import { ControlPanelSection } from "./ControlPanelSection";
-import { dateConfig } from "../../state/dateConfig";
+import { dateConfig, getTimeRange } from "../../state/dateConfig";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 function DateControl({
   title,
-  dateString,
+  dateTime,
   onChange,
 }: {
   title: string;
-  dateString: string | undefined;
+  dateTime: DateTime;
   onChange: (newDateString: string | undefined) => void;
 }) {
-  const dateValue = (
-    dateString ? DateTime.fromISO(dateString) : DateTime.now()
-  ).toJSDate();
+  const dateValue = dateTime.toJSDate();
 
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref) => (
-    <button type="button" className="btn" onClick={onClick} ref={ref as any}>
+    <button
+      type="button"
+      className="btn btn-outline"
+      onClick={onClick}
+      ref={ref as any}
+    >
       {value}
     </button>
   ));
 
   const wrappedOnChange = useCallback(
     (date) => {
-      const dt = date ? DateTime.fromJSDate(date) : undefined;
-      onChange(dt?.toISODate());
+      const newDt = date ? DateTime.fromJSDate(date) : undefined;
+      onChange(newDt?.toISODate());
     },
     [onChange]
   );
@@ -53,6 +55,7 @@ function DateControl({
 
 export function DateSettings() {
   const dateConfigState = useState(dateConfig);
+  const { startDate, endDate } = getTimeRange(dateConfigState.get());
 
   const startCb = useCallback(
     (newDateString) => dateConfig.merge({ startDate: newDateString }),
@@ -65,17 +68,9 @@ export function DateSettings() {
   );
 
   return (
-    <ControlPanelSection title="Date Settings" key="printing">
-      <DateControl
-        title="State Date"
-        dateString={dateConfigState.get().startDate}
-        onChange={startCb}
-      />
-      <DateControl
-        title="End Date"
-        dateString={dateConfigState.get().endDate}
-        onChange={endCb}
-      />
-    </ControlPanelSection>
+    <div>
+      <DateControl title="State Date" dateTime={startDate} onChange={startCb} />
+      <DateControl title="End Date" dateTime={endDate} onChange={endCb} />
+    </div>
   );
 }

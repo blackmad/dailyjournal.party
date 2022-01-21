@@ -1,6 +1,7 @@
 import { createState } from "@hookstate/core";
+import { DateTime } from "luxon";
 
-type DateConfig = {
+export type DateConfig = {
   startDate: string | undefined;
   numDays: number | undefined;
   endDate: string | undefined;
@@ -19,3 +20,16 @@ const defaultDateConfig: DateConfig = {
 };
 
 export const dateConfig = createState(defaultDateConfig);
+
+export function getTimeRange(dc: DateConfig) {
+  const { startDate: startDateString, endDate: endDateString } = dc;
+
+  const startDate = startDateString
+    ? DateTime.fromISO(startDateString)
+    : DateTime.fromJSDate(new Date());
+  const endDate = endDateString
+    ? DateTime.fromISO(endDateString)
+    : startDate.plus({ days: 7 });
+
+  return { startDate, endDate };
+}

@@ -29,7 +29,9 @@ export function ControlPanelSection({
           onChange?.(e.target.checked);
         }}
       />
-      <div className="collapse-title text-xl font-medium">{title}</div>
+      <div className="collapse-title text-left text-xl font-medium">
+        {title}
+      </div>
       <div
         className={`collapse-content ${isOpen.get() ? "overflow-visible" : ""}`}
       >

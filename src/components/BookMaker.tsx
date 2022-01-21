@@ -41,11 +41,7 @@ export default function BookMaker() {
   }, [printConfigValue]);
 
   const dateConfigState = useState(dateConfig);
-
-  const { startDate: startDateString, endDate: endDateString } =
-    dateConfigState.get();
-
-  const pages = generatePages(startDateString, endDateString);
+  const pages = generatePages(dateConfigState.get());
 
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
@@ -69,14 +65,21 @@ export default function BookMaker() {
   }
 
   return (
-    <div className="w-11/12 ">
-      <BasicBorder className="text-center hero-content">
+    <div className="w-fit min-w-[800px] h-fit pt-10">
+      <BasicBorder className="text-center">
         <div className="w-full">
           <div className="flex flex-row p-6">
-            <div className="pr-6">
+            <div className="pr-6 flex-grow w-[700px] max-w-[900px]">
               <QuestionSettings />
-              <DateSettings />
-              <PrintSettings />
+              <div className="flex py-6">
+                <BasicBorder className="p-2 basis-2/5">
+                  <DateSettings />
+                </BasicBorder>
+                <div className="p-2" />
+                <BasicBorder className="p-2 basis-1/3 flex-grow">
+                  <PrintSettings />
+                </BasicBorder>
+              </div>
             </div>
             <div className="flex flex-col">
               <div style={zoomStyle}>

@@ -1,4 +1,3 @@
-$namespace: rhfa-
 $height: 34px
 $select-padding: 6px
 $select-total-height: $height + $select-padding
@@ -6,16 +5,16 @@ $error-color: #a22
 $header-height: 46px
 
 // Outer wrapper that includes every input control
-.#{$namespace}inputBlockWrap
+.rhfa-inputBlockWrap
   display: flex
   flex-flow: column nowrap
   margin-bottom: 16px
   // Input's label
-  .#{$namespace}label
+  .rhfa-label
     flex: 0 auto
     margin-bottom: .25em
 // Styles for the input itself (<input />)
-.#{$namespace}input
+.rhfa-input
   flex: 0 auto
   border: 1px solid #a0a0a0
   background-color: #ffffff
@@ -23,25 +22,25 @@ $header-height: 46px
   padding: 0px 8px
   font-size: 16px
   // Input is normal
-  &.#{$namespace}standard
+  &.rhfa-standard
     min-height: $height
   // Input has errors
-  &.#{$namespace}errored
+  &.rhfa-errored
     border: 1px solid $error-color
-  &.#{$namespace}errored:focus
+  &.rhfa-errored:focus
     border: 1.5px solid $error-color
 // Inlined controls wrapper
-.#{$namespace}inlineWrap
-  .#{$namespace}input
+.rhfa-inlineWrap
+  .rhfa-input
     min-width: 250px
-    width: calc(100% - 20px)
+    width: 100%
 
 // Header for input arrays
-.#{$namespace}itemHeader
+.rhfa-itemHeader
   display: inline-block
 
 // Wrapper for the array panel
-.#{$namespace}inputPanelWrap
+.rhfa-inputPanelWrap
   display: flex
   flex-flow: row nowrap
   align-items: center
@@ -49,7 +48,7 @@ $header-height: 46px
   justify-content: space-between
 
 // Simply a button
-.#{$namespace}button
+.rhfa-button
   min-height: $height
   height: $height
   line-height: 1em
@@ -64,33 +63,33 @@ $header-height: 46px
     display: none
 
 // Outer checkbox div
-.#{$namespace}checkboxWrap
+.rhfa-checkboxWrap
   margin-bottom: 16px
 
 // Outer radio div
-.#{$namespace}radioGroupWrap
+.rhfa-radioGroupWrap
   margin-bottom: 16px
 
 // Label for checkbox and radio
-.#{$namespace}checkboxLabel, .#{$namespace}radioLabel
+.rhfa-checkboxLabel, .rhfa-radioLabel
   margin-left: 8px
 
 // Text to add insight
-.#{$namespace}helper
+.rhfa-helper
   position: relative
   font-size: 12px
   color: #606060
   padding: 4px
 
 // Text to explain the error
-.#{$namespace}error
+.rhfa-error
   position: relative
   font-size: 12px
   color: $error-color
   padding: 4px
 
 // Select input
-.#{$namespace}select
+.rhfa-select
   height: $select-total-height - $select-padding
   padding: $select-padding
   border: 1px solid #b0b0b0
@@ -98,28 +97,32 @@ $header-height: 46px
   border-radius: 4px
 
 // Table for the input array table
-.#{$namespace}table
+.rhfa-table
+  width: 100%
   thead
     display: none
   td
     vertical-align: top
+    &:nth-child(1), &:nth-child(3)
+      width: 0.1%
+      white-space: nowrap
 
-.#{$namespace}panel
+.rhfa-panel
   display: block
   margin-bottom: 8px
   border: 1px solid #AFDBD2
   border-radius: 8px
   overflow: hidden
-  .#{$namespace}title
+  .rhfa-title
     background: #FFFDF9
     border-bottom: 2px solid #AFDBD2
     color: #202020
     min-height: $header-height
     line-height: $header-height
     padding-left: 8px
-  .#{$namespace}content
+  .rhfa-content
     background: #ECEDE9
-  .#{$namespace}contentMargin
+  .rhfa-contentMargin
     padding: 8px
-  &.#{$namespace}errored
+  &.rhfa-errored
     border: 2px solid $error-color
