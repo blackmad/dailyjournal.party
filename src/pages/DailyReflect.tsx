@@ -20,8 +20,15 @@ const QuestionKeys = [
 type Questions = typeof QuestionKeys[number];
 export const defaultQuestionConfig: QuestionMap<Questions> = {
   gratefulFor: ["What was I grateful for today?"],
-  growth: ["What areas of growth did I express well today?"],
-  presence: ["How present did I feel today?"],
+  growth: [
+    "What areas of growth did I express well today?",
+    "What did I learn today?",
+  ],
+  presence: [
+    "How present did I feel today?",
+    "What details did I notice today?",
+    "How did my body feel today?",
+  ],
   bad: [
     "What sucked about today?",
     "How did I mug myself today?",
@@ -32,10 +39,14 @@ export const defaultQuestionConfig: QuestionMap<Questions> = {
   relationships: [
     "What relationships do I want to be investing more in?",
     "What relationships in my life are filling me up?",
+    "What positive relationships did I contribute to today?",
+    "How was I kind to others today?",
+    "How was I helpful to others today?",
   ],
   selfKindness: [
     "How was I kind to myself today?",
     "What self-talk served me well today?",
+    "What am I proud of about myself today?",
   ],
   highlights: ["Highlights", "What was awesome about today?"],
 };
