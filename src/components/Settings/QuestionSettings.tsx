@@ -2,13 +2,34 @@
 import React from "react";
 
 import { ControlPanelSection } from "./ControlPanelSection";
-import { BookForm } from "./BookForm";
+import { PageForm } from "./BookForm";
 import { AppPages } from "../../bookConfig";
+import { openQuestionsSettingPanel } from "../../state/openQuestionsSettingPanel";
 
 export function QuestionSettings() {
   return (
-    <ControlPanelSection title="Questions" key="questions">
-      <BookForm pageContents={AppPages} />
-    </ControlPanelSection>
+    <>
+      {AppPages.map((pageContent) => {
+        return (
+          <ControlPanelSection
+            title={`Questions: ${pageContent.title}`}
+            key={`Questions: ${pageContent.title}`}
+            onChange={(state: boolean) => {
+              if (state) {
+                openQuestionsSettingPanel.set(pageContent.key);
+              } else {
+                openQuestionsSettingPanel.set(undefined);
+              }
+            }}
+          >
+            <PageForm
+              pageContent={pageContent as any}
+              key={pageContent.title}
+            />
+            ;
+          </ControlPanelSection>
+        );
+      })}
+    </>
   );
 }

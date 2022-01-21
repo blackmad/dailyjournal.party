@@ -5,7 +5,12 @@ export function ControlPanelSection({
   title,
   children,
   open,
-}: React.PropsWithChildren<{ title: string; open?: boolean }>) {
+  onChange,
+}: React.PropsWithChildren<{
+  title: string;
+  open?: boolean;
+  onChange?: (state: boolean) => void;
+}>) {
   const isOpen = useState(Boolean(open));
   return (
     <div
@@ -21,6 +26,7 @@ export function ControlPanelSection({
         checked={Boolean(isOpen.get())}
         onChange={(e) => {
           isOpen.set(e.target.checked);
+          onChange?.(e.target.checked);
         }}
       />
       <div className="collapse-title text-xl font-medium">{title}</div>

@@ -133,7 +133,12 @@ export function BookForm({
         }}
       >
         {pageContents.map((pageContent) => {
-          return <PageForm pageContent={pageContent} key={pageContent.title} />;
+          return (
+            <PageForm
+              pageContent={pageContent as any}
+              key={pageContent.title}
+            />
+          );
         })}
       </div>
     </div>

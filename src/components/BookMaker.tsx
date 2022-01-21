@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import _ from "lodash";
 import { Downgraded, useState } from "@hookstate/core";
 
@@ -7,6 +7,7 @@ import { BasicBorder } from "../book-components/BorderBox";
 import { PrintSettings } from "./Settings/PrintSettings";
 import { DateSettings } from "./Settings/DateSettings";
 import {
+  AppPage,
   fullAppQuestionMapState,
   generatePages,
   printConfig,
@@ -15,23 +16,29 @@ import { convertUnits } from "../utils/convert";
 import { QuestionSettings } from "./Settings/QuestionSettings";
 import { dateConfig } from "../state/dateConfig";
 import { BookPage } from "../Book";
+import { openQuestionsSettingPanel } from "../state/openQuestionsSettingPanel";
 
 export default function BookMaker() {
   const pageIndex = useState(0);
-  const printconfigState = useState(printConfig);
-  const printconfigValue = printconfigState.get();
+  const printConfigState = useState(printConfig);
+  const printConfigValue = printConfigState.get();
+
+  const openQuestionsSettingPanelState = useState(openQuestionsSettingPanel);
+  const lastOpenQuestionsSettingPanelState = useState<undefined | AppPage>(
+    undefined
+  );
 
   const zoomStyle = useMemo(() => {
     const heightInPx = convertUnits(
-      printconfigValue.pageHeight,
-      printconfigValue.pageUnits,
+      printConfigValue.pageHeight,
+      printConfigValue.pageUnits,
       "px"
     );
     const maxHeight = 600;
     const zoomFactor = maxHeight / heightInPx;
 
     return { zoom: zoomFactor };
-  }, [printconfigValue]);
+  }, [printConfigValue]);
 
   const dateConfigState = useState(dateConfig);
 
@@ -44,6 +51,18 @@ export default function BookMaker() {
 
   const currentPage = pages[pageIndex.get()];
   const questionConfig = fullAppQuestionConfig.get()[currentPage.pageKey];
+
+  const openPanel = openQuestionsSettingPanelState.get();
+  if (openPanel !== lastOpenQuestionsSettingPanelState.get()) {
+    if (currentPage.pageKey !== openPanel) {
+      const newPageIndex = pages.findIndex((p) => p.pageKey === openPanel);
+      pageIndex.set(newPageIndex);
+    }
+
+    lastOpenQuestionsSettingPanelState.set(
+      openQuestionsSettingPanelState.get()
+    );
+  }
 
   return (
     <div className="w-11/12 ">

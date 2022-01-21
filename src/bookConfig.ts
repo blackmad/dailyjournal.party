@@ -20,10 +20,10 @@ export type PrintConfig = typeof defaultPrintConfig;
 export const printConfig = createState(defaultPrintConfig);
 
 export const AppPageConfig = {
-  // WeeklyReflect,
+  WeeklyReflect,
   DailyPlan,
-  // WeeklyPlan,
-  // DailyReflect,
+  WeeklyPlan,
+  DailyReflect,
 } as const;
 
 export const AppPages = Object.values(AppPageConfig);

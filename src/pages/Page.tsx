@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 import { useState } from "@hookstate/core";
 
 import { QuestionMap } from "../utils/question";
-import { printConfig } from "../bookConfig";
+import { AppPage, printConfig } from "../bookConfig";
 
 const PageContainer = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export interface PageContent<Q extends string> {
   component: React.FC<{ questionConfig: QuestionMap<Q> }>;
   defaultQuestionConfig: QuestionMap<Q>;
   questionTranslations?: Partial<Record<Q, string>>;
-  key: string;
+  key: AppPage;
 }
 
 export const PageGrid = styled.div`

@@ -33,7 +33,6 @@ export function BookPage<T extends string>({
 
   return (
     <React.Fragment key={`${date}-${title}`}>
-      {" "}
       <DateContext.Provider value={dateContext}>
         <Page title={title} key={date.toISODate() + title}>
           <PageContentComponent questionConfig={questionConfig as any} />
@@ -60,8 +59,6 @@ function PageSpreads() {
   const printConfigState = useState(printConfig);
   const dateConfigState = useState(dateConfig);
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
-
-  console.log({ inPrintModeState });
 
   if (!inPrintModeState.get()) {
     return null;
