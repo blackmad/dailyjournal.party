@@ -70,3 +70,6 @@ export function generatePages(dc: DateConfig) {
 
   return pages;
 }
+
+export type GeneratedPages = ReturnType<typeof generatePages>;
+export type GeneratedPage = GeneratedPages[number];
