@@ -60,7 +60,6 @@ function PageSpreads() {
   const dateConfigState = useState(dateConfig);
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
-  console.log("ipm", inPrintModeState.get());
   if (!inPrintModeState.get()) {
     return null;
   }

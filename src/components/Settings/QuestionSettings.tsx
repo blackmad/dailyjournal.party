@@ -19,7 +19,6 @@ export function QuestionSettings() {
             key={`Questions: ${pageContent.title}`}
             onChange={(state: boolean) => {
               if (state) {
-                console.log("setting state to ", pageContent.key);
                 openQuestionsSettingPanel.set(pageContent.key);
               } else {
                 // openQuestionsSettingPanel.set(undefined);
