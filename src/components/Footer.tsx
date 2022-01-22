@@ -21,7 +21,7 @@ export function Footer() {
       <Separator /> */}
       <div>
         source on{" "}
-        <a href="https://github.com/blackmad/react-yearly-planner">github</a>
+        <a href="https://github.com/blackmad/dailyjournal.party">github</a>
       </div>
     </div>
   );
