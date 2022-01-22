@@ -32,6 +32,7 @@ export default function PagePreview({
             WebkitTextSizeAdjust: `${zoom * 100}%`,
             textSizeAdjust: `${zoom * 100}%`,
             height: "fit-content",
+            background: "#fdfdfd",
           }}
         >
           <BookPage
