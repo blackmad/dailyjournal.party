@@ -73,8 +73,15 @@ function SpreadPreview({ pages }: { pages: GeneratedPages }) {
   ];
 
   return (
-    <div className="flex flex-col">
-      <div style={zoomStyle} className="flex flex-row">
+    <div className="flex flex-col m-4">
+      <div
+        style={{
+          ...zoomStyle,
+          background: "white",
+          border: "0.1mm solid lightgrey",
+        }}
+        className="flex flex-row"
+      >
         <BookPage
           date={currentPage.date}
           pageContent={currentPage.pageContent}
