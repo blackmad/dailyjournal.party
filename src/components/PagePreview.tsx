@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { DateTime } from "luxon";
+import useMobileDetect from "use-mobile-detect-hook";
 
 import DailyPlan from "../pages/DailyPlan";
 import { DateContext } from "../providers/DateContext";
@@ -13,6 +14,8 @@ export default function PagePreview({
   zoom?: number;
   pageContent?: PageContent<any>;
 }) {
+  const detectMobile = useMobileDetect();
+
   const date = DateTime.fromJSDate(new Date());
   const dateContext = useMemo(() => {
     return { dt: date };
@@ -25,7 +28,7 @@ export default function PagePreview({
           className="border border-slate-300"
           style={{
             zoom,
-            fontSize: "1.1vh",
+            fontSize: detectMobile.isIos() ? "1.1vh" : undefined,
             WebkitTextSizeAdjust: `${zoom * 100}%`,
             textSizeAdjust: `${zoom * 100}%`,
             height: "fit-content",

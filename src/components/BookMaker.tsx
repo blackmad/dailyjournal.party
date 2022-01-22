@@ -61,7 +61,12 @@ function SpreadPreview({ pages }: { pages: GeneratedPages }) {
       zoomFactor = maxHeight / heightInPx;
     }
 
-    return { zoom: zoomFactor, WebkitTextSizeAdjust: `${zoomFactor * 100}%` };
+    return {
+      zoom: zoomFactor,
+      WebkitTextSizeAdjust: detectMobile.isMobile()
+        ? `${zoomFactor * 100}%`
+        : "auto",
+    };
   }, [printConfigValue, detectMobile, windowWidth]);
 
   const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
