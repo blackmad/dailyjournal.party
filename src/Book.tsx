@@ -55,14 +55,13 @@ function chunkPagesForPrinting<T>(pages: T[]) {
 }
 
 function PageSpreads() {
-  const inPrintModeState = useState(inPrintMode);
   const printConfigState = useState(printConfig);
   const dateConfigState = useState(dateConfig);
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
 
-  if (!inPrintModeState.get()) {
-    return null;
-  }
+  useEffect(() => {
+    window.print();
+  }, []);
 
   const pageObjects = generatePages(dateConfigState.get());
   const pages = pageObjects.map((pageObject) => {
@@ -133,20 +132,15 @@ const GlobalStyle = createGlobalStyle<PrintConfig>`
 
 export function Book() {
   const printConfigState = useState(printConfig);
+  const inPrintModeState = useState(inPrintMode);
 
   useEffect(() => {
-    const beforeprintCb = () => {
-      inPrintMode.set(true);
-    };
-    window.addEventListener("beforeprint", beforeprintCb);
-
     const afterprintCb = () => {
       inPrintMode.set(false);
     };
     window.addEventListener("afterprint", afterprintCb);
 
     return () => {
-      window.removeEventListener("beforeprint", beforeprintCb);
       window.removeEventListener("afterprint", afterprintCb);
     };
   }, []);
@@ -158,7 +152,7 @@ export function Book() {
         <BookMaker />
       </div>
 
-      <PageSpreads />
+      {inPrintModeState.get() && <PageSpreads />}
     </>
   );
 }

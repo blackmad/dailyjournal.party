@@ -3,6 +3,7 @@ import React from "react";
 import stringify from "json-stable-stringify";
 import { useState } from "@hookstate/core";
 import { PrintConfig, printConfig } from "../../bookConfig";
+import { inPrintMode } from "../../state/printMode";
 
 function PageSizeSetting({
   value,
@@ -16,6 +17,7 @@ function PageSizeSetting({
 
 export function PrintSettings() {
   const printconfigState = useState(printConfig);
+  const inPrintModeState = useState(inPrintMode);
 
   return (
     <div>
@@ -102,7 +104,13 @@ export function PrintSettings() {
       )}
 
       <div className="flex justify-end pt-4">
-        <button type="button" className="btn" onClick={() => window.print()}>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            inPrintModeState.set(true);
+          }}
+        >
           Print
         </button>
       </div>
