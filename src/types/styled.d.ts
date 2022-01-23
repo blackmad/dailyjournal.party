@@ -10,5 +10,7 @@ declare module "styled-components" {
       dotColor: string;
       borderColor: string;
     };
+    fontFamily: string;
+    borderRadius: string;
   }
 }

@@ -22,6 +22,7 @@ import { BookPage } from "../Book";
 import { openQuestionsSettingPanel } from "../state/openQuestionsSettingPanel";
 import { Footer } from "./Footer";
 import { PageContent } from "../pages/Page";
+import { ThemeSettings } from "./Settings/ThemeSettings";
 
 function SpreadPreview({ pages }: { pages: GeneratedPages }) {
   const detectMobile = useMobileDetect();
@@ -61,12 +62,7 @@ function SpreadPreview({ pages }: { pages: GeneratedPages }) {
       zoomFactor = maxHeight / heightInPx;
     }
 
-    return {
-      zoom: zoomFactor,
-      WebkitTextSizeAdjust: detectMobile.isMobile()
-        ? `${zoomFactor * 100}%`
-        : "auto",
-    };
+    return { zoom: zoomFactor, WebkitTextSizeAdjust: `${zoomFactor * 100}%` };
   }, [printConfigValue, detectMobile, windowWidth]);
 
   const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
@@ -174,6 +170,11 @@ export default function BookMaker() {
                 <div className="p-2" />
                 <BasicBorder className="p-2 sm:basis-1/3 sm:flex-grow">
                   <PrintSettings />
+                </BasicBorder>
+              </div>
+              <div className="flex pt-6 sm:py-6 flex-col sm:flex-row">
+                <BasicBorder className="p-2 sm:basis-2/5">
+                  <ThemeSettings />
                 </BasicBorder>
               </div>
             </div>
