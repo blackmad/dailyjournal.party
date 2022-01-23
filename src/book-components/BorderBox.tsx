@@ -6,13 +6,13 @@ import { NLineBoxContentsProps } from "./ThreeLineBoxContents";
 
 export const BasicBorder = styled.div`
   border: solid 1px ${(props) => props.theme.colors.borderColor};
-  border-radius: 10px;
+  border-radius: ${(props) => props.theme.borderRadius};
   background: ${(props) => props.theme.colors.backgroundColor};
 `;
 
 export const BasicButton = styled.button`
   border: solid 2px ${(props) => props.theme.colors.borderColor};
-  border-radius: 10px;
+  border-radius: ${(props) => props.theme.borderRadius};
   color: ${(props) => props.theme.colors.borderColor};
   // background: ${(props) => props.theme.colors.backgroundColor};
   font-weight: bold;
