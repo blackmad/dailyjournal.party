@@ -29,6 +29,10 @@ export const AppPageConfig = {
   DailyPlan,
   WeeklyPlan,
   DailyReflect,
+} as const;
+
+export const AllAppPages = {
+  ...AppPageConfig,
   FrontCover,
   BackCover,
   EmptyPage,
@@ -36,14 +40,10 @@ export const AppPageConfig = {
 
 export const AppPages = Object.values(AppPageConfig);
 
-export type AppPage =
-  | keyof typeof AppPageConfig
-  | "FrontCover"
-  | "BackCover"
-  | "EmptyPage";
+export type AppPage = keyof typeof AllAppPages;
 
 export type AppQuestionState = {
-  [P in AppPage]?: typeof AppPageConfig[P]["defaultQuestionConfig"];
+  [P in AppPage]?: typeof AllAppPages[P]["defaultQuestionConfig"];
 };
 
 const defaultQuestionMap = _.mapValues(
