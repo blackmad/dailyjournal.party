@@ -31,7 +31,6 @@ export function BorderBox(props: React.PropsWithChildren<any>) {
   const { children } = props;
   return (
     <div className="w-full h-full flex flex-row">
-      <div style={{ height: "1em" }}>&nbsp;</div>
       <BorderBoxInner>{children}</BorderBoxInner>
     </div>
   );

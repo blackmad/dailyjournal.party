@@ -5,12 +5,13 @@ import { Header } from "../book-components/Header";
 // import { mq } from "../utils/question";
 import { PageContent, PageGrid } from "./Page";
 import { QuestionMap } from "../utils/question";
+import { BorderDottedBox } from "../book-components/BorderBox";
 
 const title = "Daily Reflect";
 
 const QuestionKeys = [
   "gratefulFor",
-  "growth",
+  // "growth",
   "presence",
   "bad",
   "relationships",
@@ -20,14 +21,16 @@ const QuestionKeys = [
 type Questions = typeof QuestionKeys[number];
 export const defaultQuestionConfig: QuestionMap<Questions> = {
   gratefulFor: ["What was I grateful for today?"],
-  growth: [
-    "What areas of growth did I express well today?",
-    "What did I learn today?",
-  ],
+  // growth: [
+  //   "What areas of growth did I express well today?",
+  //   "What did I learn today?",
+  // ],
   presence: [
-    "How present did I feel today?",
+    // "How present did I feel today?",
+    "When did I feel most present today?",
     "What details did I notice today?",
-    "How did my body feel today?",
+    "When did I feel most focused today?",
+    // "How did my body feel today?",
   ],
   bad: [
     "What sucked about today?",
@@ -56,13 +59,17 @@ function DailyReflect({
 }: {
   questionConfig: QuestionMap<Questions>;
 }) {
+  let index = 0;
   return (
     <>
       <Header title={title} />
 
       <PageGrid style={{ gap: 0 }}>
         {_.map(questionConfig, (q, key) => {
-          return (
+          index += 1;
+          return index === 1 ? (
+            <BorderDottedBox className="col-span-12" question={q} key={key} />
+          ) : (
             <OpenDottedBox className="col-span-12" question={q} key={key} />
           );
         })}

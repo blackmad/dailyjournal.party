@@ -67,7 +67,7 @@ function GridLineMultiBox({
             ContentBoxComponent={BorderBox}
             key={question.text}
           >
-            <ThreeLineBoxContents />
+            <ThreeLineBoxContents includeCheckbox />
           </AbstractBox>
         );
       })}
