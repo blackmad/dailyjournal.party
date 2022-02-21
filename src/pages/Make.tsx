@@ -1,46 +1,19 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import _ from "lodash";
-import { DateTime } from "luxon";
 import { createGlobalStyle } from "styled-components";
 import { Downgraded, useState } from "@hookstate/core";
-import { DateContext } from "./providers/DateContext";
 
-import { EmptyPage, Page, PageContent } from "./bookPages/Page";
+import { EmptyPage } from "../bookPages/Page";
 import {
   printConfig,
   fullAppQuestionMapState,
   PrintConfig,
   generatePages,
-} from "./bookConfig";
-import BookMaker from "./components/BookMaker";
-import { inPrintMode } from "./state/printMode";
-import { dateConfig } from "./state/dateConfig";
-import { QuestionMap } from "./utils/question";
-
-export function BookPage<T extends string>({
-  date,
-  pageContent,
-  questionConfig,
-}: {
-  date: DateTime;
-  pageContent: PageContent<T>;
-  questionConfig: QuestionMap<T>;
-}) {
-  const dateContext = useMemo(() => {
-    return { dt: date };
-  }, [date]);
-  const { title, component: PageContentComponent } = pageContent;
-
-  return (
-    <React.Fragment key={`${date}-${title}`}>
-      <DateContext.Provider value={dateContext}>
-        <Page title={title} key={date.toISODate() + title}>
-          <PageContentComponent questionConfig={questionConfig as any} />
-        </Page>
-      </DateContext.Provider>
-    </React.Fragment>
-  );
-}
+} from "../bookConfig";
+import BookMaker from "../components/BookMaker";
+import { inPrintMode } from "../state/printMode";
+import { dateConfig } from "../state/dateConfig";
+import BookPage from "../components/BookPage";
 
 function chunkPagesForPrinting<T>(pages: T[]) {
   return _.times(pages.length / 2).map((spreadIndex) => {
@@ -144,7 +117,7 @@ const GlobalStyle = createGlobalStyle<PrintConfig>`
   }
 `;
 
-export function Book() {
+export default function Make() {
   const printConfigState = useState(printConfig);
   const inPrintModeState = useState(inPrintMode);
 

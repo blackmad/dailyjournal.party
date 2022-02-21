@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { useState } from "@hookstate/core";
 
-import { Book } from "./Book";
+import Make from "./pages/Make";
+import OpenGraph from "./pages/OpenGraph";
+import Intro from "./pages/Intro";
+import DebugPreview from "./pages/DebugPreview";
 
-import OpenGraph from "./OpenGraph";
-import Intro from "./Intro";
-import DebugPreview from "./DebugPreview";
 import { themeConfig } from "./state/themeConfig";
 
 const GlobalFontStyle = createGlobalStyle`
@@ -26,11 +26,14 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Intro />} />
-          <Route path="preview" element={<DebugPreview />}>
-            <Route path=":page" element={<DebugPreview />} />
+
+          <Route path="debug">
+            <Route path="preview" element={<DebugPreview />}>
+              <Route path=":page" element={<DebugPreview />} />
+            </Route>
           </Route>
 
-          <Route path="/make" element={<Book />} />
+          <Route path="/make" element={<Make />} />
           <Route path="opengraph" element={<OpenGraph />} />
         </Routes>
       </BrowserRouter>

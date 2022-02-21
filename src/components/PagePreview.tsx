@@ -4,7 +4,7 @@ import useMobileDetect from "use-mobile-detect-hook";
 
 import DailyPlan from "../bookPages/DailyPlan";
 import { DateContext } from "../providers/DateContext";
-import { BookPage } from "../Book";
+import BookPage from "./BookPage";
 import { PageContent } from "../bookPages/Page";
 
 export default function PagePreview({

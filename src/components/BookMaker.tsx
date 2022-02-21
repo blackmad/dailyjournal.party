@@ -18,7 +18,7 @@ import {
 import { convertUnits } from "../utils/convert";
 import { QuestionSettings } from "./Settings/QuestionSettings";
 import { dateConfig } from "../state/dateConfig";
-import { BookPage } from "../Book";
+import BookPage from "./BookPage";
 import { openQuestionsSettingPanel } from "../state/openQuestionsSettingPanel";
 import { Footer } from "./Footer";
 import { PageContent } from "../bookPages/Page";

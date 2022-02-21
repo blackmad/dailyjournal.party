@@ -6,15 +6,15 @@ import useMobileDetect from "use-mobile-detect-hook";
 import { useWindowWidth, useWindowHeight } from "@react-hook/window-size";
 import { useState } from "@hookstate/core";
 
-// import { printconfig } from "./bookConfig";
-// import { Book } from "./Book";
-import { BasicBorder, BasicButton } from "./book-components/BorderBox";
-import { Footer } from "./components/Footer";
-import PagePreview from "./components/PagePreview";
-import DailyPlan from "./bookPages/DailyPlan";
-import DailyReflect from "./bookPages/DailyReflect";
-import { printConfig } from "./bookConfig";
-import { convertUnits } from "./utils/convert";
+// import { printconfig } from "../bookConfig";
+// import { Book } from "../Book";
+import { BasicBorder, BasicButton } from "../book-components/BorderBox";
+import { Footer } from "../components/Footer";
+import PagePreview from "../components/PagePreview";
+import DailyPlan from "../bookPages/DailyPlan";
+import DailyReflect from "../bookPages/DailyReflect";
+import { printConfig } from "../bookConfig";
+import { convertUnits } from "../utils/convert";
 
 function LeftPanel() {
   const navigate = useNavigate();

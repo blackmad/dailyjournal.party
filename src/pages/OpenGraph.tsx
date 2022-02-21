@@ -1,11 +1,11 @@
 import { DateTime } from "luxon";
 import React, { useMemo } from "react";
-import { BookPage } from "./Book";
-// import { printconfig } from "./bookConfig";
-// import { Book } from "./Book";
-import { BasicBorder } from "./book-components/BorderBox";
-import DailyPlan from "./bookPages/DailyPlan";
-import { DateContext } from "./providers/DateContext";
+import BookPage from "../components/BookPage";
+// import { printconfig } from "../bookConfig";
+// import { Book } from "../Book";
+import { BasicBorder } from "../book-components/BorderBox";
+import DailyPlan from "../bookPages/DailyPlan";
+import { DateContext } from "../providers/DateContext";
 
 export default function OpenGraph() {
   const date = DateTime.fromJSDate(new Date());
