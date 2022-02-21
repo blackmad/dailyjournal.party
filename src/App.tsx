@@ -7,6 +7,7 @@ import { theme } from "./theme";
 
 import OpenGraph from "./OpenGraph";
 import Intro from "./Intro";
+import DebugPreview from "./DebugPreview";
 
 export default function App() {
   return (
@@ -14,6 +15,10 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Intro />} />
+          <Route path="preview" element={<DebugPreview />}>
+            <Route path=":page" element={<DebugPreview />} />
+          </Route>
+
           <Route path="/make" element={<Book />} />
           <Route path="opengraph" element={<OpenGraph />} />
         </Routes>

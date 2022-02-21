@@ -54,29 +54,43 @@ function chunkPagesForPrinting<T>(pages: T[]) {
   });
 }
 
-function PageSpreads() {
-  const printConfigState = useState(printConfig);
+export function useGetAllPages(pageFilter?: string) {
   const dateConfigState = useState(dateConfig);
   const fullAppQuestionConfig = useState(fullAppQuestionMapState);
+
+  const pageObjects = generatePages(dateConfigState.get());
+  const pages = pageObjects
+    .map((pageObject) => {
+      const { pageKey } = pageObject;
+
+      if (pageFilter && pageFilter !== pageKey) {
+        return undefined;
+      }
+
+      const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
+        pageKey
+      ];
+
+      return (
+        <BookPage
+          {...pageObject}
+          questionConfig={questionConfig || ({} as any)}
+        />
+      );
+    })
+    .filter((o) => !_.isUndefined(o));
+
+  return pages;
+}
+
+function PageSpreads() {
+  const printConfigState = useState(printConfig);
 
   useEffect(() => {
     window.print();
   }, []);
 
-  const pageObjects = generatePages(dateConfigState.get());
-  const pages = pageObjects.map((pageObject) => {
-    const { pageKey } = pageObject;
-    const questionConfig = fullAppQuestionConfig.attach(Downgraded).get()[
-      pageKey
-    ];
-
-    return (
-      <BookPage
-        {...pageObject}
-        questionConfig={questionConfig || ({} as any)}
-      />
-    );
-  });
+  const pages = useGetAllPages();
 
   if (pages.length % 4 !== 0) {
     _.times(4 - (pages.length % 4)).forEach((i) => {

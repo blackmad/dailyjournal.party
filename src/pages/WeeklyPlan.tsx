@@ -56,12 +56,16 @@ function WeeklyPlan({
     <>
       <Header title={title} omitDay />
 
-      <PageGrid>
+      <PageGrid
+        style={{
+          columnGap: 5,
+        }}
+      >
         <WeekGrid className="col-span-8 row-span-4" />
         <OpenDottedBox className="col-span-4 row-span-2" question="Todo" />
         <BorderBoxWithTitle
           className="col-span-4 row-span-2"
-          question="Goal for the week"
+          question="Week Goal"
         />
       </PageGrid>
 
