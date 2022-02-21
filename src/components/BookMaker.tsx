@@ -21,7 +21,7 @@ import { dateConfig } from "../state/dateConfig";
 import { BookPage } from "../Book";
 import { openQuestionsSettingPanel } from "../state/openQuestionsSettingPanel";
 import { Footer } from "./Footer";
-import { PageContent } from "../pages/Page";
+import { PageContent } from "../bookPages/Page";
 import { ThemeSettings } from "./Settings/ThemeSettings";
 
 function SpreadPreview({ pages }: { pages: GeneratedPages }) {

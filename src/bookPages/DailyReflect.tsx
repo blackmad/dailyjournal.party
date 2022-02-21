@@ -68,7 +68,11 @@ function DailyReflect({
         {_.map(questionConfig, (q, key) => {
           index += 1;
           return index === 1 ? (
-            <BorderDottedBox className="col-span-12" question={q} key={key} />
+            <BorderDottedBox
+              className="col-span-12 mb-3"
+              question={q}
+              key={key}
+            />
           ) : (
             <OpenDottedBox className="col-span-12" question={q} key={key} />
           );

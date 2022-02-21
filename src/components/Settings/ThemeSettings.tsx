@@ -13,6 +13,25 @@ type ThemeOption = BaseOption<{
   value: DefaultTheme;
 }>;
 
+export function getThemeExample(key: string, value: DefaultTheme) {
+  return (
+    <div
+      style={{
+        background: value.colors.textBackgroundColor,
+        fontFamily: value.fontFamily,
+        color: value.colors.textColor,
+        border: "1px solid",
+        borderColor: value.colors.borderColor,
+        padding: 4,
+        margin: 4,
+        borderRadius: value.borderRadius,
+      }}
+    >
+      {key}
+    </div>
+  );
+}
+
 export function ThemeSettings() {
   const themeConfigState = useState(themeConfig).attach(Downgraded);
 
@@ -20,7 +39,7 @@ export function ThemeSettings() {
     return {
       name: key,
       key,
-      option: <div>{key}</div>,
+      option: getThemeExample(key, value),
       value,
       selected: _.isEqual(value, themeConfigState.get()),
     };

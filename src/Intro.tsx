@@ -11,8 +11,8 @@ import { useState } from "@hookstate/core";
 import { BasicBorder, BasicButton } from "./book-components/BorderBox";
 import { Footer } from "./components/Footer";
 import PagePreview from "./components/PagePreview";
-import DailyPlan from "./pages/DailyPlan";
-import DailyReflect from "./pages/DailyReflect";
+import DailyPlan from "./bookPages/DailyPlan";
+import DailyReflect from "./bookPages/DailyReflect";
 import { printConfig } from "./bookConfig";
 import { convertUnits } from "./utils/convert";
 

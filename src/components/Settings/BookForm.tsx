@@ -14,7 +14,7 @@ import {
   QuestionMap,
   QuestionWhenOptions,
 } from "../../utils/question";
-import { PageContent } from "../../pages/Page";
+import { PageContent } from "../../bookPages/Page";
 import { fullAppQuestionMapState } from "../../bookConfig";
 
 const questionSchema = createSchema("question", {

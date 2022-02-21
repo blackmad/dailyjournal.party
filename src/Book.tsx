@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import { Downgraded, useState } from "@hookstate/core";
 import { DateContext } from "./providers/DateContext";
 
-import { EmptyPage, Page, PageContent } from "./pages/Page";
+import { EmptyPage, Page, PageContent } from "./bookPages/Page";
 import {
   printConfig,
   fullAppQuestionMapState,

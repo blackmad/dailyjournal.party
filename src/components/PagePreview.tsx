@@ -2,10 +2,10 @@ import React, { useMemo } from "react";
 import { DateTime } from "luxon";
 import useMobileDetect from "use-mobile-detect-hook";
 
-import DailyPlan from "../pages/DailyPlan";
+import DailyPlan from "../bookPages/DailyPlan";
 import { DateContext } from "../providers/DateContext";
 import { BookPage } from "../Book";
-import { PageContent } from "../pages/Page";
+import { PageContent } from "../bookPages/Page";
 
 export default function PagePreview({
   zoom = 0.65,

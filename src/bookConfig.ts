@@ -3,15 +3,15 @@ import { createState } from "@hookstate/core";
 import { Interval } from "luxon";
 import { Persistence } from "@hookstate/persistence";
 
-import DailyPlan from "./pages/DailyPlan";
-import DailyReflect from "./pages/DailyReflect";
-import WeeklyPlan from "./pages/WeeklyPlan";
-import WeeklyReflect from "./pages/WeeklyReflect";
+import DailyPlan from "./bookPages/DailyPlan";
+import DailyReflect from "./bookPages/DailyReflect";
+import WeeklyPlan from "./bookPages/WeeklyPlan";
+import WeeklyReflect from "./bookPages/WeeklyReflect";
 
 import { getTimeRange, DateConfig } from "./state/dateConfig";
 import { MyStateWatchPlugin } from "./state/persistUtil";
-import { BackCover, EmptyPage, FrontCover } from "./pages/Cover";
-import { PageContent } from "./pages/Page";
+import { BackCover, EmptyPage, FrontCover } from "./bookPages/Cover";
+import { PageContent } from "./bookPages/Page";
 
 const defaultPrintConfig = {
   pageUnits: "in" as "in" | "mm",
