@@ -1,20 +1,15 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { useState } from "@hookstate/core";
 
 import Make from "./pages/Make";
 import OpenGraph from "./pages/OpenGraph";
 import Intro from "./pages/Intro";
 import DebugPreview from "./pages/DebugPreview";
+import DebugThemes from "./pages/DebugThemes";
 
 import { themeConfig } from "./state/themeConfig";
-
-const GlobalFontStyle = createGlobalStyle`
-  body { 
-    font-family: ${(props) => props.theme.fontFamily}
-  }
-`;
 
 export default function App() {
   const themeConfigState = useState(themeConfig);
@@ -22,12 +17,13 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalFontStyle />
+      {/* <GlobalFontStyle /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Intro />} />
 
           <Route path="debug">
+            <Route path="themes" element={<DebugThemes />} />
             <Route path="preview" element={<DebugPreview />}>
               <Route path=":page" element={<DebugPreview />} />
             </Route>

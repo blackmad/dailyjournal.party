@@ -17,7 +17,6 @@ const WeekContainer = styled.div`
 
 const WeekName = styled(OpenBackgroundBox)`
   display: flex;
-  align-items
 `;
 
 const defaultQuestionConfig = {} as const;

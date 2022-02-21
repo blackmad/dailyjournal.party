@@ -40,6 +40,8 @@ const BoxTitleBox = styled(BasicBorder)`
   padding: 0.2em 1em;
   white-space: nowrap;
   z-index: 1000;
+  font-family: ${(props) => props.theme.fontFamily};
+  color: ${(props) => props.theme.colors.textColor};
 `;
 
 export function BoxTitle({ title }: { title: string }) {

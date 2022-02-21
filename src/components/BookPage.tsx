@@ -1,21 +1,11 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import _ from "lodash";
 import { DateTime } from "luxon";
-import { createGlobalStyle } from "styled-components";
-import { Downgraded, useState } from "@hookstate/core";
+
 import { DateContext } from "../providers/DateContext";
 
-import { EmptyPage, Page, PageContent } from "../bookPages/Page";
-import {
-  printConfig,
-  fullAppQuestionMapState,
-  PrintConfig,
-  generatePages,
-} from "../bookConfig";
-import BookMaker from "../components/BookMaker";
-import { inPrintMode } from "../state/printMode";
-import { dateConfig } from "../state/dateConfig";
+import { Page, PageContent } from "../bookPages/Page";
 import { QuestionMap } from "../utils/question";
 
 export default function BookPage<T extends string>({

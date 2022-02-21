@@ -14,6 +14,8 @@ export const OpenBackgroundBox = styled.div`
   width: 100%;
   height: 100%;
   background: ${(props) => props.theme.colors.textBackgroundColor};
+  font-family: ${(props) => props.theme.fontFamily};
+  color: ${(props) => props.theme.colors.textColor};
 `;
 
 const BoxTitleBox = styled.div`
@@ -25,6 +27,8 @@ const BoxTitleBox = styled.div`
   padding: 0.2em 0.2em;
   width: fit-content;
   background: ${(props) => props.theme.colors.backgroundColor};
+  font-family: ${(props) => props.theme.fontFamily};
+  color: ${(props) => props.theme.colors.textColor};
 `;
 
 function BoxTitle({ title }: { title: string }) {
