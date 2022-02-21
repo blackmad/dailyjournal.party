@@ -46,7 +46,7 @@ export type AppQuestionState = {
   [P in AppPage]?: typeof AllAppPages[P]["defaultQuestionConfig"];
 };
 
-const defaultQuestionMap = _.mapValues(
+export const defaultQuestionMap = _.mapValues(
   AppPageConfig,
   "defaultQuestionConfig"
 ) as AppQuestionState;
