@@ -772,7 +772,6 @@ const daisyUIThemes: Record<keyof typeof rawDaisyUIthemes, DefaultTheme> =
     if (primaryBg === "#FFFFFF") {
       primaryBg = rawDaisyUItheme.primary;
     }
-    console.log(primaryBg);
 
     return {
       colors: {
