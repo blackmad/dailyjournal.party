@@ -21,11 +21,11 @@ export const defaultQuestionConfig: QuestionMap<Questions> = {
   completedThisWeek: ["What projects have I made progress on this week?"],
   goingWell: ["What went well this week and why?"],
   improve: [
-    "What’s one thing I can do next week that wil create the biggest results in my life?",
+    "What’s one thing I can do next week that will create the biggest results in my life?",
   ],
   timeUse: ["How am I using my time? How can I prioritize better?"],
   challenging: [
-    "What’s most chalenging and how can I turn it into an oppportunity?",
+    "What’s most challenging and how can I turn it into an opportunity?",
   ],
   highlights: ["What were my favorite moments from this week?"],
 };

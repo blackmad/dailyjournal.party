@@ -44,7 +44,7 @@ export function Header(props: {
   const year = dt.toFormat("yyyy");
   const mon = dt.toFormat("MMM");
   const week = dt.toFormat("W");
-  const daydate = dt.toFormat("ccc, d");
+  const dayDate = dt.toFormat("ccc, d");
 
   return (
     <HeaderContainer>
@@ -58,7 +58,7 @@ export function Header(props: {
           <HeaderComponent>{overrideWeek || `Week ${week}`}</HeaderComponent>
         )}
         {!omitDay && (
-          <HeaderComponent>{overrideDay || daydate}</HeaderComponent>
+          <HeaderComponent>{overrideDay || dayDate}</HeaderComponent>
         )}
         <HeaderComponentLeft>{title}</HeaderComponentLeft>
       </HeaderComponents>

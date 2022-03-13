@@ -2,6 +2,8 @@ import _ from "lodash";
 import { DefaultTheme } from "styled-components";
 import Color from "color";
 
+// cspell:disable
+
 const rawDaisyUIthemes = {
   aqua: {
     primary: "#42e3ff",

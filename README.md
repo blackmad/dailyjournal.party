@@ -17,6 +17,6 @@ server will be running at http://localhost:3000
 
 http://localhost:3000/debug/themes
 
-## Regen opengraph card
+## Regenerate opengraph card
 
 squint screenshot http://localhost:3000/opengraph --selector=.ogcard -o public/ogimage.png; file public/ogimage.png

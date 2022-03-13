@@ -1,0 +1,19 @@
+{
+    "cSpell.words": [
+        "Autoform",
+        "hookstate",
+        "luxon",
+        "ogcard",
+        "ogimage",
+        "opengraph",
+        "rhfa"
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:dailyjournal.party}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
+}
