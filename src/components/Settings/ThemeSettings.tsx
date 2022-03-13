@@ -8,6 +8,7 @@ import daisyUIThemes from "../../daisyUIthemes";
 import Dropdown, { BaseOption } from "../Dropdown";
 
 import { themeConfig } from "../../state/themeConfig";
+import { defaultTheme } from "../../theme";
 
 type ThemeOption = BaseOption<{
   value: DefaultTheme;
@@ -35,15 +36,28 @@ export function getThemeExample(key: string, value: DefaultTheme) {
 export function ThemeSettings() {
   const themeConfigState = useState(themeConfig).attach(Downgraded);
 
-  const options: Array<ThemeOption> = _.map(daisyUIThemes, (value, key) => {
-    return {
-      name: key,
-      key,
-      option: getThemeExample(key, value),
-      value,
-      selected: _.isEqual(value, themeConfigState.get()),
-    };
-  });
+  const daisyOptions: Array<ThemeOption> = _.map(
+    daisyUIThemes,
+    (value, key) => {
+      return {
+        name: key,
+        key,
+        option: getThemeExample(key, value),
+        value,
+        selected: _.isEqual(value, themeConfigState.get()),
+      };
+    }
+  );
+
+  const defaultOption = {
+    name: "default",
+    key: "default",
+    option: getThemeExample("default", defaultTheme),
+    value: defaultTheme,
+    selected: _.isEqual(defaultTheme, themeConfigState.get()),
+  };
+
+  const options: Array<ThemeOption> = [defaultOption, ...daisyOptions];
 
   const onClick = useCallback((option: ThemeOption) => {
     themeConfig.set(option.value);
