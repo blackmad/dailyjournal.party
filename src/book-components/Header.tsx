@@ -18,7 +18,7 @@ const HeaderComponents = styled.div`
 
 const HeaderComponent = styled.div`
   padding: 0.4em 0.4em 0.1em;
-  font-size: x-large;
+  font-size: 0.2in;
   font-weight: 400;
   border-left: solid 1px ${(props) => props.theme.colors.borderColor};
 `;
