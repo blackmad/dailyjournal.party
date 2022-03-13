@@ -4,7 +4,7 @@ export const defaultTheme: DefaultTheme = {
   colors: {
     backgroundColor: "#FFFDF9",
     textBackgroundColor: "#CCCDC9",
-    textColor: "#06B49A",
+    textColor: "#36313d",
     dotColor: "#06B49A",
     borderColor: "#AFDBD2",
   },
